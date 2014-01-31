@@ -15,6 +15,6 @@ In order to use the Game you must have the slick libraries included in your buil
 4) Navigate through Finesse => slick => lib 
 5) Multi-select jinput.jar / lwjgl_util.jar / lwjgl.jar / slick.jar
 6) Once returned to the Build Path page, drop down lwjgl_util and open up natives
-7) Navigate through Finesse => slick => lwjgl-2.9.0 => native => <your-current-os>
+7) Navigate through Finesse => slick => lwjgl-2.9.0 => native => your-current-os
 
 Once finished you can run the slick game
