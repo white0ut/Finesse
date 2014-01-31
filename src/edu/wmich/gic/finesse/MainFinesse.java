@@ -15,7 +15,7 @@ public class MainFinesse {
 		FinesseGame.setTitleScreen(true);
 		app = new AppGameContainer(new FinesseGame("Finesse"));
 		app.setTargetFrameRate(200);
-		app.setDisplayMode(1680, 1280, false);
+		app.setDisplayMode(800, 600, false);
 		app.start();
 	}
 }
