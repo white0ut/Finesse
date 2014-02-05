@@ -6,16 +6,18 @@ import org.newdawn.slick.SlickException;
 
 public class MainFinesse {
 	private static AppGameContainer app;
+	public final static int width = 1024;
+	public final static int height = 768;
 	
 	public static void main(String[] args) throws SlickException {
 		startGame();
 	}
 
 	public static void startGame() throws SlickException{
-		FinesseGame.setTitleScreen(true);
+		FinesseGame.isTitle = true;
 		app = new AppGameContainer(new FinesseGame("Finesse"));
 		app.setTargetFrameRate(200);
-		app.setDisplayMode(800, 600, false);
+		app.setDisplayMode(width, height, false);
 		app.start();
 	}
 }

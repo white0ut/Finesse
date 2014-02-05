@@ -8,30 +8,30 @@ import org.newdawn.slick.geom.Circle;
 import edu.wmich.gic.finesse.FinesseGame;
 import edu.wmich.gic.finesse.MainFinesse;
 
-public class MapGrid {
+public class OscillatingMapGrid {
 	
 	private Control[] color = {new Control(10,14,false),new Control(10,14,false),new Control(10,14,false)};
 	private Control[] pulses = new Control[20];
 	private static final double defaultBrightness = .5;
 	private static final int numCircles = 4;
 	
-	public MapGrid() {
+	public OscillatingMapGrid() {
 		for(int i=0; i<pulses.length; i++) pulses[i] = new Control(10, 14, true);
 	}
 	
 	public void render(Graphics g) {
 		g.setColor(getColor(0,defaultBrightness));
-		g.fillRect(0, 0, FinesseGame.width, FinesseGame.height);
+		g.fillRect(0, 0, MainFinesse.width, MainFinesse.height);
 		g.setColor(getColor(0, defaultBrightness));
 		for (int circ=0; circ<numCircles; circ++) {
 			for (int i=0; i<pulses.length; i++) {
-				pulses[i].drawPulse(g, (FinesseGame.width * (i + 1) / (pulses.length + 1)), circ);
+				pulses[i].drawPulse(g, (MainFinesse.width * (i + 1) / (pulses.length + 1)), circ);
 			}
 			
 		}
 		g.setColor(Color.black);
-		for(int x=0;x<FinesseGame.width/32+1;x++) {
-			for(int y=0;y<(FinesseGame.height/32)+1;y++) {
+		for(int x=0;x<MainFinesse.width/32+1;x++) {
+			for(int y=0;y<(MainFinesse.height/32)+1;y++) {
 				g.fillRect(x*32,y*32,31,31);
 			}
 		}
@@ -93,8 +93,8 @@ public class MapGrid {
 		
 		void drawPulse(Graphics g, int pos, int i) {
 			double bright1 = .3, bright2 = .5;
-			MapGrid mg = MapGrid.this;
-			int coord = (int)(getValue() * (FinesseGame.height-1) + .5);
+			OscillatingMapGrid mg = OscillatingMapGrid.this;
+			int coord = (int)(getValue() * (MainFinesse.height-1) + .5);
 			double brightness = 1 - Math.cos(2 * Math.PI * time / len);
 			double intensity = (i + 1.0) / numCircles * brightness;
 			int r = 70 * (numCircles - i) / numCircles;
