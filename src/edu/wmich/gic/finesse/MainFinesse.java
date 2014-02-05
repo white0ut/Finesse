@@ -8,6 +8,7 @@ public class MainFinesse {
 	private static AppGameContainer app;
 	public final static int width = 1024;
 	public final static int height = 768;
+	//brodie
 	
 	public static void main(String[] args) throws SlickException {
 		startGame();
