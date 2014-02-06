@@ -1,6 +1,5 @@
 package edu.wmich.gic.finesse;
 
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
@@ -14,7 +13,6 @@ public class MainFinesse {
 	}
 
 	public static void startGame() throws SlickException{
-		FinesseGame.isTitle = true;
 		app = new AppGameContainer(new FinesseGame("Finesse"));
 		app.setTargetFrameRate(200);
 		app.setDisplayMode(width, height, false);
