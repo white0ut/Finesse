@@ -19,7 +19,6 @@ public class Game extends BasicGameState {
 			throws SlickException {
 		
 		map = OscillatingMapGrid.getInstance();
-		pathfinding = Pathfinding.getInstance();
 	}
 
 	@Override
