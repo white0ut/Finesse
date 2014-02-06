@@ -4,23 +4,48 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 
-public class Game {
+import edu.wmich.gic.finesse.drawable.OscillatingMapGrid;
 
-	Input input;
-
-	public void render(Graphics g) {
-		g.setColor(Color.blue);
-		g.drawString("Welcome to our amazing game 0_0", 200, 200);
+public class Game extends BasicGameState {
+	OscillatingMapGrid map;
+	Pathfinding pathfinding;
+	
+	@Override
+	public void init(GameContainer gc, StateBasedGame game)
+			throws SlickException {
+		
+		map = OscillatingMapGrid.getInstance();
+		pathfinding = Pathfinding.getInstance();
 	}
 
-	public void update(GameContainer gc, int delta) {
-		input = gc.getInput();
-		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			FinesseGame.isGame = false;
-			FinesseGame.isPaused = true;
+	@Override
+	public void render(GameContainer gc, StateBasedGame game, Graphics g)
+			throws SlickException {
+		
+		map.render(g);
+		
+		g.setColor(Color.white);
+		g.drawString("You are in the game state", 20, 50);
+		g.drawString("Press ESC to quit", 20, 100);
+	}
+
+	@Override
+	public void update(GameContainer gc, StateBasedGame game, int delta)
+			throws SlickException {
+		
+		map.update(gc, delta);
+
+		if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+			gc.exit();
 		}
-
 	}
 
+	@Override
+	public int getID() {
+		return FinesseGame.game;
+	}
 }

@@ -9,13 +9,20 @@ import edu.wmich.gic.finesse.FinesseGame;
 import edu.wmich.gic.finesse.MainFinesse;
 
 public class OscillatingMapGrid {
+
+	private static final OscillatingMapGrid INSTANCE = new OscillatingMapGrid();
+
+	public static OscillatingMapGrid getInstance() {
+			return INSTANCE;
+	}
 	
 	private Control[] color = {new Control(10,14,false),new Control(10,14,false),new Control(10,14,false)};
 	private Control[] pulses = new Control[20];
 	private static final double defaultBrightness = .5;
 	private static final int numCircles = 4;
 	
-	public OscillatingMapGrid() {
+	// Private constructor prevents instantiation from other classes
+	private OscillatingMapGrid() {
 		for(int i=0; i<pulses.length; i++) pulses[i] = new Control(10, 14, true);
 	}
 	
@@ -61,7 +68,7 @@ public class OscillatingMapGrid {
 		
 		Control(double minlen, double maxLen, boolean jump) {
 			time=0;
-			this.minLen=minLen;
+			this.minLen=minlen;
 			this.maxLen=maxLen;
 			this.jump = jump;
 			change();

@@ -2,85 +2,38 @@ package edu.wmich.gic.finesse;
 
 import java.util.Random;
 
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
-import edu.wmich.gic.finesse.menus.PauseScreen;
 import edu.wmich.gic.finesse.menus.TitleScreen;
+import edu.wmich.gic.finesse.menus.MainMenu;
 
 
-public class FinesseGame extends BasicGame {
-	
-	private PauseScreen pauseScreen;
-	private TitleScreen titleScreen;
-	private Game game;
-	private Pathfinding pathfinding;
 
-	public static boolean isTitle, isGame, isPaused, isPathfinding;
-	
+public class FinesseGame extends StateBasedGame {
+	public static final int titleScreen = 0, mainMenu = 1, game = 2, pathfinding = 3;
+
 	//PUBLIC VALUES
 	public static Random rand = new Random();
 	
 	public FinesseGame(String title) {
 		super(title);
-		
-		// TODO Auto-generated constructor stub
+
+		this.addState(new TitleScreen());
+		this.addState(new MainMenu());
+		this.addState(new Game());
+		this.addState(new Pathfinding());
 	}
 
 	@Override
-	public void init(GameContainer gc) throws SlickException {
-		pauseScreen = new PauseScreen();
-		titleScreen = new TitleScreen();
-		game = new Game();
-		pathfinding = new Pathfinding();
+	public void initStatesList(GameContainer gc) throws SlickException {
+		this.getState(titleScreen).init(gc, this);
+		this.getState(mainMenu).init(gc, this);
+		this.getState(game).init(gc, this);
+		this.getState(pathfinding).init(gc, this);
+
+		this.enterState(titleScreen); //Main Starting State
+//		this.enterState(pathfinding); //Brodie is using this state for easy testing
 	}
-
-	@Override
-	public void render(GameContainer gc, Graphics g) throws SlickException {
-		
-		
-		//TODO: Game stuff goes here
-		if(isGame){
-			game.render(g);
-		}
-
-		//TODO: Title stuff goes here
-		else if(isTitle){
-			titleScreen.render(g);
-		}
-
-		//TODO: Paused stuff goes here
-		else if(isPaused){
-			pauseScreen.render(g);
-		}
-		
-		else if(isPathfinding){
-			pathfinding.render(g);
-		}
-	}
-
-	@Override
-	public void update(GameContainer gc, int delta) throws SlickException {
-		//TODO: Game stuff goes here
-		if(isGame){
-			game.update(gc, delta);
-		}
-
-		//TODO: Title stuff goes here
-		else if(isTitle){
-			titleScreen.update(gc, delta);
-		}
-
-		//TODO: Paused stuff goes here
-		else if(isPaused){
-			pauseScreen.update(gc, delta);
-		}
-		
-		else if(isPathfinding){
-			pathfinding.update(gc, delta);
-		}
-	}
-
 }
