@@ -16,8 +16,9 @@ public class FinesseGame extends BasicGame {
 	private PauseScreen pauseScreen;
 	private TitleScreen titleScreen;
 	private Game game;
+	private Pathfinding pathfinding;
 
-	public static boolean isTitle, isGame, isPaused;
+	public static boolean isTitle, isGame, isPaused, isPathfinding;
 	
 	//PUBLIC VALUES
 	public static Random rand = new Random();
@@ -33,6 +34,7 @@ public class FinesseGame extends BasicGame {
 		pauseScreen = new PauseScreen();
 		titleScreen = new TitleScreen();
 		game = new Game();
+		pathfinding = new Pathfinding();
 	}
 
 	@Override
@@ -53,6 +55,10 @@ public class FinesseGame extends BasicGame {
 		else if(isPaused){
 			pauseScreen.render(g);
 		}
+		
+		else if(isPathfinding){
+			pathfinding.render(g);
+		}
 	}
 
 	@Override
@@ -70,6 +76,10 @@ public class FinesseGame extends BasicGame {
 		//TODO: Paused stuff goes here
 		else if(isPaused){
 			pauseScreen.update(gc, delta);
+		}
+		
+		else if(isPathfinding){
+			pathfinding.update(gc, delta);
 		}
 	}
 
