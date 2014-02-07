@@ -1,5 +1,8 @@
 package edu.wmich.gic.finesse;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -8,17 +11,19 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import edu.wmich.gic.entity.Minion;
+import edu.wmich.gic.finesse.drawable.GameGrid;
 import edu.wmich.gic.finesse.drawable.OscillatingMapGrid;
 
 public class Game extends BasicGameState {
-	OscillatingMapGrid map;
-	Pathfinding pathfinding;
+	
+	private GameGrid map;
+	private Pathfinding pathfinding;
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
-		
-		map = OscillatingMapGrid.getInstance();
+		map = GameGrid.getInstance();
 	}
 
 	@Override

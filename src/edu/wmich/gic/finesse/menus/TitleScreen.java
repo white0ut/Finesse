@@ -54,7 +54,6 @@ public class TitleScreen extends BasicGameState {
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return FinesseGame.titleScreen;
 	}
 }

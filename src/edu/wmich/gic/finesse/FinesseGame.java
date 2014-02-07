@@ -9,14 +9,13 @@ import org.newdawn.slick.state.StateBasedGame;
 import edu.wmich.gic.finesse.menus.TitleScreen;
 import edu.wmich.gic.finesse.menus.MainMenu;
 
-
-
 public class FinesseGame extends StateBasedGame {
-	public static final int titleScreen = 0, mainMenu = 1, game = 2, pathfinding = 3;
+	public static final int titleScreen = 0, mainMenu = 1, game = 2,
+			pathfinding = 3;
 
-	//PUBLIC VALUES
+	// PUBLIC VALUES
 	public static Random rand = new Random();
-	
+
 	public FinesseGame(String title) {
 		super(title);
 
@@ -24,6 +23,7 @@ public class FinesseGame extends StateBasedGame {
 		this.addState(new MainMenu());
 		this.addState(new Game());
 		this.addState(new Pathfinding());
+
 	}
 
 	@Override
@@ -33,7 +33,8 @@ public class FinesseGame extends StateBasedGame {
 		this.getState(game).init(gc, this);
 		this.getState(pathfinding).init(gc, this);
 
-		this.enterState(titleScreen); //Main Starting State
-//		this.enterState(pathfinding); //Brodie is using this state for easy testing
+		this.enterState(titleScreen); // Main Starting State
+		// this.enterState(pathfinding); //Brodie is using this state for easy
+		// testing
 	}
 }
