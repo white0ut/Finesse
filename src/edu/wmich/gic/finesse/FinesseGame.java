@@ -10,8 +10,16 @@ import edu.wmich.gic.finesse.menus.TitleScreen;
 import edu.wmich.gic.finesse.menus.MainMenu;
 
 public class FinesseGame extends StateBasedGame {
-	public static final int titleScreen = 0, mainMenu = 1, game = 2,
-			pathfinding = 3;
+	public static enum ScreenType {
+		TITLESCREEN,
+		MAINMENU,
+		GAME,
+		PATHFINDING;
+		
+		public int getValue() {
+	        return this.ordinal();
+	    }
+	}
 
 	// PUBLIC VALUES
 	public static Random rand = new Random();
@@ -28,13 +36,13 @@ public class FinesseGame extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
-		this.getState(titleScreen).init(gc, this);
-		this.getState(mainMenu).init(gc, this);
-		this.getState(game).init(gc, this);
-		this.getState(pathfinding).init(gc, this);
+		this.getState(ScreenType.TITLESCREEN.getValue()).init(gc, this);
+		this.getState(ScreenType.MAINMENU.getValue()).init(gc, this);
+		this.getState(ScreenType.GAME.getValue()).init(gc, this);
+		this.getState(ScreenType.PATHFINDING.getValue()).init(gc, this);
 
-		this.enterState(titleScreen); // Main Starting State
-		// this.enterState(pathfinding); //Brodie is using this state for easy
+		this.enterState(ScreenType.TITLESCREEN.getValue()); // Main Starting State
+		// this.enterState(ScreenType.PATHFINDING.getValue()); //Brodie is using this state for easy
 		// testing
 	}
 }

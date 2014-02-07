@@ -12,6 +12,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import edu.wmich.gic.entity.Minion;
+import edu.wmich.gic.finesse.FinesseGame.ScreenType;
 import edu.wmich.gic.finesse.drawable.GameGrid;
 import edu.wmich.gic.finesse.drawable.OscillatingMapGrid;
 
@@ -50,6 +51,6 @@ public class Game extends BasicGameState {
 
 	@Override
 	public int getID() {
-		return FinesseGame.game;
+		return ScreenType.GAME.getValue();
 	}
 }

@@ -11,6 +11,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import edu.wmich.gic.finesse.FinesseGame.ScreenType;
+
 
 public class Pathfinding extends BasicGameState {
 	
@@ -270,7 +272,7 @@ public class Pathfinding extends BasicGameState {
 
 	@Override
 	public int getID() {
-		return FinesseGame.pathfinding;
+		return ScreenType.PATHFINDING.getValue();
 	}
 }
 
