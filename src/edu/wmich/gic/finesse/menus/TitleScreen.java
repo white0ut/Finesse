@@ -11,6 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.*;
 
 import edu.wmich.gic.finesse.FinesseGame;
+import edu.wmich.gic.finesse.FinesseGame.ScreenType;
 import edu.wmich.gic.finesse.drawable.OscillatingMapGrid;
 
 public class TitleScreen extends BasicGameState {
@@ -48,13 +49,12 @@ public class TitleScreen extends BasicGameState {
 		map.update(gc, delta);
 		
 		if (input.isKeyPressed(Input.KEY_ENTER)){
-			game.enterState(FinesseGame.mainMenu, new FadeOutTransition(), new FadeInTransition());
+			game.enterState(ScreenType.MAINMENU.getValue(), new FadeOutTransition(), new FadeInTransition());
 		}
 	}
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
-		return FinesseGame.titleScreen;
+		return ScreenType.TITLESCREEN.getValue();
 	}
 }

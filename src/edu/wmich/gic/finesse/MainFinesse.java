@@ -14,7 +14,7 @@ public class MainFinesse {
 
 	public static void startGame() throws SlickException{
 		app = new AppGameContainer(new FinesseGame("Finesse"));
-		app.setTargetFrameRate(120); //200 was sucking a lot of cpu, fans kept turning on haha
+		app.setTargetFrameRate(120); //200 was sucking a lot of cpu, fans kept turning on haha 
 		app.setMinimumLogicUpdateInterval(25);
 		app.setDisplayMode(width, height, false);
 		app.start();

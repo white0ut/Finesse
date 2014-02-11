@@ -14,6 +14,7 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.Color;
 
 import edu.wmich.gic.finesse.FinesseGame;
+import edu.wmich.gic.finesse.FinesseGame.ScreenType;
 import edu.wmich.gic.finesse.drawable.OscillatingMapGrid;
 
 public class MainMenu extends BasicGameState {
@@ -72,7 +73,7 @@ public class MainMenu extends BasicGameState {
 		if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
 			switch (selection) {
 				case 0:
-					game.enterState(FinesseGame.game, new FadeOutTransition(), new FadeInTransition());
+					game.enterState(ScreenType.GAME.getValue(), new FadeOutTransition(), new FadeInTransition());
 					break;
 				case 1:
 					// enterState(optionsMenu);
@@ -86,6 +87,6 @@ public class MainMenu extends BasicGameState {
 
 	@Override
 	public int getID() {
-		return FinesseGame.mainMenu;
+		return ScreenType.MAINMENU.getValue();
 	}
 }
