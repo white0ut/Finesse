@@ -31,8 +31,8 @@ public class Tile {
 		}
 		row = _row;
 		col = _col;
-		x = GameGrid.gridOffset+col*(GameGrid.colWidth+GameGrid.gridSpacing);
-		y = GameGrid.gridOffset+row*(GameGrid.rowHeight+GameGrid.gridSpacing);
+		x = GameGrid.gridLeftOffset+col*(GameGrid.colWidth+GameGrid.gridSpacing);
+		y = GameGrid.gridTopOffset+row*(GameGrid.rowHeight+GameGrid.gridSpacing);
 	}
 	
 	public String toString(){

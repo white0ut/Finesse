@@ -44,8 +44,8 @@ public class Game extends BasicGameState {
 		if (button == 0) {
 //			System.out.println("Release "+((x-GameGrid.gridOffset)/(GameGrid.colWidth+GameGrid.gridSpacing)));
 //			System.out.println("Release "+((y-GameGrid.gridOffset)/(GameGrid.rowHeight+GameGrid.gridSpacing)));
-			int row = (y-GameGrid.gridOffset)/(GameGrid.rowHeight+GameGrid.gridSpacing);
-			int col = (x-GameGrid.gridOffset)/(GameGrid.colWidth+GameGrid.gridSpacing);
+			int row = (y-GameGrid.gridTopOffset)/(GameGrid.rowHeight+GameGrid.gridSpacing);
+			int col = (x-GameGrid.gridLeftOffset)/(GameGrid.colWidth+GameGrid.gridSpacing);
 			if(row > 0 && col > 0 && row < map.rows-1 && col < map.columns-1){
 				if(map.mapArray[row][col].walkable && map.currentMinionTile != map.mapArray[row][col]){
 					map.resetGrid();

@@ -24,8 +24,9 @@ public class GameGrid {
 	public final int columns = 25;
 	public final static int rowHeight = 25;
 	public final static int colWidth = 25;
-	public final static int gridSpacing = 5;
-	public final static int gridOffset = 100;
+	public final static int gridSpacing = 2;
+	public final static int gridTopOffset = 100;
+	public final static int gridLeftOffset = 200;
 	
 	public Tile currentMinionTile;
 	public static Tile[][] mapArray;// = new Tile[rows][columns];
