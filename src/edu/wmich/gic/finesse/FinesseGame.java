@@ -30,7 +30,7 @@ public class FinesseGame extends StateBasedGame {
 		this.addState(new TitleScreen());
 		this.addState(new MainMenu());
 		this.addState(new Game());
-		this.addState(new Pathfinding());
+//		this.addState(new Pathfinding());
 
 	}
 
@@ -39,10 +39,10 @@ public class FinesseGame extends StateBasedGame {
 		this.getState(ScreenType.TITLESCREEN.getValue()).init(gc, this);
 		this.getState(ScreenType.MAINMENU.getValue()).init(gc, this);
 		this.getState(ScreenType.GAME.getValue()).init(gc, this);
-		this.getState(ScreenType.PATHFINDING.getValue()).init(gc, this);
+//		this.getState(ScreenType.PATHFINDING.getValue()).init(gc, this);
 
 		this.enterState(ScreenType.TITLESCREEN.getValue()); // Main Starting State
-		// this.enterState(ScreenType.PATHFINDING.getValue()); //Brodie is using this state for easy
+//		 this.enterState(ScreenType.PATHFINDING.getValue()); //Brodie is using this state for easy
 		// testing
 	}
 }
