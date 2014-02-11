@@ -33,7 +33,7 @@ public class FinesseGame extends StateBasedGame {
 		this.getState(game).init(gc, this);
 		this.getState(pathfinding).init(gc, this);
 
-		this.enterState(titleScreen); //Main Starting State
-//		this.enterState(pathfinding); //Brodie is using this state for easy testing
+//		this.enterState(titleScreen); //Main Starting State
+		this.enterState(pathfinding); //Brodie is using this state for easy testing
 	}
 }

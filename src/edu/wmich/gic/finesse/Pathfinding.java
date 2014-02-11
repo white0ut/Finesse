@@ -21,10 +21,10 @@ public class Pathfinding extends BasicGameState {
 //	}
 
 	Input input;
-	final int rows = 15;
-	final int columns = 21;
-	final static int rowHeight = 40;
-	final static int colWidth = 40;
+	final int rows = 30;
+	final int columns = 42;
+	final static int rowHeight = 15;
+	final static int colWidth = 15;
 	final static int gridSpacing = 5;
 	final static int gridOffset = 40;
 	
@@ -215,13 +215,13 @@ public class Pathfinding extends BasicGameState {
 		    	g.fillRect(mapArray[i][j].x, mapArray[i][j].y, colWidth, rowHeight);
 		    }
 		}
-		for(int i=0; i < rows; i++){
-			for(int j=0; j < columns; j++){
-				g.drawString(String.valueOf(mapArray[i][j].f),mapArray[i][j].x+1,mapArray[i][j].y-2);
-				g.drawString(String.valueOf(mapArray[i][j].g),mapArray[i][j].x+1,mapArray[i][j].y+11);
-				g.drawString(String.valueOf(mapArray[i][j].dist),mapArray[i][j].x+1,mapArray[i][j].y+24);
-			}
-		}
+//		for(int i=0; i < rows; i++){
+//			for(int j=0; j < columns; j++){
+//				g.drawString(String.valueOf(mapArray[i][j].f),mapArray[i][j].x+1,mapArray[i][j].y-2);
+//				g.drawString(String.valueOf(mapArray[i][j].g),mapArray[i][j].x+1,mapArray[i][j].y+11);
+//				g.drawString(String.valueOf(mapArray[i][j].dist),mapArray[i][j].x+1,mapArray[i][j].y+24);
+//			}
+//		}
 	}
 	
 	public void resetMap(){
@@ -291,7 +291,7 @@ class Tile {
 	public Tile parent = null;
 	
 	public Tile(int _row, int _col){
-		int rand = (int) Math.floor((Math.random()*6)+1);
+		int rand = (int) Math.floor((Math.random()*4)+1);
 		if(rand == 1){
 			this.walkable = false;
 		}
