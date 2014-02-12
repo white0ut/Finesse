@@ -1,5 +1,7 @@
 package edu.wmich.gic.finesse.drawable;
 
+import java.util.PriorityQueue;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -20,7 +22,7 @@ public class OscillatingMapGrid {
 			new Control(10, 14, false), new Control(10, 14, false) };
 	private Control[] pulses = new Control[20];
 	private static final double defaultBrightness = .5;
-	private static final int numCircles = 4;
+	private static final int numCircles = 7, radius = 85;
 
 	// Private constructor prevents instantiation from other classes
 	private OscillatingMapGrid() {
@@ -31,15 +33,15 @@ public class OscillatingMapGrid {
 	public void render(Graphics g) {
 		g.setColor(getColor(0, defaultBrightness));
 		g.fillRect(0, 0, MainFinesse.width, MainFinesse.height);
-		g.setColor(getColor(0, defaultBrightness));
+		
+		PriorityQueue<Circ> heap=new PriorityQueue<Circ>();
 		for (int circ = 0; circ < numCircles; circ++) {
 			for (int i = 0; i < pulses.length; i++) {
-				pulses[i].drawPulse(g,
-						(MainFinesse.width * (i + 1) / (pulses.length + 1)),
-						circ);
+				pulses[i].drawPulse(g,(MainFinesse.width * (i + 1) / (pulses.length + 1)),circ,heap);
 			}
-
 		}
+		while(!heap.isEmpty()) heap.remove().draw(g);
+		
 		g.setColor(Color.black);
 		for (int x = 0; x < MainFinesse.width / 32 + 1; x++) {
 			for (int y = 0; y < (MainFinesse.height / 32) + 1; y++) {
@@ -103,7 +105,7 @@ public class OscillatingMapGrid {
 			return Math.max(0, Math.min(255, (int) (x * 255 + .5)));
 		}
 
-		void drawPulse(Graphics g, int pos, int i) {
+		void drawPulse(Graphics g, int pos, int i, PriorityQueue<Circ> heap) {
 			double bright1 = .3;
 			double bright2 = .5;
 
@@ -112,12 +114,32 @@ public class OscillatingMapGrid {
 			int coord = (int) (getValue() * (MainFinesse.height - 1) + .5);
 			double brightness = 1 - Math.cos(2 * Math.PI * time / len);
 			double intensity = (i + 1.0) / numCircles * brightness;
-			int r = 70 * (numCircles - i) / numCircles;
+			int r = radius * (numCircles - i) / numCircles;
 
-			g.setColor(mg.getColor(bright1 * intensity, defaultBrightness
-					+ bright2 * intensity));
-			g.draw(new Circle(pos, coord, r));
-			g.fill(new Circle(pos, coord, r));
+			heap.add(new Circ(pos,coord,r,intensity));
+		}
+	}
+	
+	private class Circ implements Comparable<Circ>{
+		int x,y,r;
+		double bright,bright1=.3,bright2=.5;
+		Circ(int x,int y,int r,double bright){this.x=x;this.y=y;this.r=r;this.bright=bright;}
+		
+		void draw(Graphics g){
+			g.setColor(OscillatingMapGrid.this.getColor(
+				bright1*bright,
+				defaultBrightness+bright2*bright
+			));
+			g.draw(new Circle(x,y,r));
+			g.fill(new Circle(x,y,r));
+		}
+
+		@Override
+		public int compareTo(Circ arg0){
+			double ob=arg0.bright;
+			if(bright>ob) return 1;
+			if(bright<ob) return -1;
+			return 0;
 		}
 	}
 }
