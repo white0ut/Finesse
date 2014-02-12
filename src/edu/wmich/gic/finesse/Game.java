@@ -36,11 +36,13 @@ public class Game extends BasicGameState {
 //		g.drawString("CLICK to move the Minion. Use ENTER to reset the map", 20, 50);
 //		g.drawString("Press ESC to quit", 20, 100);
 	}
-
+	
+	@Override
 	public void mouseReleased(int button, int x, int y) {
 		map.mouseReleased(button, x, y);
 	}
 	
+	@Override
 	public void mouseMoved(int oldx, int oldy, int newx, int newy){
 		map.mouseMoved(oldx, oldy, newx, newy);
 	}
