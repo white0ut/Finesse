@@ -7,10 +7,9 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import org.newdawn.slick.state.transition.*;
-
-import edu.wmich.gic.finesse.FinesseGame;
 import edu.wmich.gic.finesse.FinesseGame.ScreenType;
 import edu.wmich.gic.finesse.drawable.OscillatingMapGrid;
 
@@ -37,7 +36,9 @@ public class TitleScreen extends BasicGameState {
 			throws SlickException {
 		
 		map.render(g);
-		g.drawImage(titleImage, (gc.getWidth()/2)-(titleImage.getWidth()/2), (gc.getHeight() / 2) - (titleImage.getHeight() / 2) );
+		g.drawImage(titleImage, 
+				(gc.getWidth()/2)-(titleImage.getWidth()/2), 
+				(gc.getHeight() / 2) - (titleImage.getHeight() / 2) );
 		
 	}
 
@@ -49,7 +50,8 @@ public class TitleScreen extends BasicGameState {
 		map.update(gc, delta);
 		
 		if (input.isKeyPressed(Input.KEY_ENTER)){
-			game.enterState(ScreenType.MAINMENU.getValue(), new FadeOutTransition(), new FadeInTransition());
+			game.enterState(ScreenType.MAINMENU.getValue(), 
+					new FadeOutTransition(), new FadeInTransition());
 		}
 	}
 

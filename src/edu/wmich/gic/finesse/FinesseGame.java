@@ -40,6 +40,6 @@ public class FinesseGame extends StateBasedGame {
 		this.getState(ScreenType.GAME.getValue()).init(gc, this);
 //		this.getState(ScreenType.PATHFINDING.getValue()).init(gc, this);
 
-		this.enterState(ScreenType.GAME.getValue()); // Main Starting State
+		this.enterState(ScreenType.TITLESCREEN.getValue()); // Main Starting State
 	}
 }

@@ -39,6 +39,7 @@ public class Tile {
 		}
 		row = _row;
 		col = _col;
+		//TODO: Offset the grid to an edge of the screen, leaving room for buttons
 		x = GameGrid.gridLeftOffset+col*(GameGrid.colWidth+GameGrid.gridSpacing);
 		y = GameGrid.gridTopOffset+row*(GameGrid.rowHeight+GameGrid.gridSpacing);
 	}
@@ -60,31 +61,36 @@ public class Tile {
 		dist = 0;
 		parent = null;
 		child = null;
-		//		minion = null;
+		// minion = null;
 	}
 
 	public void render(Graphics g){
-		g.setColor(Color.blue);
-		if(start == true){
-			g.setColor(Color.green);
-		}else{
-			if(path == true){
-				g.setColor(Color.cyan);
-			}
-			else{
-				if(walkable == true){
-					g.setColor(Color.white);
-				}
-				else{
-//					if(searched == true){
-//						g.setColor(Color.magenta);
-//					}
-//					else{
-//						g.setColor(Color.gray);
-//					}
-				}
-			}
+		if(minion != null){
+			g.setColor(Color.white);
+			g.fillRect(x, y, GameGrid.colWidth, GameGrid.rowHeight);
+			g.drawImage(minion.image, x-5, y-5);
+			return;
 		}
+		if(!walkable){
+			g.drawImage(img, x, y);
+			return;
+		}
+		g.setColor(Color.blue);
+		if(start)
+			g.setColor(Color.green);
+			//else if(path)
+				//	g.setColor(Color.cyan);
+				else if(walkable)
+						g.setColor(Color.white);
+					else{
+	//					if(searched == true){
+	//						g.setColor(Color.magenta);
+	//					}
+	//					else{
+	//						g.setColor(Color.gray);
+	//					}
+					}
+		
 		if(end == true){
 			g.setColor(Color.red);
 		}
@@ -98,12 +104,8 @@ public class Tile {
 			g.drawRoundRect((float)x+5, (float)y+5, (float)GameGrid.colWidth-10, (float)GameGrid.rowHeight-10,1);
 		}
 		//    	}
-		if(minion != null){
-			g.drawImage(minion.image, x-5, y-5);
-		}
-		if(!walkable){
-			g.drawImage(img, x, y);
-		}
+
+
 		//			g.drawString(String.valueOf(f),x+1,y-2);
 		//			g.drawString(String.valueOf(g),x+1,y+11);
 		//			g.drawString(String.valueOf(dist),x+1,y+24);
