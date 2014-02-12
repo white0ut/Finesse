@@ -7,8 +7,10 @@ public class Minion {
 	
 	public Image image;
 	public int x, y;
+	public Player opponent;
 	
-	public Minion(){
+	public Minion(Player _opponent){
+		opponent = _opponent;
 		x=1;
 		y=1;
 		try {
@@ -16,5 +18,10 @@ public class Minion {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void action(){
+		System.out.println("Killed Minion");
+		opponent.points += 100;
 	}
 }

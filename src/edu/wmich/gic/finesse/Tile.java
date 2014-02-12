@@ -17,78 +17,86 @@ public class Tile {
 	public boolean searched = false;
 	public boolean walkable = true;
 	public boolean path = false;
+	public boolean furthest = false;
 	public int f = 0;
 	public int g = 0;
 	public int dist = 0;
 	public Tile parent = null;
 	public Tile child = null;
 	public Minion minion = null;
-	
+
 	public Tile(int _row, int _col){
-		int rand = (int) Math.floor((Math.random()*4)+1);
+		int rand = (int) Math.floor((Math.random()*10)+1);
 		if(rand == 1){
-			this.walkable = false;
+			walkable = false;
 		}
 		row = _row;
 		col = _col;
 		x = GameGrid.gridLeftOffset+col*(GameGrid.colWidth+GameGrid.gridSpacing);
 		y = GameGrid.gridTopOffset+row*(GameGrid.rowHeight+GameGrid.gridSpacing);
 	}
-	
+
 	public String toString(){
 		return "Row:"+row+"  Column:"+col+"  Start:"+start+"  End:"+end+"  Searched:"+searched+"  Walkable:"+walkable;//+"  \nParent:"+parent+"\nChild:"+child+"\n";
 	}
-	
-	public void resetTile(){
-		this.start = false;
-		this.end = false;
-		this.searched = false;
-		this.path = false;
-		this.f = 0;
-		this.g = 0;
-		this.dist = 0;
-		this.parent = null;
-		this.child = null;
-//		this.minion = null;
+
+	public void resetTile(boolean resetFurthest){
+		if(resetFurthest){
+			furthest = false;
+		}
+		start = false;
+		end = false;
+		searched = false;
+		path = false;
+		f = 0;
+		g = 0;
+		dist = 0;
+		parent = null;
+		child = null;
+		//		minion = null;
 	}
-	
+
 	public void render(Graphics g){
 		g.setColor(Color.blue);
-		if(this.start == true){
-    		g.setColor(Color.green);
+		if(start == true){
+			g.setColor(Color.green);
 		}else{
-			if(this.end == true){
-				g.setColor(Color.red);
+			if(path == true){
+				g.setColor(Color.cyan);
 			}
 			else{
-				if(this.searched == true){
-					g.setColor(Color.magenta);
+				if(walkable == true){
+					g.setColor(Color.white);
 				}
 				else{
-					if(this.walkable == true){
-						g.setColor(Color.white);
-					}
-					else{
+//					if(searched == true){
+//						g.setColor(Color.magenta);
+//					}
+//					else{
 						g.setColor(Color.gray);
-					}
+//					}
 				}
 			}
 		}
-    	if(this.path == true){
-    		g.setColor(Color.cyan);
+		if(end == true){
+			g.setColor(Color.red);
 		}
-//    	if(this.minion != null){
-//    		g.drawImage(this.minion.image, this.x-5, this.y-5);
-//    	}
-//    	else{
-    		g.fillRect(this.x, this.y, GameGrid.colWidth, GameGrid.rowHeight);
-//    	}
-    		if(this.minion != null){
-        		g.drawImage(this.minion.image, this.x-5, this.y-5);
-        	}
-//			g.drawString(String.valueOf(this.f),this.x+1,this.y-2);
-//			g.drawString(String.valueOf(this.g),this.x+1,this.y+11);
-//			g.drawString(String.valueOf(this.dist),this.x+1,this.y+24);
+		//    	if(minion != null){
+		//    		g.drawImage(minion.image, x-5, y-5);
+		//    	}
+		//    	else{
+		g.fillRect(x, y, GameGrid.colWidth, GameGrid.rowHeight);
+		if(furthest){
+			g.setColor(Color.red);
+			g.drawRoundRect((float)x+5, (float)y+5, (float)GameGrid.colWidth-10, (float)GameGrid.rowHeight-10,1);
+		}
+		//    	}
+		if(minion != null){
+			g.drawImage(minion.image, x-5, y-5);
+		}
+		//			g.drawString(String.valueOf(f),x+1,y-2);
+		//			g.drawString(String.valueOf(g),x+1,y+11);
+		//			g.drawString(String.valueOf(dist),x+1,y+24);
 	}
 }
 

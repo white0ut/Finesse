@@ -56,7 +56,7 @@ public class Pathfinding {
 		openList = new ArrayList<Tile>();
 		closedList = new ArrayList<Tile>();
 		
-		System.out.println("SearchPath");
+//		System.out.println("SearchPath");
 		startTile.g = 0;
 		startTile.dist = (Math.abs(endTile.row-startTile.row) + Math.abs(endTile.col-startTile.col))*10;
 		startTile.f = startTile.g + startTile.dist;
@@ -77,6 +77,13 @@ public class Pathfinding {
 			}
 			int index = openList.indexOf(bestNode);
 			openList.remove(index);
+			if(bestNode.g > GameGrid.maxDist){
+				endTile.end = false;
+				endTile = bestNode;
+				endTile.end = true;
+//				endTile.path = true;
+				endTile.furthest = true;
+			}
 			closedList.add(bestNode);
 			if(closedList.contains(endTile)){
 //				Tile oldTile = bestNode;
@@ -89,7 +96,7 @@ public class Pathfinding {
 					bestNode = bestNode.child;
 //					System.out.println(bestNode);
 				}
-				System.out.println("Found End Tile");
+				//System.out.println("Found End Tile");
 				
 				return true;
 			}

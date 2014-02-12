@@ -11,6 +11,7 @@ public class Player {
 	
 	
 	public Player(){
+		points = 0;
 		minions = new ArrayList<Minion>();
 	}
 	

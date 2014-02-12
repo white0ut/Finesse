@@ -13,8 +13,7 @@ public class FinesseGame extends StateBasedGame {
 	public static enum ScreenType {
 		TITLESCREEN,
 		MAINMENU,
-		GAME,
-		PATHFINDING;
+		GAME;
 		
 		public int getValue() {
 	        return this.ordinal();
@@ -41,8 +40,6 @@ public class FinesseGame extends StateBasedGame {
 		this.getState(ScreenType.GAME.getValue()).init(gc, this);
 //		this.getState(ScreenType.PATHFINDING.getValue()).init(gc, this);
 
-		this.enterState(ScreenType.TITLESCREEN.getValue()); // Main Starting State
-//		 this.enterState(ScreenType.PATHFINDING.getValue()); //Brodie is using this state for easy
-		// testing
+		this.enterState(ScreenType.GAME.getValue()); // Main Starting State
 	}
 }
