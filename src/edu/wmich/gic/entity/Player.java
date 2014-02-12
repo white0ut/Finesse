@@ -8,9 +8,10 @@ public class Player {
 	// Public variable
 	public int points;
 	private List<Minion> minions;
+	public String name;
 	
-	
-	public Player(){
+	public Player(String _name){
+		name = _name;
 		points = 0;
 		minions = new ArrayList<Minion>();
 	}
