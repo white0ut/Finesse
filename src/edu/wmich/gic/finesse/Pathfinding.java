@@ -220,7 +220,7 @@ public class Pathfinding {
 //		}
 //	}
 	
-	public void resetMap(){
+	public void resetMap() throws SlickException{
 		GameGrid.mapArray = new Tile[rows][columns];
 		for (int i = 0; i < rows; i ++){
 		    for (int j = 0; j < columns; j++){

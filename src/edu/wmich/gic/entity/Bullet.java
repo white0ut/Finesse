@@ -52,7 +52,7 @@ public class Bullet {
 	}
 	
 	public void render(Graphics g){
-		g.setColor(Color.red);
+		g.setColor(Color.pink);
 		g.fillOval((float)x, (float)y, width, height);
 	}
 	

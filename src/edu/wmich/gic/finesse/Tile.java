@@ -2,6 +2,9 @@ package edu.wmich.gic.finesse;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 import edu.wmich.gic.entity.Minion;
 import edu.wmich.gic.finesse.drawable.GameGrid;
@@ -24,8 +27,12 @@ public class Tile {
 	public Tile parent = null;
 	public Tile child = null;
 	public Minion minion = null;
+	public SpriteSheet sprites;
+	public Image img;
 
-	public Tile(int _row, int _col){
+	public Tile(int _row, int _col) throws SlickException{
+		sprites = new SpriteSheet(new Image("res/images/tiles.png"),17,17);
+		img = sprites.getSprite(1, 0).getSubImage(1, 1, 17, 17).getScaledCopy(1.6f);
 		int rand = (int) Math.floor((Math.random()*10)+1);
 		if(rand == 1){
 			walkable = false;
@@ -73,7 +80,7 @@ public class Tile {
 //						g.setColor(Color.magenta);
 //					}
 //					else{
-						g.setColor(Color.gray);
+//						g.setColor(Color.gray);
 //					}
 				}
 			}
@@ -93,6 +100,9 @@ public class Tile {
 		//    	}
 		if(minion != null){
 			g.drawImage(minion.image, x-5, y-5);
+		}
+		if(!walkable){
+			g.drawImage(img, x, y);
 		}
 		//			g.drawString(String.valueOf(f),x+1,y-2);
 		//			g.drawString(String.valueOf(g),x+1,y+11);

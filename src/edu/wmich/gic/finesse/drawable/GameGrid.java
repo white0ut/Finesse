@@ -6,6 +6,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 
 import edu.wmich.gic.entity.Bullet;
 import edu.wmich.gic.entity.Minion;
@@ -109,7 +110,12 @@ public class GameGrid {
 		mapArray = new Tile[rows][columns];
 		for (int i = 0; i < rows; i ++){
 			for (int j = 0; j < columns; j++){
-				mapArray[i][j] = new Tile(i,j);
+				try {
+					mapArray[i][j] = new Tile(i,j);
+				} catch (SlickException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				if(i == 0 || i == rows-1 || j == 0 || j == columns-1){
 					mapArray[i][j].walkable = false;
 				}
