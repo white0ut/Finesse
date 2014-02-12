@@ -41,6 +41,10 @@ public class Game extends BasicGameState {
 			players[i] = new Player(playerNames[i]);
 		}
 	}
+	
+	public void initPlayers(){
+		
+	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame game, Graphics g)
@@ -56,7 +60,6 @@ public class Game extends BasicGameState {
 		// g.drawString("Press ESC to quit", 20, 100);
 	}
 	
-	//
 	@Override
 	public void mouseReleased(int button, int x, int y) {
 		map.mouseReleased(button, x, y);

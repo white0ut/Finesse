@@ -11,12 +11,12 @@ public class MainFinesse {
 	 * Post bugs here
 	 * 
 	 *TODO:confront BUG where minions can eat each other... Intentional?  I like it... ------
-
 	 * 
 	 */
+	
 	/*
 	 * ##############For the Meeting February 12, 2014#################
-	 * Quote of the day:
+	 * Quote of the week:
 	 * 		“Programming is like sex. One mistake and you have to support it for the rest of your life.”
 			- Michael Sinz
 	 * 
@@ -56,7 +56,7 @@ public class MainFinesse {
 
 	public static void startGame() throws SlickException{
 		app = new AppGameContainer(new FinesseGame("Finesse"));
-		app.setTargetFrameRate(60); //200 was sucking a lot of cpu, fans kept turning on haha 
+		app.setTargetFrameRate(60); 
 		app.setMinimumLogicUpdateInterval(20);
 		app.setDisplayMode(width, height, false);
 		app.start();
