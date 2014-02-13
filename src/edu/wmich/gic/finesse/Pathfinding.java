@@ -98,7 +98,7 @@ public class Pathfinding {
 			int aCol = bestNode.col;
 			searchTile = GameGrid.mapArray[aRow][aCol - 1];
 			// searchTile.toString();
-			if (searchTile.walkable == true && !closedList.contains(searchTile)) {
+			if (searchTile.walkable == true && searchTile.minion == null && !closedList.contains(searchTile)) {
 				// System.out.println("First");
 				index = openList.indexOf(searchTile);
 				if (index > -1) {
@@ -119,7 +119,7 @@ public class Pathfinding {
 			}
 			searchTile = GameGrid.mapArray[aRow][aCol + 1];
 			// searchTile.toString();
-			if (searchTile.walkable == true && !closedList.contains(searchTile)) {
+			if (searchTile.walkable == true && searchTile.minion == null && !closedList.contains(searchTile)) {
 				// System.out.println("Second");
 				index = openList.indexOf(searchTile);
 				if (index > -1) {
@@ -140,7 +140,7 @@ public class Pathfinding {
 			}
 			searchTile = GameGrid.mapArray[aRow - 1][aCol];
 			// searchTile.toString();
-			if (searchTile.walkable == true && !closedList.contains(searchTile)) {
+			if (searchTile.walkable == true && searchTile.minion == null && !closedList.contains(searchTile)) {
 				index = openList.indexOf(searchTile);
 				// System.out.println("Third");
 				if (index > -1) {
@@ -161,7 +161,7 @@ public class Pathfinding {
 			}
 			searchTile = GameGrid.mapArray[aRow + 1][aCol];
 			// searchTile.toString();
-			if (searchTile.walkable == true && !closedList.contains(searchTile)) {
+			if (searchTile.walkable == true && searchTile.minion == null && !closedList.contains(searchTile)) {
 				index = openList.indexOf(searchTile);
 				// System.out.println("Fourth");
 				if (index > -1) {

@@ -22,13 +22,13 @@ public class GameGrid {
 
 	// TODO: Lets organize these and label them w/ comments
 	Input input;
-	public final int rows = 20;
-	public final int columns = 25;
+	public final int rows = 28;
+	public final int columns = 27;
 	public final static int rowHeight = 25;
 	public final static int colWidth = 25;
 	public final static int gridSpacing = 2;
-	public final static int gridTopOffset = 100;
-	public final static int gridLeftOffset = 200;
+	public final static int gridTopOffset = 0;
+	public final static int gridLeftOffset = 300;
 	public static int maxDist;
 	public static int maxLength;
 
@@ -94,8 +94,7 @@ public class GameGrid {
 				&& col > 0 && row < rows - 1 && col < columns - 1) {
 			oldRow = row;
 			oldColumn = col;
-			if (mapArray[row][col].walkable
-					&& currentMinionTile != mapArray[row][col]) {
+			if (mapArray[row][col].walkable && mapArray[row][col].minion == null && currentMinionTile != mapArray[row][col]) {
 				resetGrid(false);
 				pathfinding.searchPath(currentMinionTile, mapArray[row][col]);
 			}

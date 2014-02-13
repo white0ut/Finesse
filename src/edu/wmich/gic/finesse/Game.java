@@ -51,22 +51,21 @@ public class Game extends BasicGameState {
 			throws SlickException {
 		g.setColor(Color.blue);
 		g.drawString("Player Score: " + human.points, 100, 30);
-		g.drawString("Computer Score: " + computer.points, 700, 30);
+		g.drawString("Computer Score: " + computer.points, 100, 60);
 		map.render(g);
-
-		// g.setColor(Color.white);
-		// g.drawString("CLICK to move the Minion. Use ENTER to reset the map",
-		// 20, 50);
-		// g.drawString("Press ESC to quit", 20, 100);
+		
+//		g.setColor(Color.white);
+//		g.drawString("CLICK to move the Minion. Use ENTER to reset the map", 20, 50);
+//		g.drawString("Press ESC to quit", 20, 100);
 	}
-	
+
 	@Override
 	public void mouseReleased(int button, int x, int y) {
 		map.mouseReleased(button, x, y);
 	}
 	
 	@Override
-	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
+	public void mouseMoved(int oldx, int oldy, int newx, int newy){
 		map.mouseMoved(oldx, oldy, newx, newy);
 	}
 
