@@ -17,18 +17,18 @@ import edu.wmich.gic.finesse.Tile;
  * When you want to draw this grid you simply instantiate is and call these methods.
  */
 public class GameGrid {
-	
-	//private static final GameGrid INSTANCE = new GameGrid();
 
-	//TODO: Lets organize these and label them w/ comments
+	// private static final GameGrid INSTANCE = new GameGrid();
+
+	// TODO: Lets organize these and label them w/ comments
 	Input input;
-	public final int rows = 20;
-	public final int columns = 25;
+	public final int rows = 28;
+	public final int columns = 27;
 	public final static int rowHeight = 25;
 	public final static int colWidth = 25;
 	public final static int gridSpacing = 2;
-	public final static int gridTopOffset = 100;
-	public final static int gridLeftOffset = 200;
+	public final static int gridTopOffset = 0;
+	public final static int gridLeftOffset = 300;
 	public static int maxDist;
 	public static int maxLength;
 
@@ -42,19 +42,17 @@ public class GameGrid {
 
 	public Bullet bullet = null;
 
-	//TODO: pub or priv?
+	// TODO: pub or priv?
 	boolean moveMinion = false;
 
 	int oldRow = 0;
 	int oldColumn = 0;
 
-
-	//private GameGrid() {
+	// private GameGrid() {
 	public GameGrid(Game game) {
 		parentGame = game;
 		/*
 		 * Players will not be controlled here
-		 * 
 		 */
 		maxDist = 40;
 		maxLength = (maxDist / 10) + 1;
@@ -67,7 +65,8 @@ public class GameGrid {
 	// }
 
 	public void mouseReleased(int button, int x, int y) {
-		//TODO: There is a bug where you can walk over an enemy if the enemy is to the right of you
+		// TODO: There is a bug where you can walk over an enemy if the enemy is
+		// to the right of you
 		if (button == 1) {
 			// System.out.println("Release "+((x-GameGrid.gridOffset)/(GameGrid.colWidth+GameGrid.gridSpacing)));
 			// System.out.println("Release "+((y-GameGrid.gridOffset)/(GameGrid.rowHeight+GameGrid.gridSpacing)));
@@ -95,8 +94,7 @@ public class GameGrid {
 				&& col > 0 && row < rows - 1 && col < columns - 1) {
 			oldRow = row;
 			oldColumn = col;
-			if (mapArray[row][col].walkable
-					&& currentMinionTile != mapArray[row][col]) {
+			if (mapArray[row][col].walkable && mapArray[row][col].minion == null && currentMinionTile != mapArray[row][col]) {
 				resetGrid(false);
 				pathfinding.searchPath(currentMinionTile, mapArray[row][col]);
 			}
@@ -126,26 +124,26 @@ public class GameGrid {
 				}
 			}
 		}
-		//TODO: Remove, see below
+		// TODO: Remove, see below
 		mapArray[10][10].minion = new Minion(parentGame.computer);
 		currentMinionTile = mapArray[10][10];
 
 		mapArray[10][15].minion = new Minion(parentGame.human);
 		enemyMinionTile = mapArray[10][15];
-		
+
 		/*
-		TODO:
-		*This will be handled via a loop that draws the minions per player...
-		*we need to be have a minion be "highlighted" when the minion is clicked...
-		*We will then showFurthest() on the currently highlighted minion
-		**/
+		 * TODO:This will be handled via a loop that draws the minions per
+		 * player...we need to be have a minion be "highlighted" when the minion
+		 * is clicked...We will then showFurthest() on the currently highlighted
+		 * minion
+		 */
 
 		showFurthest();
 	}
 
-//	public static GameGrid getInstance() {
-//		return INSTANCE;
-//	}
+	// public static GameGrid getInstance() {
+	// return INSTANCE;
+	// }
 
 	public void render(Graphics g) {
 		g.setColor(Color.blue);
@@ -155,7 +153,7 @@ public class GameGrid {
 		// g.fillRect(x * 32, y * 32, 31, 31);
 		// }
 		// }
-		
+
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
 				mapArray[i][j].render(g);
@@ -168,7 +166,7 @@ public class GameGrid {
 
 	public void update(GameContainer gc, int delta) {
 		timeDelta += delta;
-		//TODO: We need to work this through to work with different minions
+		// TODO: We need to work this through to work with different minions
 		if (moveMinion && timeDelta > 100) {
 			// System.out.println("Update");
 			if (currentMinionTile.parent != null) {
