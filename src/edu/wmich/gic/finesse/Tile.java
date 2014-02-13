@@ -55,7 +55,7 @@ public class Tile {
 		start = false;
 		end = false;
 		searched = false;
-		path = false;
+//		path = false;
 		f = 0;
 		g = 0;
 		dist = 0;
@@ -78,8 +78,8 @@ public class Tile {
 		g.setColor(Color.blue);
 		if(start)
 			g.setColor(Color.green);
-			//else if(path)
-				//	g.setColor(Color.cyan);
+			else if(path || furthest)
+					g.setColor(Color.cyan);
 				else if(walkable)
 						g.setColor(Color.white);
 					else{
