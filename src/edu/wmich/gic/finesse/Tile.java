@@ -75,7 +75,7 @@ public class Tile {
 		}
 		g.drawImage(floor, x, y);
 		if(minion != null){
-			g.setColor(Color.white);
+			//g.setColor(Color.white);
 			g.fillRect(x, y, GameGrid.colWidth, GameGrid.rowHeight);
 			if(minion.selected){
 				g.drawImage(minion.selectedImage, x-5, y-5);

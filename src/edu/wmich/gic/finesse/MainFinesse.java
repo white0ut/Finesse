@@ -24,7 +24,7 @@ public class MainFinesse{
 	/*
 	 * ##############For the Meeting February 12, 2014#################
 	 * Quote of the day:
-	 * 		ÒProgramming is like sex. One mistake and you have to support it for the rest of your life.Ó
+	 * 		ï¿½Programming is like sex. One mistake and you have to support it for the rest of your life.ï¿½
 			- Michael Sinz
 	 * 
 	 * Set a projected finish date for board game night
