@@ -16,9 +16,6 @@ public class Game extends BasicGameState {
 
 	private GameGrid map;
 	
-	// TODO: MAKE THIS FUNCTIONAL WITH AN ARRAY
-	public Player human;
-	public Player computer;
 	Player[] players;
 
 	@Override
@@ -26,9 +23,8 @@ public class Game extends BasicGameState {
 			throws SlickException {
 		// map = GameGrid.getInstance();
 		map = new GameGrid(this);
-
-		human = new Player("Human");
-		computer = new Player("Computer");
+		//Temporary fix to the creation of this w/out use of the intermediate window
+		initPlayers();
 	}
 
 	public void initPlayers(int numPlayers, String[] playerNames) {
@@ -43,15 +39,18 @@ public class Game extends BasicGameState {
 	}
 	
 	public void initPlayers(){
-		
+		players = new Player[2];
+		players[0] = new Player("Human");
+		players[1] = new Player("Computer");
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame game, Graphics g)
 			throws SlickException {
 		g.setColor(Color.blue);
-		g.drawString("Player Score: " + human.points, 100, 30);
-		g.drawString("Computer Score: " + computer.points, 100, 60);
+		for (int i=0; i<players.length; i++) {
+			g.drawString(players[i].name+" Score: " + players[i].points, 100, 30+(30*i));
+		}
 		map.render(g);
 		
 //		g.setColor(Color.white);

@@ -20,7 +20,6 @@ public class GameGrid {
 
 	// private static final GameGrid INSTANCE = new GameGrid();
 
-	// TODO: Lets organize these and label them w/ comments
 	Input input;
 	public final int rows = 28;
 	public final int columns = 27;
@@ -42,18 +41,15 @@ public class GameGrid {
 
 	public Bullet bullet = null;
 
-	// TODO: pub or priv?
-	boolean moveMinion = false;
+	private boolean moveMinion = false;
 
-	int oldRow = 0;
-	int oldColumn = 0;
+	private int oldRow = 0;
+	private int oldColumn = 0;
 
 	// private GameGrid() {
 	public GameGrid(Game game) {
 		parentGame = game;
-		/*
-		 * Players will not be controlled here
-		 */
+
 		maxDist = 40;
 		maxLength = (maxDist / 10) + 1;
 		pathfinding = new Pathfinding();
@@ -125,6 +121,7 @@ public class GameGrid {
 			}
 		}
 		// TODO: Remove, see below
+		
 		mapArray[10][10].minion = new Minion(parentGame.computer);
 		currentMinionTile = mapArray[10][10];
 
