@@ -14,10 +14,10 @@ public class FinesseGame extends StateBasedGame {
 		TITLESCREEN,
 		MAINMENU,
 		GAME;
-		
+
 		public int getValue() {
-	        return this.ordinal();
-	    }
+			return this.ordinal();
+		}
 	}
 
 	// PUBLIC VALUES
@@ -29,7 +29,6 @@ public class FinesseGame extends StateBasedGame {
 		this.addState(new TitleScreen());
 		this.addState(new MainMenu());
 		this.addState(new Game());
-//		this.addState(new Pathfinding());
 
 	}
 
@@ -38,8 +37,13 @@ public class FinesseGame extends StateBasedGame {
 		this.getState(ScreenType.TITLESCREEN.getValue()).init(gc, this);
 		this.getState(ScreenType.MAINMENU.getValue()).init(gc, this);
 		this.getState(ScreenType.GAME.getValue()).init(gc, this);
-//		this.getState(ScreenType.PATHFINDING.getValue()).init(gc, this);
-
-		this.enterState(ScreenType.TITLESCREEN.getValue()); // Main Starting State
+		//		System.out.println(MainFinesse.commandLineArgs[0]);
+		if(MainFinesse.commandLineArgs.length > 0){
+			if(MainFinesse.commandLineArgs[0].compareTo("brodie") == 0){
+				this.enterState(ScreenType.GAME.getValue());
+			}else{
+				this.enterState(ScreenType.TITLESCREEN.getValue()); // Main Starting State
+			}
+		}
 	}
 }

@@ -122,10 +122,10 @@ public class GameGrid {
 		}
 		// TODO: Remove, see below
 		
-		mapArray[10][10].minion = new Minion(parentGame.computer);
+		mapArray[10][10].minion = new Minion(parentGame.players[0]);
 		currentMinionTile = mapArray[10][10];
 
-		mapArray[10][15].minion = new Minion(parentGame.human);
+		mapArray[10][15].minion = new Minion(parentGame.players[1]);
 		enemyMinionTile = mapArray[10][15];
 
 		/*

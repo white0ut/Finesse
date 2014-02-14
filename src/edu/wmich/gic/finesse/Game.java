@@ -16,15 +16,15 @@ public class Game extends BasicGameState {
 
 	private GameGrid map;
 	
-	Player[] players;
+	public Player[] players;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		// map = GameGrid.getInstance();
-		map = new GameGrid(this);
 		//Temporary fix to the creation of this w/out use of the intermediate window
 		initPlayers();
+		map = new GameGrid(this);
 	}
 
 	public void initPlayers(int numPlayers, String[] playerNames) {

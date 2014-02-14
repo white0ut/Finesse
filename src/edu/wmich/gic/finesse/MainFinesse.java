@@ -5,6 +5,7 @@ import org.newdawn.slick.SlickException;
 
 public class MainFinesse {
 	private static AppGameContainer app;
+	public static String[] commandLineArgs;
 	public final static int width = 1024;
 	public final static int height = 768;
 	/* BUGS! 0-0
@@ -50,6 +51,8 @@ public class MainFinesse {
 	 */
 
 	public static void main(String[] args) throws SlickException {
+		commandLineArgs = args;
+//		System.out.println(args[0]);
 		startGame();
 	}
 
