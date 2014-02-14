@@ -16,14 +16,14 @@ public class Game extends BasicGameState {
 
 	private GameGrid map;
 	
-	public Player[] players;
+	public static Player[] players;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		// map = GameGrid.getInstance();
 		//Temporary fix to the creation of this w/out use of the intermediate window
-		initPlayers();
+		initPlayers(MainFinesse.numPlayersConfig,MainFinesse.playerNamesConfig);
 		map = new GameGrid(this);
 	}
 
@@ -49,7 +49,7 @@ public class Game extends BasicGameState {
 			throws SlickException {
 		g.setColor(Color.blue);
 		for (int i=0; i<players.length; i++) {
-			g.drawString(players[i].name+" Score: " + players[i].points, 100, 30+(30*i));
+			g.drawString(players[i].name+" Score: " + players[i].points, 30, 40+(30*i));
 		}
 		map.render(g);
 		

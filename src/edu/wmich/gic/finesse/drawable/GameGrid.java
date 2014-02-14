@@ -12,10 +12,7 @@ import edu.wmich.gic.finesse.Game;
 import edu.wmich.gic.finesse.Pathfinding;
 import edu.wmich.gic.finesse.Tile;
 
-/*
- * The intent of this Class is to provide a class with a render() and update() method 
- * When you want to draw this grid you simply instantiate is and call these methods.
- */
+
 public class GameGrid {
 
 	// private static final GameGrid INSTANCE = new GameGrid();
@@ -45,6 +42,10 @@ public class GameGrid {
 
 	private int oldRow = 0;
 	private int oldColumn = 0;
+	
+	private boolean moving = false;
+	private boolean shooting = false;
+	private boolean shopping = false;
 
 	// private GameGrid() {
 	public GameGrid(Game game) {
@@ -56,13 +57,8 @@ public class GameGrid {
 		createGrid();
 	}
 
-	// public void randomSearch(){
-	// pathfinding.searchPath(mapArray[4][4], mapArray[10][10]);
-	// }
 
 	public void mouseReleased(int button, int x, int y) {
-		// TODO: There is a bug where you can walk over an enemy if the enemy is
-		// to the right of you
 		if (button == 1) {
 			// System.out.println("Release "+((x-GameGrid.gridOffset)/(GameGrid.colWidth+GameGrid.gridSpacing)));
 			// System.out.println("Release "+((y-GameGrid.gridOffset)/(GameGrid.rowHeight+GameGrid.gridSpacing)));
@@ -124,9 +120,11 @@ public class GameGrid {
 		
 		mapArray[10][10].minion = new Minion(parentGame.players[0]);
 		currentMinionTile = mapArray[10][10];
+		currentMinionTile.walkable = true;
 
 		mapArray[10][15].minion = new Minion(parentGame.players[1]);
 		enemyMinionTile = mapArray[10][15];
+		enemyMinionTile.walkable = true;
 
 		/*
 		 * TODO:This will be handled via a loop that draws the minions per
