@@ -37,12 +37,6 @@ public class Game extends BasicGameState {
 			players[i] = new Player(playerNames[i]);
 		}
 	}
-	
-	public void initPlayers(){
-		players = new Player[2];
-		players[0] = new Player("Human");
-		players[1] = new Player("Computer");
-	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame game, Graphics g)
