@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 
 import edu.wmich.gic.entity.Bullet;
 import edu.wmich.gic.entity.Minion;
+import edu.wmich.gic.finesse.FinesseGame;
 import edu.wmich.gic.finesse.Game;
 import edu.wmich.gic.finesse.Pathfinding;
 import edu.wmich.gic.finesse.Tile;
@@ -22,11 +23,13 @@ public class GameGrid {
 	public final int columns = 27;
 	public final static int rowHeight = 25;
 	public final static int colWidth = 25;
-	public final static int gridSpacing = 2;
+	public final static int gridSpacing = 1;
 	public final static int gridTopOffset = 0;
 	public final static int gridLeftOffset = 300;
 	public static int maxDist;
 	public static int maxLength;
+	public int rowCounter = maxLength * -1;
+	public int colCounter = maxLength * -1;
 
 	public Tile currentMinionTile;
 	public Tile enemyMinionTile;
@@ -43,14 +46,16 @@ public class GameGrid {
 	private int oldRow = 0;
 	private int oldColumn = 0;
 	
-	private boolean moving = false;
-	private boolean shooting = false;
-	private boolean shopping = false;
+	public int playingState = 0;
+	private final int MOVING = 0;
+	private final int SHOOTING = 1;
+	private final int BUYING = 2;
+	private final int DEBUGGING = 3;
+	public String[] playingStateNames = new String[]{"MOVING","SHOOTING","BUYING","DEBUGGING"};
 
 	// private GameGrid() {
 	public GameGrid(Game game) {
 		parentGame = game;
-
 		maxDist = 40;
 		maxLength = (maxDist / 10) + 1;
 		pathfinding = new Pathfinding();
@@ -59,36 +64,68 @@ public class GameGrid {
 
 
 	public void mouseReleased(int button, int x, int y) {
-		if (button == 1) {
-			// System.out.println("Release "+((x-GameGrid.gridOffset)/(GameGrid.colWidth+GameGrid.gridSpacing)));
-			// System.out.println("Release "+((y-GameGrid.gridOffset)/(GameGrid.rowHeight+GameGrid.gridSpacing)));
-			int row = getRow(y);
-			int col = getColumn(x);
-			if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
-				if (mapArray[row][col].walkable
-						&& currentMinionTile != mapArray[row][col]) {
-					resetGrid(true);
-					pathfinding.searchPath(currentMinionTile,
-							mapArray[row][col]);
-					moveMinion = true;
+		if (button == 0) {
+			if(playingState == MOVING){
+				int row = getRow(y);
+				int col = getColumn(x);
+				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
+					if(currentMinionTile != null){
+						if(currentMinionTile == mapArray[row][col]){
+							currentMinionTile.minion.selected = false;
+							currentMinionTile = null;
+							resetGrid(true);
+						}
+						else{
+							if (mapArray[row][col].walkable && mapArray[row][col].minion == null) {
+								resetGrid(true);
+								pathfinding.searchPath(currentMinionTile,mapArray[row][col]);
+								moveMinion = true;
+							}
+							else{
+								if(mapArray[row][col].minion != null){
+									currentMinionTile.minion.selected = false;
+									currentMinionTile = mapArray[row][col];
+									currentMinionTile.minion.selected = true;
+									resetGrid(true);
+									showFurthest(currentMinionTile);
+								}
+							}
+						}
+					} else{
+						if(mapArray[row][col].minion != null){
+							currentMinionTile = mapArray[row][col];
+							currentMinionTile.minion.selected = true;
+							showFurthest(currentMinionTile);
+						}
+					}
 				}
 			}
-		} else if (button == 0) {
-			bullet = new Bullet(currentMinionTile, x, y);
-		}
+			else if(playingState == SHOOTING){
+				bullet = new Bullet(currentMinionTile, x, y);
+			}
+			else if(playingState == DEBUGGING){
+				int row = getRow(y);
+				int col = getColumn(x);
+				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
+					System.out.println(mapArray[row][col].toString());
+				}
+			}
+		} 
 	}
 
 	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
 		// System.out.println("Mouse Move");
-		int row = getRow(newy);
-		int col = getColumn(newx);
-		if (!moveMinion && (oldRow != row || oldColumn != col) && row > 0
-				&& col > 0 && row < rows - 1 && col < columns - 1) {
-			oldRow = row;
-			oldColumn = col;
-			if (mapArray[row][col].walkable && mapArray[row][col].minion == null && currentMinionTile != mapArray[row][col]) {
-				resetGrid(false);
-				pathfinding.searchPath(currentMinionTile, mapArray[row][col]);
+		if(playingState == MOVING && currentMinionTile != null){
+			int row = getRow(newy);
+			int col = getColumn(newx);
+			if (!moveMinion && (oldRow != row || oldColumn != col) && row > 0
+					&& col > 0 && row < rows - 1 && col < columns - 1) {
+				oldRow = row;
+				oldColumn = col;
+				if (mapArray[row][col].walkable && mapArray[row][col].minion == null && currentMinionTile != mapArray[row][col]) {
+					resetGrid(false);
+					pathfinding.searchPath(currentMinionTile, mapArray[row][col]);
+				}
 			}
 		}
 	}
@@ -117,14 +154,20 @@ public class GameGrid {
 			}
 		}
 		// TODO: Remove, see below
+		for(int i = 0; i < 100; i++){
+			int randRow = FinesseGame.rand.nextInt(rows-2)+1;
+			int randCol = FinesseGame.rand.nextInt(columns-2)+1;
+			mapArray[randRow][randCol].minion = new Minion(parentGame.players[0]);
+			parentGame.players[0].minions.add(mapArray[randRow][randCol].minion);
+			mapArray[randRow][randCol].walkable = true;
+		}
 		
-		mapArray[10][10].minion = new Minion(parentGame.players[0]);
-		currentMinionTile = mapArray[10][10];
-		currentMinionTile.walkable = true;
+//		currentMinionTile = mapArray[10][10];
+//		currentMinionTile.walkable = true;
 
-		mapArray[10][15].minion = new Minion(parentGame.players[1]);
-		enemyMinionTile = mapArray[10][15];
-		enemyMinionTile.walkable = true;
+//		mapArray[10][15].minion = new Minion(parentGame.players[1]);
+//		enemyMinionTile = mapArray[10][15];
+//		enemyMinionTile.walkable = true;
 
 		/*
 		 * TODO:This will be handled via a loop that draws the minions per
@@ -133,7 +176,7 @@ public class GameGrid {
 		 * minion
 		 */
 
-		showFurthest();
+//		showFurthest(currentMinionTile);
 	}
 
 	// public static GameGrid getInstance() {
@@ -142,7 +185,8 @@ public class GameGrid {
 
 	public void render(Graphics g) {
 		g.setColor(Color.blue);
-
+		g.drawString("Playing State: "+playingStateNames[playingState], 30, 30);
+		g.drawString("Change State\nM = Moving\nS = Shooting\nB = Buying", 30, 50);
 		// for (int x = 7; x < MainFinesse.width / 32 + 1; x++) {
 		// for (int y = 0; y < (MainFinesse.height / 32) + 1; y++) {
 		// g.fillRect(x * 32, y * 32, 31, 31);
@@ -170,7 +214,8 @@ public class GameGrid {
 				currentMinionTile = currentMinionTile.parent;
 			} else {
 				moveMinion = false;
-				showFurthest();
+				resetGrid(true);
+				showFurthest(currentMinionTile);
 			}
 			timeDelta = 0;
 		}
@@ -180,9 +225,24 @@ public class GameGrid {
 				bullet = null;
 			}
 		}
+		if(gc.getInput().isKeyPressed(Input.KEY_M)){
+			playingState = 0;
+		}
+		else if(gc.getInput().isKeyPressed(Input.KEY_S)){
+			playingState = 1;
+		}
+		else if(gc.getInput().isKeyPressed(Input.KEY_B)){
+			playingState = 2;
+		}
+		else if(gc.getInput().isKeyPressed(Input.KEY_D)){
+			playingState = 3;
+		}
+//		else if(gc.getInput().isKeyPressed(Input.KEY_ENTER)){
+//			
+//		}
 	}
 
-	public void showFurthest() {
+	public void showFurthest(Tile startingTile) {
 		// System.out.println("Show Furthest");
 		// System.out.println(maxLength);
 		int negMaxLength = -1 * maxLength;
@@ -190,18 +250,18 @@ public class GameGrid {
 		for (int i = negMaxLength; i <= maxLength; i++) {
 			for (int j = negMaxLength; j <= maxLength; j++) {
 				// System.out.println("blah");
-				int row = currentMinionTile.row + i;
-				int col = currentMinionTile.col + j;
+				int row = startingTile.row + i;
+				int col = startingTile.col + j;
 				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
-					if (mapArray[row][col].walkable
-							&& currentMinionTile != mapArray[row][col]) {
+					if (mapArray[row][col].walkable && startingTile != mapArray[row][col]) {
 						resetGrid(false);
-						pathfinding.searchPath(currentMinionTile,
-								mapArray[row][col]);
+						pathfinding.searchPath(startingTile,mapArray[row][col]);
 					}
 				}
 			}
 		}
+		pathfinding.endTile.end = false;
+//		pathfinding.startTile.start = false;
 	}
 
 	static public int getRow(int y) {

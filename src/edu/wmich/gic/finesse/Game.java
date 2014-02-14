@@ -14,7 +14,7 @@ import edu.wmich.gic.finesse.drawable.GameGrid;
 
 public class Game extends BasicGameState {
 
-	private GameGrid map;
+	private GameGrid gameGrid;
 	
 	public static Player[] players;
 
@@ -24,7 +24,7 @@ public class Game extends BasicGameState {
 		// map = GameGrid.getInstance();
 		//Temporary fix to the creation of this w/out use of the intermediate window
 		initPlayers(MainFinesse.numPlayersConfig,MainFinesse.playerNamesConfig);
-		map = new GameGrid(this);
+		gameGrid = new GameGrid(this);
 	}
 
 	public void initPlayers(int numPlayers, String[] playerNames) {
@@ -49,9 +49,9 @@ public class Game extends BasicGameState {
 			throws SlickException {
 		g.setColor(Color.blue);
 		for (int i=0; i<players.length; i++) {
-			g.drawString(players[i].name+" Score: " + players[i].points, 30, 40+(30*i));
+			g.drawString(players[i].name+" Score: " + players[i].points, 30, 140+(20*i));
 		}
-		map.render(g);
+		gameGrid.render(g);
 		
 //		g.setColor(Color.white);
 //		g.drawString("CLICK to move the Minion. Use ENTER to reset the map", 20, 50);
@@ -60,18 +60,18 @@ public class Game extends BasicGameState {
 
 	@Override
 	public void mouseReleased(int button, int x, int y) {
-		map.mouseReleased(button, x, y);
+		gameGrid.mouseReleased(button, x, y);
 	}
 	
 	@Override
 	public void mouseMoved(int oldx, int oldy, int newx, int newy){
-		map.mouseMoved(oldx, oldy, newx, newy);
+		gameGrid.mouseMoved(oldx, oldy, newx, newy);
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame game, int delta)
 			throws SlickException {
-		map.update(gc, delta);
+		gameGrid.update(gc, delta);
 
 		if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			gc.exit();
@@ -82,7 +82,7 @@ public class Game extends BasicGameState {
 			// map.resetGrid();
 			// pathfinding.searchPath(map.mapArray[rand1][1],
 			// map.mapArray[rand2][map.columns-2]);
-			map.createGrid();
+			gameGrid.createGrid();
 		}
 	}
 

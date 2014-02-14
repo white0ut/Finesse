@@ -12,16 +12,16 @@ public class Pathfinding {
 	Input input;
 	final int rows = 30;
 	final int columns = 42;
-	final static int rowHeight = 15;
-	final static int colWidth = 15;
+//	final static int rowHeight = 15;
+//	final static int colWidth = 15;
 	final static int gridSpacing = 5;
 	final static int gridOffset = 40;
 
 	// Tile[][] GameGrid.mapArray;// = new Tile[rows][columns];
-	List<Tile> openList;// = new ArrayList<Tile>();
-	List<Tile> closedList;// = new ArrayList<Tile>();
-	Tile startTile;
-	Tile endTile;
+	private List<Tile> openList;// = new ArrayList<Tile>();
+	private List<Tile> closedList;// = new ArrayList<Tile>();
+	public Tile startTile;
+	public Tile endTile;
 
 	@SuppressWarnings("unused")
 	public boolean searchPath(Tile start, Tile end) {
@@ -61,12 +61,13 @@ public class Pathfinding {
 				endTile.end = false;
 				endTile = bestNode;
 				endTile.end = true;
-				// endTile.path = true;
+				endTile.path = true;
 				endTile.furthest = true;
 			}
 			closedList.add(bestNode);
 			if (closedList.contains(endTile)) {
 				// Tile oldTile = bestNode;
+				bestNode.path = true;
 				bestNode.child.parent = bestNode;
 				bestNode = bestNode.child;
 				// System.out.println(endTile.child);

@@ -10,7 +10,7 @@ import edu.wmich.gic.finesse.FinesseGame.ScreenType;
 
 public class MainFinesse{
 	private static AppGameContainer app;
-	public static String[] commandLineArgs;
+	public static String[] commandLineArgs = new String[0];
 	public static String[] playerNamesConfig;
 	public static int numPlayersConfig;
 	public final static int width = 1024;
@@ -18,7 +18,7 @@ public class MainFinesse{
 	/* BUGS! 0-0
 	 * Post bugs here
 	 * 
-	 *TODO:confront BUG where minions can eat each other... Intentional?  I like it... -----
+	 *FIXED:confront BUG where minions can eat each other... Intentional?  I like it... -----
 	 * 
 	 */
 	/*
@@ -29,9 +29,9 @@ public class MainFinesse{
 	 * 
 	 * Set a projected finish date for board game night
 	 * We need a page before the game starts that accepts input for the follow
-	 * 		TODO:1: Amount of players
-	 * 		TODO:2: What their names are
-	 * 		TODO:3: Max of 4 players
+	 * 		FIXED:1: Amount of players
+	 * 		FIXED:2: What their names are
+	 * 		FIXED:3: Max of 4 players
 	 * 		TODO:4: Optional game settings? (get creative, idc)
 	 * 		If anyone is interested in doing the GUI this page has potential to look cool
 	 * 
@@ -67,6 +67,8 @@ public class MainFinesse{
 			}else{
 				ConfigPopUp();
 			}
+		}else{
+			ConfigPopUp();
 		}
 		startGame();
 	}
