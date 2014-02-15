@@ -75,7 +75,7 @@ public class Tile {
 		}
 		g.drawImage(floor, x, y);
 		if(minion != null){
-			//g.setColor(Color.white);
+			g.setColor(Color.white);
 			g.fillRect(x, y, GameGrid.colWidth, GameGrid.rowHeight);
 			if(minion.selected){
 				g.drawImage(minion.selectedImage, x-5, y-5);
@@ -92,7 +92,7 @@ public class Tile {
 				else if(walkable)
 						g.setColor(Color.white);
 		
-		if(end == true){
+		if(end){
 			g.setColor(Color.red);
 		}
 		g.fillRect(x, y, GameGrid.colWidth, GameGrid.rowHeight);

@@ -153,7 +153,6 @@ public class GameGrid {
 				}
 			}
 		}
-		// TODO: Remove, see below
 		for(int i = 0; i < 100; i++){
 			int randRow = FinesseGame.rand.nextInt(rows-2)+1;
 			int randCol = FinesseGame.rand.nextInt(columns-2)+1;
@@ -162,19 +161,6 @@ public class GameGrid {
 			mapArray[randRow][randCol].walkable = true;
 		}
 		
-//		currentMinionTile = mapArray[10][10];
-//		currentMinionTile.walkable = true;
-
-//		mapArray[10][15].minion = new Minion(parentGame.players[1]);
-//		enemyMinionTile = mapArray[10][15];
-//		enemyMinionTile.walkable = true;
-
-		/*
-		 * TODO:This will be handled via a loop that draws the minions per
-		 * player...we need to be have a minion be "highlighted" when the minion
-		 * is clicked...We will then showFurthest() on the currently highlighted
-		 * minion
-		 */
 
 //		showFurthest(currentMinionTile);
 	}
