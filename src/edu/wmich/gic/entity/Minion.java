@@ -1,5 +1,6 @@
 package edu.wmich.gic.entity;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -41,12 +42,12 @@ public class Minion {
 	}
 	
 	public void render(Graphics g, int x, int y){
-		x = x - (width-GameGrid.colWidth)/2;
-		y = y - (height-GameGrid.rowHeight)/2;
+		int offsetX = x - (width-GameGrid.colWidth)/2;
+		int offsetY = y - (height-GameGrid.rowHeight)/2;
 		if(selected){
-			g.drawImage(selectedImage, x, y);
+			g.drawImage(selectedImage, offsetX, offsetY);
 		}else{
-			g.drawImage(mainImage, x, y);
+			g.drawImage(mainImage, offsetX, offsetY);
 		}
 	}
 	

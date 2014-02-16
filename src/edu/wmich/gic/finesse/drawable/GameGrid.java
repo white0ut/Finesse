@@ -46,12 +46,16 @@ public class GameGrid {
 	private int oldRow = 0;
 	private int oldColumn = 0;
 	
-	public int playingState = 0;
+	public static int playingState = 0;
 	private final int MOVING = 0;
 	private final int SHOOTING = 1;
 	private final int BUYING = 2;
 	private final int DEBUGGING = 3;
 	public String[] playingStateNames = new String[]{"MOVING","SHOOTING","BUYING","DEBUGGING"};
+	
+//	double deltaX = 100;
+//	double distance = Math.sqrt(deltaX*deltaX);
+	public static int shootingDiameter = 300;
 
 	// private GameGrid() {
 	public GameGrid(Game game) {
@@ -115,8 +119,10 @@ public class GameGrid {
 						}
 					}
 					else{
-						currentMinionTile = mapArray[row][col];
-						currentMinionTile.minion.selected = true;
+						if(mapArray[row][col].minion != null){
+							currentMinionTile = mapArray[row][col];
+							currentMinionTile.minion.selected = true;
+						}
 					}
 				}
 			}
@@ -201,6 +207,13 @@ public class GameGrid {
 				mapArray[i][j].render(g);
 			}
 		}
+		if(currentMinionTile != null && playingState == SHOOTING){//Shooting
+			g.setColor(Color.red);
+			g.setLineWidth(5);
+			int circleX = currentMinionTile.x + currentMinionTile.width / 2 - shootingDiameter / 2;
+			int circleY = currentMinionTile.y + currentMinionTile.height / 2 - shootingDiameter / 2;
+			g.drawOval(circleX, circleY, shootingDiameter, shootingDiameter);
+		}
 		if (bullet != null) {
 			bullet.render(g);
 		}
@@ -228,20 +241,26 @@ public class GameGrid {
 				bullet = null;
 			}
 		}
-		if(gc.getInput().isKeyPressed(Input.KEY_M)){
-			playingState = 0;
-		}
-		else if(gc.getInput().isKeyPressed(Input.KEY_S)){
-			playingState = 1;
-			resetGrid(true);
-		}
-		else if(gc.getInput().isKeyPressed(Input.KEY_B)){
-			playingState = 2;
-			resetGrid(true);
-		}
-		else if(gc.getInput().isKeyPressed(Input.KEY_D)){
-			playingState = 3;
-			resetGrid(true);
+		if(bullet == null && moveMinion == false){
+			if(gc.getInput().isKeyPressed(Input.KEY_M)){
+				playingState = 0;
+				if(currentMinionTile != null){
+					resetGrid(true);
+					showFurthest(currentMinionTile);
+				}
+			}
+			else if(gc.getInput().isKeyPressed(Input.KEY_S)){
+				playingState = 1;
+				resetGrid(true);
+			}
+			else if(gc.getInput().isKeyPressed(Input.KEY_B)){
+				playingState = 2;
+				resetGrid(true);
+			}
+			else if(gc.getInput().isKeyPressed(Input.KEY_D)){
+				playingState = 3;
+				resetGrid(true);
+			}
 		}
 //		else if(gc.getInput().isKeyPressed(Input.KEY_ENTER)){
 //			

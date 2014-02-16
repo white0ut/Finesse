@@ -38,10 +38,10 @@ public class Bullet {
 		double deltaX = mouseX-x;
 		double deltaY = mouseY-y;
 		double distance = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
-		velX = deltaX / distance * 4;
-		velY = deltaY / distance * 4;
-		endX = Math.abs((int)(deltaX * 100 / distance));
-		endY = Math.abs((int)(deltaY * 100 / distance));
+		velX = deltaX * 4 / distance;
+		velY = deltaY * 4 / distance;
+		endX = Math.abs((int)(deltaX * GameGrid.shootingDiameter / 2 / distance));
+		endY = Math.abs((int)(deltaY * GameGrid.shootingDiameter / 2 / distance));
 //		delta_x = float(end_x-self.start_x)
 //	            delta_y = float(end_y-self.start_y)
 //
@@ -53,7 +53,7 @@ public class Bullet {
 	}
 	
 	public void render(Graphics g){
-		g.setColor(Color.pink);
+		g.setColor(Color.red);
 		g.fillOval((float)x, (float)y, width, height);
 	}
 	
