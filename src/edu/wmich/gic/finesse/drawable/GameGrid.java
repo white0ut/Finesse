@@ -68,10 +68,10 @@ public class GameGrid {
 
 
 	public void mouseReleased(int button, int x, int y) {
+		int row = getRow(y);
+		int col = getColumn(x);
 		if (button == 0) {
 			if(playingState == MOVING){
-				int row = getRow(y);
-				int col = getColumn(x);
 				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
 					if(currentMinionTile != null){
 						if(currentMinionTile == mapArray[row][col]){
@@ -105,8 +105,6 @@ public class GameGrid {
 				}
 			}
 			else if(playingState == SHOOTING){
-				int row = getRow(y);
-				int col = getColumn(x);
 				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
 					if(currentMinionTile != null){
 						if(mapArray[row][col] == currentMinionTile){
@@ -126,9 +124,16 @@ public class GameGrid {
 					}
 				}
 			}
+			else if(playingState == BUYING){
+				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
+					if(mapArray[row][col].minion == null){
+						mapArray[row][col].minion = new Minion(parentGame.players[0]);
+						parentGame.players[0].minions.add(mapArray[row][col].minion);
+						parentGame.players[0].points -= 100;
+					}
+				}
+			}
 			else if(playingState == DEBUGGING){
-				int row = getRow(y);
-				int col = getColumn(x);
 				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
 					System.out.println(mapArray[row][col].toString());
 				}
