@@ -101,7 +101,24 @@ public class GameGrid {
 				}
 			}
 			else if(playingState == SHOOTING){
-				bullet = new Bullet(currentMinionTile, x, y);
+				int row = getRow(y);
+				int col = getColumn(x);
+				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
+					if(currentMinionTile != null){
+						if(mapArray[row][col] == currentMinionTile){
+							currentMinionTile.minion.selected = false;
+							currentMinionTile = null;
+							return;
+						}
+						if(bullet == null){
+							bullet = new Bullet(currentMinionTile, x, y);
+						}
+					}
+					else{
+						currentMinionTile = mapArray[row][col];
+						currentMinionTile.minion.selected = true;
+					}
+				}
 			}
 			else if(playingState == DEBUGGING){
 				int row = getRow(y);
@@ -216,12 +233,15 @@ public class GameGrid {
 		}
 		else if(gc.getInput().isKeyPressed(Input.KEY_S)){
 			playingState = 1;
+			resetGrid(true);
 		}
 		else if(gc.getInput().isKeyPressed(Input.KEY_B)){
 			playingState = 2;
+			resetGrid(true);
 		}
 		else if(gc.getInput().isKeyPressed(Input.KEY_D)){
 			playingState = 3;
+			resetGrid(true);
 		}
 //		else if(gc.getInput().isKeyPressed(Input.KEY_ENTER)){
 //			

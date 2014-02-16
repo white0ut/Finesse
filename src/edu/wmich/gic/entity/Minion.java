@@ -1,9 +1,11 @@
 package edu.wmich.gic.entity;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import edu.wmich.gic.finesse.Tile;
+import edu.wmich.gic.finesse.drawable.GameGrid;
 
 public class Minion {
 	
@@ -12,6 +14,8 @@ public class Minion {
 	public Player owner;
 	private String name;
 	public Tile currentTile;
+	public int width = GameGrid.colWidth*5/4;
+	public int height = GameGrid.rowHeight*5/4;
 	public boolean selected = false;
 	
 	public Minion(Player _owner){
@@ -36,10 +40,20 @@ public class Minion {
 		owner.points += 100;
 	}
 	
+	public void render(Graphics g, int x, int y){
+		x = x - (width-GameGrid.colWidth)/2;
+		y = y - (height-GameGrid.rowHeight)/2;
+		if(selected){
+			g.drawImage(selectedImage, x, y);
+		}else{
+			g.drawImage(mainImage, x, y);
+		}
+	}
+	
 	public void LoadImages(){
 		try {
-			mainImage = new Image("res/images/Shy-Minion.png");
-			selectedImage = new Image("res/images/Shy-Minion-selected.png");
+			mainImage = new Image("res/images/Shy-Minion.png").getScaledCopy(width, height);
+			selectedImage = new Image("res/images/Shy-Minion-selected.png").getScaledCopy(width, height);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

@@ -13,6 +13,8 @@ import edu.wmich.gic.finesse.drawable.GameGrid;
 public class Tile {
 	public int x = 0;
 	public int y = 0;
+	public int width;
+	public int height;
 	public int row = 0;
 	public int col = 0;
 	public boolean start = false;
@@ -27,14 +29,16 @@ public class Tile {
 	public Tile parent = null;
 	public Tile child = null;
 	public Minion minion = null;
-	public SpriteSheet sprites;
+	private SpriteSheet sprites;
 	public Image wall;
 	public Image floor;
 
 	public Tile(int _row, int _col) throws SlickException{
+		width = GameGrid.colWidth;
+		height = GameGrid.rowHeight;
 		sprites = new SpriteSheet(new Image("res/images/tiles.png"),16,16);
-		wall = sprites.getSprite(1,0).getScaledCopy(GameGrid.colWidth, GameGrid.rowHeight);
-		floor = sprites.getSprite(6,1).getScaledCopy(GameGrid.colWidth, GameGrid.rowHeight);
+		wall = sprites.getSprite(1,0).getScaledCopy(width, height);
+		floor = sprites.getSprite(6,1).getScaledCopy(width, height);
 		int rand = (int) Math.floor((Math.random()*10)+1);
 		if(rand == 1){
 			walkable = false;
@@ -42,8 +46,8 @@ public class Tile {
 		row = _row;
 		col = _col;
 		//TODO: Offset the grid to an edge of the screen, leaving room for buttons
-		x = GameGrid.gridLeftOffset+col*(GameGrid.colWidth+GameGrid.gridSpacing);
-		y = GameGrid.gridTopOffset+row*(GameGrid.rowHeight+GameGrid.gridSpacing);
+		x = GameGrid.gridLeftOffset+col*(width+GameGrid.gridSpacing);
+		y = GameGrid.gridTopOffset+row*(height+GameGrid.gridSpacing);
 	}
 
 	public String toString(){
@@ -76,12 +80,8 @@ public class Tile {
 		g.drawImage(floor, x, y);
 		if(minion != null){
 			g.setColor(Color.white);
-			g.fillRect(x, y, GameGrid.colWidth, GameGrid.rowHeight);
-			if(minion.selected){
-				g.drawImage(minion.selectedImage, x-5, y-5);
-			}else{
-				g.drawImage(minion.mainImage, x-5, y-5);
-			}
+			g.fillRect(x, y, width, height);
+			minion.render(g,x,y);
 			return;
 		}
 		g.setColor(Color.blue);
@@ -95,7 +95,7 @@ public class Tile {
 		if(end){
 			g.setColor(Color.red);
 		}
-		g.fillRect(x, y, GameGrid.colWidth, GameGrid.rowHeight);
+		g.fillRect(x, y, width, height);
 //		if(furthest){
 //			g.setColor(Color.red);
 //			g.drawRoundRect((float)x+5, (float)y+5, (float)GameGrid.colWidth-10, (float)GameGrid.rowHeight-10,1);
