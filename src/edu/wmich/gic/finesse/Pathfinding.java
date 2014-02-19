@@ -9,33 +9,19 @@ import org.newdawn.slick.SlickException;
 import edu.wmich.gic.finesse.drawable.GameGrid;
 
 public class Pathfinding {
-
-	// private static final Pathfinding INSTANCE = new Pathfinding();
-	//
-	// public static Pathfinding getInstance() {
-	// return INSTANCE;
-	// }
-
 	Input input;
 	final int rows = 30;
 	final int columns = 42;
-	final static int rowHeight = 15;
-	final static int colWidth = 15;
+//	final static int rowHeight = 15;
+//	final static int colWidth = 15;
 	final static int gridSpacing = 5;
 	final static int gridOffset = 40;
 
 	// Tile[][] GameGrid.mapArray;// = new Tile[rows][columns];
-	List<Tile> openList;// = new ArrayList<Tile>();
-	List<Tile> closedList;// = new ArrayList<Tile>();
-	Tile startTile;
-	Tile endTile;
-
-	// @Override
-	// public void init(GameContainer gc, StateBasedGame game) throws
-	// SlickException {
-	// resetMap();
-	// // searchPath();
-	// }
+	private List<Tile> openList;// = new ArrayList<Tile>();
+	private List<Tile> closedList;// = new ArrayList<Tile>();
+	public Tile startTile;
+	public Tile endTile;
 
 	@SuppressWarnings("unused")
 	public boolean searchPath(Tile start, Tile end) {
@@ -75,12 +61,13 @@ public class Pathfinding {
 				endTile.end = false;
 				endTile = bestNode;
 				endTile.end = true;
-				// endTile.path = true;
+				endTile.path = true;
 				endTile.furthest = true;
 			}
 			closedList.add(bestNode);
 			if (closedList.contains(endTile)) {
 				// Tile oldTile = bestNode;
+				bestNode.path = true;
 				bestNode.child.parent = bestNode;
 				bestNode = bestNode.child;
 				// System.out.println(endTile.child);
@@ -185,36 +172,6 @@ public class Pathfinding {
 		return false;
 	}
 
-	// @Override
-	// public void update(GameContainer gc, StateBasedGame game, int delta)
-	// throws SlickException {
-	// input = gc.getInput();
-	// if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-	// // FinesseGame.isGame = false;
-	// // FinesseGame.isPaused = true;
-	// gc.exit();
-	// // System.out.println("Escape");
-	// }
-	// else if(input.isKeyPressed(Input.KEY_ENTER)){
-	// // System.out.println(GameGrid.mapArray[0][0]);
-	// resetMap();
-	// // searchPath();
-	// }
-	// }
-
-	// @Override
-	// public void render(GameContainer gc, StateBasedGame game, Graphics g)
-	// throws SlickException {
-	// g.setColor(Color.blue);
-	// g.fillRect(0, 0, MainFinesse.width, MainFinesse.height);
-	// g.setColor(Color.white);
-	// g.drawString("Change the starting state in the bottom of FinesseGame.java\nBrodie might have forgotten to comment it out when committing",150,0);
-	// for (int i = 0; i < rows; i ++){
-	// for (int j = 0; j < columns; j++){
-	// GameGrid.mapArray[i][j].render(g);
-	// }
-	// }
-	// }
 
 	public void resetMap() throws SlickException {
 		GameGrid.mapArray = new Tile[rows][columns];
@@ -226,24 +183,6 @@ public class Pathfinding {
 				}
 			}
 		}
-
-		GameGrid.mapArray[0][13].walkable = false;
-		GameGrid.mapArray[1][13].walkable = false;
-		GameGrid.mapArray[2][13].walkable = false;
-		GameGrid.mapArray[3][13].walkable = false;
-		GameGrid.mapArray[4][13].walkable = false;
-		GameGrid.mapArray[5][13].walkable = false;
-		GameGrid.mapArray[6][13].walkable = false;
-		GameGrid.mapArray[7][13].walkable = false;
-
-		GameGrid.mapArray[14][7].walkable = false;
-		GameGrid.mapArray[13][7].walkable = false;
-		GameGrid.mapArray[12][7].walkable = false;
-		GameGrid.mapArray[11][7].walkable = false;
-		GameGrid.mapArray[10][7].walkable = false;
-		GameGrid.mapArray[9][7].walkable = false;
-		GameGrid.mapArray[8][7].walkable = false;
-		GameGrid.mapArray[7][7].walkable = false;
 
 		startTile = GameGrid.mapArray[rows - 2][1];
 		startTile.start = true;
@@ -260,9 +199,4 @@ public class Pathfinding {
 		return (Math.abs(endTile.row - openList.get(i).row) + Math
 				.abs(endTile.col - openList.get(i).col)) * 10;
 	}
-
-	// @Override
-	// public int getID() {
-	// return ScreenType.PATHFINDING.getValue();
-	// }
 }

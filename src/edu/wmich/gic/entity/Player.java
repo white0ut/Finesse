@@ -7,7 +7,7 @@ public class Player {
 	
 	// Public variable
 	public int points;
-	private List<Minion> minions;
+	public List<Minion> minions;
 	public String name;
 	
 	public Player(String _name){
