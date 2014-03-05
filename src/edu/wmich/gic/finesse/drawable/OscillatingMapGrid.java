@@ -12,7 +12,9 @@ import edu.wmich.gic.finesse.MainFinesse;
 
 public class OscillatingMapGrid {
 
+	// I am fascinated right now... --Kenny
 	private static final OscillatingMapGrid INSTANCE = new OscillatingMapGrid();
+	// 0_0 ^^^^^^^^^^^^^^^^^^^^^^^^^^ 0_0 THIS IS GENIUS 0_0
 
 	public static OscillatingMapGrid getInstance() {
 		return INSTANCE;

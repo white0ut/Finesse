@@ -8,13 +8,12 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import edu.wmich.gic.finesse.FinesseGame.ScreenType;
 import edu.wmich.gic.finesse.drawable.OscillatingMapGrid;
 
 public class TitleScreen extends BasicGameState {
-	
+
 	OscillatingMapGrid map;
 	Image titleImage;
 	Input input;
@@ -22,7 +21,7 @@ public class TitleScreen extends BasicGameState {
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		
+
 		map = OscillatingMapGrid.getInstance();
 		try {
 			titleImage = new Image("res/images/TitlePageName.png");
@@ -34,24 +33,24 @@ public class TitleScreen extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame game, Graphics g)
 			throws SlickException {
-		
+
 		map.render(g);
-		g.drawImage(titleImage, 
-				(gc.getWidth()/2)-(titleImage.getWidth()/2), 
-				(gc.getHeight() / 2) - (titleImage.getHeight() / 2) );
-		
+		g.drawImage(titleImage, (gc.getWidth() / 2)
+				- (titleImage.getWidth() / 2), (gc.getHeight() / 2)
+				- (titleImage.getHeight() / 2));
+
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame game, int delta)
 			throws SlickException {
-		
+
 		input = gc.getInput();
 		map.update(gc, delta);
-		
-		if (input.isKeyPressed(Input.KEY_ENTER)){
-			game.enterState(ScreenType.MAINMENU.getValue(), 
-					new FadeOutTransition(), new FadeInTransition());
+
+		if (input.isKeyPressed(Input.KEY_ENTER)) {
+			game.enterState(ScreenType.MAINMENU.getValue(),
+					null, new FadeInTransition());
 		}
 	}
 

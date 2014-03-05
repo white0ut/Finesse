@@ -13,8 +13,8 @@ public class MainFinesse{
 	public static String[] commandLineArgs = new String[0];
 	public static String[] playerNamesConfig;
 	public static int numPlayersConfig;
-	public final static int width = 1024;
-	public final static int height = 768;
+	public final static int width = 1280;
+	public final static int height = 1024;
 	/* BUGS! 0-0
 	 * Post bugs here
 	 * 
