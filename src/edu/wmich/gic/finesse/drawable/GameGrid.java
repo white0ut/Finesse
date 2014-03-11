@@ -10,6 +10,7 @@ import edu.wmich.gic.entity.Bullet;
 import edu.wmich.gic.entity.Minion;
 import edu.wmich.gic.finesse.FinesseGame;
 import edu.wmich.gic.finesse.Game;
+import edu.wmich.gic.finesse.MainFinesse;
 import edu.wmich.gic.finesse.Pathfinding;
 import edu.wmich.gic.finesse.Tile;
 
@@ -19,13 +20,13 @@ public class GameGrid {
 	// private static final GameGrid INSTANCE = new GameGrid();
 
 	Input input;
-	public final int rows = 28;
-	public final int columns = 27;
+	public final static int rows = 39;
+	public final static int columns = 40;
 	public final static int rowHeight = 25;
 	public final static int colWidth = 25;
 	public final static int gridSpacing = 1;
 	public final static int gridTopOffset = 0;
-	public final static int gridLeftOffset = 300;
+	public final static int gridLeftOffset = MainFinesse.width - (columns*colWidth + columns*gridSpacing);
 	public static int maxDist;
 	public static int maxLength;
 	public int rowCounter = maxLength * -1;
@@ -176,6 +177,7 @@ public class GameGrid {
 				} catch (SlickException e) {
 					e.printStackTrace();
 				}
+				// Check for edges, in which case you can't walk
 				if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1) {
 					mapArray[i][j].walkable = false;
 				}
@@ -226,7 +228,6 @@ public class GameGrid {
 
 	public void update(GameContainer gc, int delta) {
 		timeDelta += delta;
-		// TODO: We need to work this through to work with different minions
 		if (moveMinion && timeDelta > 100) {
 			// System.out.println("Update");
 			if (currentMinionTile.parent != null) {

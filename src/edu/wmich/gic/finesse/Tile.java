@@ -45,7 +45,7 @@ public class Tile {
 		}
 		row = _row;
 		col = _col;
-		//TODO: Offset the grid to an edge of the screen, leaving room for buttons
+
 		x = GameGrid.gridLeftOffset+col*(width+GameGrid.gridSpacing);
 		y = GameGrid.gridTopOffset+row*(height+GameGrid.gridSpacing);
 	}

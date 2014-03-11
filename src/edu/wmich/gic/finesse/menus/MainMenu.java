@@ -73,7 +73,7 @@ public class MainMenu extends BasicGameState {
 		if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
 			switch (selection) {
 				case 0:
-					game.enterState(ScreenType.GAME.getValue(), new FadeOutTransition(), new FadeInTransition());
+					game.enterState(ScreenType.SETUPMENU.getValue(), null, new FadeInTransition());
 					break;
 				case 1:
 					// enterState(optionsMenu);
