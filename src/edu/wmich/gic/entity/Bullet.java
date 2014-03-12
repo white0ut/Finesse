@@ -68,6 +68,9 @@ public class Bullet {
 		column = GameGrid.getColumn((int)x);
 		for(int i = -1; i <= 1;i++){
 			for(int j = -1; j <= 1; j++){
+				if(row-i < 0 || column-j < 0){
+					break;
+				}
 				collisionTile = GameGrid.mapArray[row-i][column-j];
 //				collisionTile.path = true;
 				double vX = (x + (width / 2)+velX) - (collisionTile.x + (collisionTile.width / 2));
@@ -75,8 +78,8 @@ public class Bullet {
 				int hWidths = (width / 2) + (collisionTile.width / 2);
 				int hHeights = (height / 2) + (collisionTile.height / 2);
 				if (Math.abs(vX) < hWidths && Math.abs(vY) < hHeights){
-					if(GameGrid.mapArray[row-i][column-j].minion != null && GameGrid.mapArray[row-i][column-j] != shooter){
-						GameGrid.mapArray[row-i][column-j].minion.action();
+					if(GameGrid.mapArray[row-i][column-j].minion != null && GameGrid.mapArray[row-i][column-j] != shooter && GameGrid.mapArray[row-i][column-j].minion.owner != shooter.minion.owner){
+						GameGrid.mapArray[row-i][column-j].minion.death(shooter.minion.owner);
 						GameGrid.mapArray[row-i][column-j].minion = null;
 						return false;
 					}

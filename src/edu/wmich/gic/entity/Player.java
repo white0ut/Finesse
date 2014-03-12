@@ -12,7 +12,7 @@ public class Player {
 	
 	public Player(String _name){
 		name = _name;
-		points = 0;
+		points = 100;
 		minions = new ArrayList<Minion>();
 	}
 	

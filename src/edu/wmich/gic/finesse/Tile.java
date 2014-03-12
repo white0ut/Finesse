@@ -7,6 +7,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import edu.wmich.gic.entity.Minion;
+import edu.wmich.gic.entity.Player;
 import edu.wmich.gic.finesse.drawable.GameGrid;
 
 @SuppressWarnings("unused")
@@ -29,16 +30,16 @@ public class Tile {
 	public Tile parent = null;
 	public Tile child = null;
 	public Minion minion = null;
-	private SpriteSheet sprites;
 	public Image wall;
 	public Image floor;
+	public boolean buyingZone = false;
+	public Player buyingZoneOwner = null;
 
 	public Tile(int _row, int _col) throws SlickException{
 		width = GameGrid.colWidth;
 		height = GameGrid.rowHeight;
-		sprites = new SpriteSheet(new Image("res/images/tiles.png"),16,16);
-		wall = sprites.getSprite(1,0).getScaledCopy(width, height);
-		floor = sprites.getSprite(6,1).getScaledCopy(width, height);
+		wall = GameGrid.sprites.getSprite(1,0).getScaledCopy(width, height);
+		floor = GameGrid.sprites.getSprite(6,1).getScaledCopy(width, height);
 		int rand = (int) Math.floor((Math.random()*10)+1);
 		if(rand == 1){
 			walkable = false;
@@ -77,13 +78,13 @@ public class Tile {
 			g.drawImage(wall, x, y);
 			return;
 		}
-		g.drawImage(floor, x, y);
-		if(minion != null){
-			g.setColor(Color.white);
-			g.fillRect(x, y, width, height);
-			minion.render(g,x,y);
-			return;
-		}
+		//g.drawImage(floor, x, y);
+//		if(minion != null){
+//			g.setColor(Color.white);
+//			g.fillRect(x, y, width, height);
+//			minion.render(g,x,y);
+//			//return;
+//		}
 		g.setColor(Color.blue);
 		if(start)
 			g.setColor(Color.green);
@@ -96,6 +97,14 @@ public class Tile {
 			g.setColor(Color.red);
 		}
 		g.fillRect(x, y, width, height);
+		if(minion != null){
+			minion.render(g,x,y);
+		}
+		if(GameGrid.playingState == 2 && GameGrid.currentPlayer == buyingZoneOwner && buyingZone){
+			g.setColor(new Color(0,0,200,0.5f));
+			g.fillRect(x, y, width, height);
+		}
+		
 //		if(furthest){
 //			g.setColor(Color.red);
 //			g.drawRoundRect((float)x+5, (float)y+5, (float)GameGrid.colWidth-10, (float)GameGrid.rowHeight-10,1);

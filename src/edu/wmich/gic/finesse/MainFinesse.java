@@ -17,6 +17,8 @@ public class MainFinesse{
 	public final static int height = 1024;
 
 
+
+
 	public static void main(String[] args) throws SlickException {
 		commandLineArgs = args;
 		if(MainFinesse.commandLineArgs.length > 0){

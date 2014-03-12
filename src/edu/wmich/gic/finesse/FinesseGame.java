@@ -50,7 +50,7 @@ public class FinesseGame extends StateBasedGame {
 			if(MainFinesse.commandLineArgs[0].compareTo("brodie") == 0){
 				this.enterState(ScreenType.GAME.getValue());
 			}else{
-				this.enterState(ScreenType.GAME.getValue()); // Main Starting State
+				this.enterState(ScreenType.TITLESCREEN.getValue()); // Main Starting State
 			}
 		} else {
 			enterState(ScreenType.SPLASHSCREEN.getValue());

@@ -36,9 +36,9 @@ public class Minion {
 	}
 	private String getName(){return name;}
 
-	public void action(){
+	public void death(Player killer){
 //		System.out.println("Killed Minion");
-		owner.points += 100;
+		killer.points += 100;
 	}
 	
 	public void render(Graphics g, int x, int y){
