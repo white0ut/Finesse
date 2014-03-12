@@ -45,9 +45,11 @@ public class GUIManager {
 	
 	public static void buttonRelease(int button, int x, int y) {
 		if(button == 0) {
-			clicked.releaseClick();
-			clicked.getActionHandler().onAction();
-			clicked = null;
+			if(null != clicked) {
+				clicked.releaseClick();
+				clicked.getActionHandler().onAction();
+				clicked = null;
+			}
 		}
 		
 	}
