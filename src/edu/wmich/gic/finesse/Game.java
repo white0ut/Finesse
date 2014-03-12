@@ -69,7 +69,7 @@ public class Game extends BasicGameState {
 
 		if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			gc.exit();
-		} else if (gc.getInput().isKeyPressed(Input.KEY_ENTER)) {
+		} else if (gc.getInput().isKeyPressed(Input.KEY_TAB)) {
 			// int rand1 = (int) Math.floor((Math.random()*(map.rows-2))+1);
 			// int rand2 = (int) Math.floor((Math.random()*(map.rows-2))+1);
 			// System.out.println(rand1+" - "+map.rows);

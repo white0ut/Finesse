@@ -102,7 +102,7 @@ public class Tile {
 		if(minion != null){
 			minion.render(g,x,y);
 		}
-		if(GameGrid.playingState == 2 && buyingZone){
+		if(GameGrid.playingState == 2 && GameGrid.currentPlayer == buyingZoneOwner && buyingZone){
 			g.setColor(new Color(0,0,200,0.5f));
 			g.fillRect(x, y, width, height);
 		}

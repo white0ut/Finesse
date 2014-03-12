@@ -35,6 +35,7 @@ public class GameGrid {
 	public int startingMinions = 3;
 	public int buyingZoneWidth = 6;
 	public int buyingZoneHeight = 6;
+	public int minionPurchaseCost = 100;
 
 	public Tile currentMinionTile;
 	public Tile enemyMinionTile;
@@ -124,7 +125,7 @@ public class GameGrid {
 						}
 					}
 					else{
-						if(mapArray[row][col].minion != null){
+						if(mapArray[row][col].minion != null && mapArray[row][col].minion.owner == currentPlayer){
 							currentMinionTile = mapArray[row][col];
 							currentMinionTile.minion.selected = true;
 						}
@@ -136,7 +137,7 @@ public class GameGrid {
 					if(mapArray[row][col].minion == null && mapArray[row][col].buyingZone && mapArray[row][col].buyingZoneOwner == currentPlayer){
 						mapArray[row][col].minion = new Minion(parentGame.players[0]);
 						parentGame.players[0].minions.add(mapArray[row][col].minion);
-						parentGame.players[0].points -= 100;
+						parentGame.players[0].points -= minionPurchaseCost;
 					}
 				}
 			}
@@ -289,6 +290,14 @@ public class GameGrid {
 			else if(gc.getInput().isKeyPressed(Input.KEY_D)){
 				playingState = 3;
 				resetGrid(true);
+			}
+			else if(gc.getInput().isKeyPressed(Input.KEY_ENTER)){
+				if(currentPlayer == parentGame.players[0]){
+					currentPlayer = parentGame.players[1];
+				}
+				else if(currentPlayer == parentGame.players[1]){
+					currentPlayer = parentGame.players[0];
+				}
 			}
 		}
 //		else if(gc.getInput().isKeyPressed(Input.KEY_ENTER)){
