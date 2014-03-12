@@ -7,6 +7,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import edu.wmich.gic.entity.Minion;
+import edu.wmich.gic.entity.Player;
 import edu.wmich.gic.finesse.drawable.GameGrid;
 
 @SuppressWarnings("unused")
@@ -32,6 +33,8 @@ public class Tile {
 	private SpriteSheet sprites;
 	public Image wall;
 	public Image floor;
+	public boolean buyingZone = false;
+	public Player buyingZoneOwner = null;
 
 	public Tile(int _row, int _col) throws SlickException{
 		width = GameGrid.colWidth;
@@ -77,13 +80,13 @@ public class Tile {
 			g.drawImage(wall, x, y);
 			return;
 		}
-		g.drawImage(floor, x, y);
-		if(minion != null){
-			g.setColor(Color.white);
-			g.fillRect(x, y, width, height);
-			minion.render(g,x,y);
-			return;
-		}
+		//g.drawImage(floor, x, y);
+//		if(minion != null){
+//			g.setColor(Color.white);
+//			g.fillRect(x, y, width, height);
+//			minion.render(g,x,y);
+//			//return;
+//		}
 		g.setColor(Color.blue);
 		if(start)
 			g.setColor(Color.green);
@@ -96,6 +99,14 @@ public class Tile {
 			g.setColor(Color.red);
 		}
 		g.fillRect(x, y, width, height);
+		if(minion != null){
+			minion.render(g,x,y);
+		}
+		if(GameGrid.playingState == 2 && buyingZone){
+			g.setColor(new Color(0,0,200,0.5f));
+			g.fillRect(x, y, width, height);
+		}
+		
 //		if(furthest){
 //			g.setColor(Color.red);
 //			g.drawRoundRect((float)x+5, (float)y+5, (float)GameGrid.colWidth-10, (float)GameGrid.rowHeight-10,1);
