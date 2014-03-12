@@ -29,7 +29,7 @@ public class GUIManager {
 	
 	public void checkForButtonClicks(int button, int x, int y) {
 		if(button == 0) {
-			for(Button b : getRegisteredButtons()) {
+			for(Button b : registeredButtons) {
 				if (b.checkClick(x, y)) {
 					if(b.hasImage()){
 						b.drawDownClick();
