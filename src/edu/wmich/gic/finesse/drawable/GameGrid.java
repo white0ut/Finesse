@@ -1,5 +1,7 @@
 package edu.wmich.gic.finesse.drawable;
 
+import java.awt.Font;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -7,6 +9,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.TrueTypeFont;
 
 import edu.wmich.gic.entity.Bullet;
 import edu.wmich.gic.entity.Minion;
@@ -57,12 +60,22 @@ public class GameGrid {
 	private int oldRow = 0;
 	private int oldColumn = 0;
 	
+	private static String popupMessage = "";
+	private int popupX = MainFinesse.width / 5;
+	private int popupY = MainFinesse.height/5;
+	private int popupWidth = MainFinesse.width * 3 / 5;
+	private int popupHeight = MainFinesse.height * 3 / 5;
+	private Font awtBigFont;
+	private TrueTypeFont bigFont;
+	
 	public static int playingState = 0;
+	public static int previousState = 0;
 	private final int MOVING = 0;
 	private final int SHOOTING = 1;
 	private final int BUYING = 2;
 	private final int DEBUGGING = 3;
-	public String[] playingStateNames = new String[]{"MOVING","SHOOTING","BUYING","DEBUGGING"};
+	private final int POPUP = 4;
+	public String[] playingStateNames = new String[]{"MOVING","SHOOTING","BUYING","DEBUGGING","POPUP"};
 	
 //	double deltaX = 100;
 //	double distance = Math.sqrt(deltaX*deltaX);
@@ -75,6 +88,8 @@ public class GameGrid {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+		awtBigFont = new Font("Arial",Font.BOLD, 30);
+	    bigFont = new TrueTypeFont(awtBigFont, false);
 		parentGame = game;
 		maxDist = 40;
 		maxLength = (maxDist / 10) + 1;
@@ -143,15 +158,28 @@ public class GameGrid {
 			else if(playingState == BUYING){
 				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
 					if(mapArray[row][col].minion == null && mapArray[row][col].buyingZone && mapArray[row][col].buyingZoneOwner == currentPlayer){
-						mapArray[row][col].minion = new Minion(parentGame.players[0]);
-						parentGame.players[0].minions.add(mapArray[row][col].minion);
-						parentGame.players[0].points -= minionPurchaseCost;
+						if(currentPlayer.points >= minionPurchaseCost){
+							mapArray[row][col].minion = new Minion(currentPlayer);
+							currentPlayer.minions.add(mapArray[row][col].minion);
+							currentPlayer.points -= minionPurchaseCost;
+						}
+						else{
+							previousState = playingState;
+							popupMessage = "Not Enough Money!";
+							playingState = POPUP;
+						}
 					}
 				}
 			}
 			else if(playingState == DEBUGGING){
 				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
 					System.out.println(mapArray[row][col].toString());
+				}
+			}
+			else if(playingState == POPUP){
+				if(x > popupX && x < popupX + popupWidth && y > popupY && y < popupY + popupHeight){
+					playingState = previousState;
+					popupMessage = "";
 				}
 			}
 		} 
@@ -255,6 +283,16 @@ public class GameGrid {
 		}
 		if (bullet != null) {
 			bullet.render(g);
+		}
+		if(playingState == POPUP){
+			g.setColor(new Color(0,0,200,0.9f));
+			g.fillRect(popupX,popupY,popupWidth,popupHeight);
+			g.setFont(bigFont);
+			g.setColor(Color.yellow);
+			int stringWidth = bigFont.getWidth(popupMessage);
+			g.drawString(popupMessage, popupX + (popupWidth - stringWidth) / 2, popupY+50);
+			stringWidth = bigFont.getWidth("This is an alert, click to remove");
+			g.drawString("This is an alert, click to remove", popupX + (popupWidth - stringWidth) / 2, popupY+300);
 		}
 	}
 

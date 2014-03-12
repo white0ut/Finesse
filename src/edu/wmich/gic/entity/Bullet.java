@@ -79,7 +79,7 @@ public class Bullet {
 				int hHeights = (height / 2) + (collisionTile.height / 2);
 				if (Math.abs(vX) < hWidths && Math.abs(vY) < hHeights){
 					if(GameGrid.mapArray[row-i][column-j].minion != null && GameGrid.mapArray[row-i][column-j] != shooter && GameGrid.mapArray[row-i][column-j].minion.owner != shooter.minion.owner){
-						GameGrid.mapArray[row-i][column-j].minion.action();
+						GameGrid.mapArray[row-i][column-j].minion.death(shooter.minion.owner);
 						GameGrid.mapArray[row-i][column-j].minion = null;
 						return false;
 					}
