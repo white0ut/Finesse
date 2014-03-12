@@ -1,5 +1,8 @@
 package edu.wmich.gic.finesse.menus;
 
+
+
+import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -16,11 +19,14 @@ public class SetupMenu extends BasicGameState {
 	OscillatingMapGrid map;
 	private int temp;
 	TextField test;
+
+	
 	@Override
 	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
 		map = OscillatingMapGrid.getInstance();
 		temp = 0;
+		
 	}
 	
 
