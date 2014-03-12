@@ -37,6 +37,7 @@ public class MainFinesse{
 		app.setTargetFrameRate(60); 
 		app.setMinimumLogicUpdateInterval(20);
 		app.setDisplayMode(width, height, false);
+		app.setShowFPS(false);
 		app.start();
 	}
 	

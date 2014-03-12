@@ -3,32 +3,31 @@ package edu.wmich.gic.finesse.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.gui.TextField;
 
 public class GUIManager {
 	
-	private static  List<Button> registeredButtons = new ArrayList<Button>();
-	private static  Button clicked = null;
+	private  List<Button> registeredButtons = new ArrayList<Button>();
+	private List<TextField> registeredTextFields = new ArrayList<TextField>();
+	private  Button clicked = null;
+	
 	
 	public GUIManager() {
 		
 	}
 	
-	public static List<Button> getRegisteredButtons() {
+	public List<Button> getRegisteredButtons() {
 		return registeredButtons;
 	}
 	
-	public static void registerButton(Button b) {
+	public void registerButton(Button b) {
 		registeredButtons.add(b);
 	}
 	
-	public static void renderButtons(Graphics g) {
-		for (Button b : registeredButtons) {
-			b.render(g);
-		}
-	}
 	
-	public static void checkForButtonClicks(int button, int x, int y) {
+	public void checkForButtonClicks(int button, int x, int y) {
 		if(button == 0) {
 			for(Button b : getRegisteredButtons()) {
 				if (b.checkClick(x, y)) {
@@ -43,7 +42,7 @@ public class GUIManager {
 		
 	}
 	
-	public static void buttonRelease(int button, int x, int y) {
+	public void buttonRelease(int button, int x, int y) {
 		if(button == 0) {
 			if(null != clicked) {
 				clicked.releaseClick();
@@ -53,5 +52,22 @@ public class GUIManager {
 		}
 		
 	}
+	
+	public void registerTextField(TextField t) {
+		registeredTextFields.add(t);
+	}
+	
+	public List<TextField> getRegisterTextFields() {
+		return registeredTextFields;
+	}
 
+	
+	public void render(GameContainer gc, Graphics g) {
+		for(Button b : registeredButtons) {
+			b.render(g);
+		}
+		for(TextField t : registeredTextFields) {
+			t.render(gc, g);
+		}
+	}
 }

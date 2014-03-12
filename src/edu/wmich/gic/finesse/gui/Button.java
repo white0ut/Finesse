@@ -11,6 +11,7 @@ public class Button {
 	private Image buttonImage, clickedImage, currentImage;
 	private int x, y, width, height;
 	private ActionHandler actionHandler;
+	private String text;
 
 	public Button(int x, int y, int width, int height, Image image, Image clickedImage,
 			ActionHandler action) {
@@ -23,6 +24,7 @@ public class Button {
 		this.clickedImage = clickedImage;
 		this.currentImage = buttonImage;
 		this.actionHandler = action;
+		this.text = "";
 	}
 
 	public Button(int x, int y, int width, int height, ActionHandler action) {
@@ -35,6 +37,7 @@ public class Button {
 		this.clickedImage = null;
 		this.currentImage = buttonImage;
 		this.actionHandler = action;
+		this.text = "";
 		//buttonShape = new Rectangle(x, y, width, height);
 
 	}
@@ -55,10 +58,16 @@ public class Button {
 	public void render(Graphics g) {
 		if (null != buttonImage) {
 			g.drawImage(currentImage, x, y);
+			g.drawString(text, x, y);
 		} else {
 			g.drawRect(x, y, width, height);
+			g.drawString(text, x, y);
 		}
 
+	}
+	
+	public void setText(String t) {
+		text = t;
 	}
 
 	public ActionHandler getActionHandler() {

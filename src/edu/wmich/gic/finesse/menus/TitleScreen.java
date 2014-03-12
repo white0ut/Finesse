@@ -35,9 +35,8 @@ public class TitleScreen extends BasicGameState {
 			throws SlickException {
 
 		map.render(g);
-		g.drawImage(titleImage, (gc.getWidth() / 2)
-				- (titleImage.getWidth() / 2), (gc.getHeight() / 2)
-				- (titleImage.getHeight() / 2));
+		g.drawImage(titleImage, (gc.getWidth() / 2)- (titleImage.getWidth() / 2), 
+				(gc.getHeight() / 2) - (titleImage.getHeight() / 2));
 
 	}
 

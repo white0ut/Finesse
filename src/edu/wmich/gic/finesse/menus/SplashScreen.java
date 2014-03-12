@@ -3,8 +3,8 @@ package edu.wmich.gic.finesse.menus;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -45,6 +45,9 @@ public class SplashScreen extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame game, int delta)
 			throws SlickException {
 		map.update(gc, delta);
+		Input input = gc.getInput();
+		if(input.isKeyDown(Input.KEY_ENTER))
+			game.enterState(ScreenType.TITLESCREEN.getValue());
 		if ((timer += 0.75 * delta) > 2000) {
 			
 			game.enterState(ScreenType.TITLESCREEN.getValue(),

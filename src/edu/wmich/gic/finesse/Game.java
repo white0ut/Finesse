@@ -23,6 +23,8 @@ public class Game extends BasicGameState {
 	
 	private boolean isInitialized;
 	
+	private GUIManager guiManager;
+	
 	Button test;
 	
 
@@ -31,6 +33,8 @@ public class Game extends BasicGameState {
 			throws SlickException {
 		// map = GameGrid.getInstance();
 		//Temporary fix to the creation of this w/out use of the intermediate window
+		guiManager = new GUIManager();
+
 		isInitialized = false;
 		initPlayers(MainFinesse.numPlayersConfig,MainFinesse.playerNamesConfig);
 		gameGrid = new GameGrid(this);
@@ -41,7 +45,7 @@ public class Game extends BasicGameState {
 			}
 		});
 		
-		GUIManager.registerButton(test);
+		guiManager.registerButton(test);
 		
 		
 		
@@ -68,7 +72,7 @@ public class Game extends BasicGameState {
 		}
 		gameGrid.render(g);
 		
-		GUIManager.renderButtons(g);
+		guiManager.render(gc, g);
 		
 		
 //		g.setColor(Color.white);
@@ -79,13 +83,13 @@ public class Game extends BasicGameState {
 	@Override
 	public void mouseReleased(int button, int x, int y) {
 		gameGrid.mouseReleased(button, x, y);
-		GUIManager.buttonRelease(button, x, y);
+		guiManager.buttonRelease(button, x, y);
 		
 	}
 	
 	@Override 
 	public void mousePressed(int button, int x, int y) {
-		GUIManager.checkForButtonClicks(button, x, y);
+		guiManager.checkForButtonClicks(button, x, y);
 	}
 	
 	@Override
