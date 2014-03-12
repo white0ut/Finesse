@@ -20,13 +20,13 @@ public class GameGrid {
 	// private static final GameGrid INSTANCE = new GameGrid();
 
 	Input input;
-	public final static int rows = 39;
-	public final static int columns = 40;
 	public final static int rowHeight = 25;
 	public final static int colWidth = 25;
 	public final static int gridSpacing = 1;
-	public final static int gridTopOffset = 0;
-	public final static int gridLeftOffset = MainFinesse.width - (columns*colWidth + columns*gridSpacing);
+	public final static int rows = MainFinesse.height / (rowHeight + gridSpacing);
+	public final static int columns = MainFinesse.width * 4 / 5 / (colWidth + gridSpacing);
+	public final static int gridTopOffset = (MainFinesse.height - (rows * (rowHeight + gridSpacing)))/2;
+	public final static int gridLeftOffset = MainFinesse.width - (columns*colWidth + columns*gridSpacing) - gridTopOffset;
 	public static int maxDist;
 	public static int maxLength;
 	public int rowCounter = maxLength * -1;
