@@ -3,8 +3,10 @@ package edu.wmich.gic.finesse.drawable;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 import edu.wmich.gic.entity.Bullet;
 import edu.wmich.gic.entity.Minion;
@@ -36,6 +38,7 @@ public class GameGrid {
 	public int buyingZoneWidth = 6;
 	public int buyingZoneHeight = 6;
 	public int minionPurchaseCost = 100;
+	public static SpriteSheet sprites;
 
 	public Tile currentMinionTile;
 	public Tile enemyMinionTile;
@@ -67,6 +70,11 @@ public class GameGrid {
 
 	// private GameGrid() {
 	public GameGrid(Game game) {
+		try {
+			sprites = new SpriteSheet(new Image("res/images/tiles.png"),16,16);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 		parentGame = game;
 		maxDist = 40;
 		maxLength = (maxDist / 10) + 1;

@@ -30,7 +30,6 @@ public class Tile {
 	public Tile parent = null;
 	public Tile child = null;
 	public Minion minion = null;
-	private SpriteSheet sprites;
 	public Image wall;
 	public Image floor;
 	public boolean buyingZone = false;
@@ -39,9 +38,8 @@ public class Tile {
 	public Tile(int _row, int _col) throws SlickException{
 		width = GameGrid.colWidth;
 		height = GameGrid.rowHeight;
-		sprites = new SpriteSheet(new Image("res/images/tiles.png"),16,16);
-		wall = sprites.getSprite(1,0).getScaledCopy(width, height);
-		floor = sprites.getSprite(6,1).getScaledCopy(width, height);
+		wall = GameGrid.sprites.getSprite(1,0).getScaledCopy(width, height);
+		floor = GameGrid.sprites.getSprite(6,1).getScaledCopy(width, height);
 		int rand = (int) Math.floor((Math.random()*10)+1);
 		if(rand == 1){
 			walkable = false;
