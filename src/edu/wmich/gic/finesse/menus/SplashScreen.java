@@ -46,6 +46,7 @@ public class SplashScreen extends BasicGameState {
 			throws SlickException {
 		map.update(gc, delta);
 		if ((timer += 0.75 * delta) > 2000) {
+			
 			game.enterState(ScreenType.TITLESCREEN.getValue(),
 					new FadeOutTransition(), new FadeInTransition());
 		}

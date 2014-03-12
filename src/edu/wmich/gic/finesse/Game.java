@@ -14,9 +14,8 @@ import edu.wmich.gic.finesse.drawable.GameGrid;
 import edu.wmich.gic.finesse.gui.ActionHandler;
 import edu.wmich.gic.finesse.gui.Button;
 import edu.wmich.gic.finesse.gui.GUIManager;
-import edu.wmich.gic.finesse.gui.GUIWindow;
 
-public class Game extends BasicGameState implements GUIWindow{
+public class Game extends BasicGameState {
 
 	private GameGrid gameGrid;
 	
@@ -36,7 +35,7 @@ public class Game extends BasicGameState implements GUIWindow{
 		initPlayers(MainFinesse.numPlayersConfig,MainFinesse.playerNamesConfig);
 		gameGrid = new GameGrid(this);
 		
-		test = new Button(0, MainFinesse.height/2, 200, 202, null, new ActionHandler() {
+		test = new Button(0, MainFinesse.height/2, 200, 202, new ActionHandler() {
 			public void onAction() {
 				System.out.println("CLICKED");
 			}
@@ -68,9 +67,8 @@ public class Game extends BasicGameState implements GUIWindow{
 			g.drawString(players[i].name+" Score: " + players[i].points, 30, 140+(20*i));
 		}
 		gameGrid.render(g);
-		for(Button b : GUIManager.getRegisteredButtons()) {
-			b.render(g);
-		}
+		
+		GUIManager.renderButtons(g);
 		
 		
 //		g.setColor(Color.white);
@@ -80,10 +78,14 @@ public class Game extends BasicGameState implements GUIWindow{
 
 	@Override
 	public void mouseReleased(int button, int x, int y) {
-		System.out.println("Mouse released");
 		gameGrid.mouseReleased(button, x, y);
-		checkForButtonInteractions(button, x, y);
+		GUIManager.buttonRelease(button, x, y);
 		
+	}
+	
+	@Override 
+	public void mousePressed(int button, int x, int y) {
+		GUIManager.checkForButtonClicks(button, x, y);
 	}
 	
 	@Override
@@ -102,16 +104,7 @@ public class Game extends BasicGameState implements GUIWindow{
 			gameGrid.createGrid();
 		}
 	}
-	
-	public void checkForButtonInteractions(int button, int mouseX, int mouseY) {
-		if(button == 0) {
-			for(Button b : GUIManager.getRegisteredButtons()) {
-				if (b.checkClick(mouseX, mouseY)) {
-					b.getActionHandler().onAction();
-				}
-			}
-		}
-	}
+
 
 	@Override
 	public int getID() {

@@ -5,8 +5,6 @@ import javax.swing.JOptionPane;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-import edu.wmich.gic.finesse.FinesseGame.ScreenType;
-
 
 public class MainFinesse{
 	private static AppGameContainer app;
