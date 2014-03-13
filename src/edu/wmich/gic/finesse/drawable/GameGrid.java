@@ -102,21 +102,25 @@ public class GameGrid {
 		int row = getRow(y);
 		int col = getColumn(x);
 		if (button == 0) {
+			//Moving state logic
 			if(playingState == MOVING){
+				//only check inside the walls
 				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
-					if(currentMinionTile != null){
-						if(currentMinionTile == mapArray[row][col]){
+					if(currentMinionTile != null){ //if a minion is selected
+						if(currentMinionTile == mapArray[row][col]){ 
+							//if your selected minion is where you clicked, delselect it
 							currentMinionTile.minion.selected = false;
 							currentMinionTile = null;
 							resetGrid(true);
 						}
-						else{
+						else{ //if you click on a walkable terrain and there is no minion in the way
+							//  then pathfind
 							if (mapArray[row][col].walkable && mapArray[row][col].minion == null) {
 								resetGrid(true);
 								pathfinding.searchPath(currentMinionTile,mapArray[row][col]);
 								moveMinion = true;
 							}
-							else{
+							else{//if you own the minion you clicked on, select that one and unselect the old one
 								if(mapArray[row][col].minion != null && mapArray[row][col].minion.owner == currentPlayer){
 									currentMinionTile.minion.selected = false;
 									currentMinionTile = mapArray[row][col];
@@ -126,7 +130,7 @@ public class GameGrid {
 								}
 							}
 						}
-					} else{
+					} else{//select the minion you clicked on if you own it
 						if(mapArray[row][col].minion != null && mapArray[row][col].minion.owner == currentPlayer){
 							currentMinionTile = mapArray[row][col];
 							currentMinionTile.minion.selected = true;
@@ -134,36 +138,42 @@ public class GameGrid {
 						}
 					}
 				}
-			}
+			}//shooting state logic
 			else if(playingState == SHOOTING){
 				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
-					if(currentMinionTile != null){
+					if(currentMinionTile != null){//if you have a minion selected
 						if(mapArray[row][col] == currentMinionTile){
+							//deselect minion
 							currentMinionTile.minion.selected = false;
 							currentMinionTile = null;
 							return;
 						}
-						if(bullet == null){
+						if(bullet == null){//if there is no bullet, create a new one
 							bullet = new Bullet(currentMinionTile, x, y);
 						}
 					}
-					else{
+					else{//select a minion if it is yours
 						if(mapArray[row][col].minion != null && mapArray[row][col].minion.owner == currentPlayer){
 							currentMinionTile = mapArray[row][col];
 							currentMinionTile.minion.selected = true;
 						}
 					}
 				}
-			}
+			}//buying state logic
 			else if(playingState == BUYING){
 				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
+					//if there is no minion where you are clicking
+					//then if you are clicking in a buyingzone
+					//then if you are the zone owner
 					if(mapArray[row][col].minion == null && mapArray[row][col].buyingZone && mapArray[row][col].buyingZoneOwner == currentPlayer){
+						//check points vs price
 						if(currentPlayer.points >= minionPurchaseCost){
+							//create new minion and add to player list
 							mapArray[row][col].minion = new Minion(currentPlayer);
 							currentPlayer.minions.add(mapArray[row][col].minion);
 							currentPlayer.points -= minionPurchaseCost;
 						}
-						else{
+						else{//start popup state and set message
 							previousState = playingState;
 							popupMessage = "Not Enough Money!";
 							playingState = POPUP;
@@ -173,10 +183,11 @@ public class GameGrid {
 			}
 			else if(playingState == DEBUGGING){
 				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
-					System.out.println(mapArray[row][col].toString());
+					System.out.println(mapArray[row][col].toString()); //prints out stats for clicked tile
 				}
 			}
 			else if(playingState == POPUP){
+				//close popup
 				if(x > popupX && x < popupX + popupWidth && y > popupY && y < popupY + popupHeight){
 					playingState = previousState;
 					popupMessage = "";
@@ -192,7 +203,7 @@ public class GameGrid {
 			int col = getColumn(newx);
 			if (!moveMinion && (oldRow != row || oldColumn != col) && row > 0
 					&& col > 0 && row < rows - 1 && col < columns - 1) {
-				oldRow = row;
+				oldRow = row; //only perform logic if they move to new tile
 				oldColumn = col;
 				if (mapArray[row][col].walkable && mapArray[row][col].minion == null && currentMinionTile != mapArray[row][col]) {
 					resetGrid(false);
@@ -206,12 +217,12 @@ public class GameGrid {
 		// System.out.println("Reset Grid");
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
-				mapArray[i][j].resetTile(resetFurthest);
+				mapArray[i][j].resetTile(resetFurthest); //resets pathfinding information
 			}
 		}
 	}
 
-	public void createGrid() {
+	public void createGrid() { //creates new grid from scratch
 		mapArray = new Tile[rows][columns];
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
@@ -224,6 +235,7 @@ public class GameGrid {
 				if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1) {
 					mapArray[i][j].walkable = false;
 				}
+				//set buying zones for players 0 and 1
 				if(j <= buyingZoneWidth && j > 0 && i >= rows - buyingZoneHeight - 1 && i < rows){
 					mapArray[i][j].buyingZone = true;
 					mapArray[i][j].buyingZoneOwner = parentGame.players[0];
@@ -234,6 +246,7 @@ public class GameGrid {
 				}
 			}
 		}
+		//add minions for players 0 and 1
 		for(int i = 1; i <= startingMinions; i++){
 			int randRow = rows - i - 2;//FinesseGame.rand.nextInt(rows-2)+1;
 			int randCol = startingMinions - i + 2;//FinesseGame.rand.nextInt(columns-2)+1;
@@ -298,6 +311,7 @@ public class GameGrid {
 
 	public void update(GameContainer gc, int delta) {
 		timeDelta += delta;
+		//moving minion logic and delay
 		if (moveMinion && timeDelta > 100) {
 			// System.out.println("Update");
 			if (currentMinionTile.parent != null) {
@@ -311,12 +325,13 @@ public class GameGrid {
 			}
 			timeDelta = 0;
 		}
-
+		//move bullet logic
 		if (bullet != null) {
 			if (!bullet.update(gc, delta)) {
 				bullet = null;
 			}
 		}
+		//change state only when there are no flying bullets and minions are done moving
 		if(bullet == null && moveMinion == false){
 			if(gc.getInput().isKeyPressed(Input.KEY_M)){
 				playingState = 0;
@@ -351,7 +366,7 @@ public class GameGrid {
 //		}
 	}
 
-	public void showFurthest(Tile startingTile) {
+	public void showFurthest(Tile startingTile) { //show the minions possible movements
 		// System.out.println("Show Furthest");
 		// System.out.println(maxLength);
 		int negMaxLength = -1 * maxLength;
@@ -373,12 +388,12 @@ public class GameGrid {
 //		pathfinding.startTile.start = false;
 	}
 
-	static public int getRow(int y) {
+	static public int getRow(int y) { //translates coords to rows
 		return (y - GameGrid.gridTopOffset)
 				/ (GameGrid.rowHeight + GameGrid.gridSpacing);
 	}
 
-	static public int getColumn(int x) {
+	static public int getColumn(int x) { //translates coords to columns
 		return (x - GameGrid.gridLeftOffset)
 				/ (GameGrid.colWidth + GameGrid.gridSpacing);
 	}
