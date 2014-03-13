@@ -18,6 +18,7 @@ public class SplashScreen extends BasicGameState {
 	OscillatingMapGrid map;
 	Image splashImage;
 	private int timer;
+	private float imageScale;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame game)
@@ -25,6 +26,9 @@ public class SplashScreen extends BasicGameState {
 		
 		try {
 			splashImage = new Image("res/images/GICLogo.png");
+			imageScale = (float)gc.getHeight() / (float)splashImage.getHeight();
+//			System.out.println(imageScale);
+			splashImage = splashImage.getScaledCopy(imageScale);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
