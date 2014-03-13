@@ -11,8 +11,8 @@ public class MainFinesse{
 	public static String[] commandLineArgs = new String[0];
 	public static String[] playerNamesConfig;
 	public static int numPlayersConfig;
-	public final static int width = 1280;
-	public final static int height = 1024;
+	public static int width = 1280;
+	public static int height = 1024;
 
 
 
@@ -21,6 +21,7 @@ public class MainFinesse{
 		commandLineArgs = args;
 		if(MainFinesse.commandLineArgs.length > 0){
 			if(MainFinesse.commandLineArgs[0].compareTo("brodie") == 0){
+				height = 720;
 				playerNamesConfig = new String[]{"Tom","Jerry"};
 				numPlayersConfig = 2;
 			}else{
