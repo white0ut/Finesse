@@ -37,7 +37,8 @@ public class Minion {
 	private String getName(){return name;}
 
 	public void death(Player killer){
-//		System.out.println("Killed Minion");
+		System.out.println("Killed Minion");
+		owner.minions.remove(this);
 		killer.points += 100;
 	}
 	

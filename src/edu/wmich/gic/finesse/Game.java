@@ -14,16 +14,18 @@ import edu.wmich.gic.finesse.drawable.GameGrid;
 import edu.wmich.gic.finesse.gui.ActionHandler;
 import edu.wmich.gic.finesse.gui.Button;
 import edu.wmich.gic.finesse.gui.GUIManager;
+import edu.wmich.gic.finesse.network.Network;
 
 public class Game extends BasicGameState {
 
 	private GameGrid gameGrid;
 	
-	public static Player[] players;
+	public Player[] players;
 	
 	private boolean isInitialized;
 	
 	private GUIManager guiManager;
+	private Network network;
 	
 	Button test;
 	
@@ -37,7 +39,9 @@ public class Game extends BasicGameState {
 
 		isInitialized = false;
 		initPlayers(MainFinesse.numPlayersConfig,MainFinesse.playerNamesConfig);
-		gameGrid = new GameGrid(this);
+		
+		network = new Network(this);
+		gameGrid = new GameGrid(this,network);
 		
 		test = new Button(0, MainFinesse.height/2, 200, 202, new ActionHandler() {
 			public void onAction() {
@@ -109,6 +113,9 @@ public class Game extends BasicGameState {
 		}
 	}
 
+	public void receiveNetwork(String data){
+		
+	}
 
 	@Override
 	public int getID() {

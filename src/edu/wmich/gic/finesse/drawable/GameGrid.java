@@ -19,6 +19,7 @@ import edu.wmich.gic.finesse.Game;
 import edu.wmich.gic.finesse.MainFinesse;
 import edu.wmich.gic.finesse.Pathfinding;
 import edu.wmich.gic.finesse.Tile;
+import edu.wmich.gic.finesse.network.Network;
 
 
 public class GameGrid {
@@ -26,6 +27,8 @@ public class GameGrid {
 	// private static final GameGrid INSTANCE = new GameGrid();
 
 	Input input;
+	private Network network = null;
+	
 	public final static int rowHeight = 25;
 	public final static int colWidth = 25;
 	public final static int gridSpacing = 1;
@@ -40,7 +43,7 @@ public class GameGrid {
 	public int startingMinions = 3;
 	public int buyingZoneWidth = 6;
 	public int buyingZoneHeight = 6;
-	public int minionPurchaseCost = 100;
+	public int minionPurchaseCost = 50;
 	public static SpriteSheet sprites;
 
 	public Tile currentMinionTile;
@@ -82,12 +85,13 @@ public class GameGrid {
 	public static int shootingDiameter = 300;
 
 	// private GameGrid() {
-	public GameGrid(Game game) {
+	public GameGrid(Game game, Network _network) {
 		try {
 			sprites = new SpriteSheet(new Image("res/images/tiles.png"),16,16);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+		network = _network;
 		awtBigFont = new Font("Arial",Font.BOLD, 30);
 	    bigFont = new TrueTypeFont(awtBigFont, false);
 		parentGame = game;
@@ -99,6 +103,7 @@ public class GameGrid {
 
 
 	public void mouseReleased(int button, int x, int y) {
+//		send("mouseclick "+button);
 		int row = getRow(y);
 		int col = getColumn(x);
 		if (button == 0) {
@@ -108,14 +113,15 @@ public class GameGrid {
 				if (row > 0 && col > 0 && row < rows - 1 && col < columns - 1) {
 					if(currentMinionTile != null){ //if a minion is selected
 						if(currentMinionTile == mapArray[row][col]){ 
-							//if your selected minion is where you clicked, delselect it
+							//if your selected minion is where you clicked, de-select it
 							currentMinionTile.minion.selected = false;
 							currentMinionTile = null;
 							resetGrid(true);
 						}
 						else{ //if you click on a walkable terrain and there is no minion in the way
-							//  then pathfind
-							if (mapArray[row][col].walkable && mapArray[row][col].minion == null) {
+							//  then find path
+							if (!moveMinion && mapArray[row][col].walkable && mapArray[row][col].minion == null) {
+								send(new Object[]{"move",currentMinionTile.row,currentMinionTile.col,row,col});
 								resetGrid(true);
 								pathfinding.searchPath(currentMinionTile,mapArray[row][col]);
 								moveMinion = true;
@@ -149,6 +155,7 @@ public class GameGrid {
 							return;
 						}
 						if(bullet == null){//if there is no bullet, create a new one
+							send(new Object[]{"bullet",currentMinionTile.row,currentMinionTile.col,x,y});
 							bullet = new Bullet(currentMinionTile, x, y);
 						}
 					}
@@ -172,6 +179,7 @@ public class GameGrid {
 							mapArray[row][col].minion = new Minion(currentPlayer);
 							currentPlayer.minions.add(mapArray[row][col].minion);
 							currentPlayer.points -= minionPurchaseCost;
+							send(new Object[]{"purchase",row,col});
 						}
 						else{//start popup state and set message
 							previousState = playingState;
@@ -223,6 +231,10 @@ public class GameGrid {
 	}
 
 	public void createGrid() { //creates new grid from scratch
+		currentMinionTile = null;
+		currentPlayer = parentGame.players[0];
+		parentGame.players[0].minions.clear();
+		parentGame.players[1].minions.clear();
 		mapArray = new Tile[rows][columns];
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
@@ -353,6 +365,12 @@ public class GameGrid {
 				resetGrid(true);
 			}
 			else if(gc.getInput().isKeyPressed(Input.KEY_ENTER)){
+				if(currentMinionTile != null){
+					currentMinionTile.minion.selected = false;
+				}
+				currentMinionTile = null;
+				resetGrid(true);
+				send(new Object[]{"turnend"});
 				if(currentPlayer == parentGame.players[0]){
 					currentPlayer = parentGame.players[1];
 				}
@@ -396,5 +414,16 @@ public class GameGrid {
 	static public int getColumn(int x) { //translates coords to columns
 		return (x - GameGrid.gridLeftOffset)
 				/ (GameGrid.colWidth + GameGrid.gridSpacing);
+	}
+	
+	private void send(Object[] data){
+		String output = "";
+		for (Object item : data) {
+			output += item.toString() + " ";
+		}
+		System.out.println(output);
+		if(network.state == "connected"){
+			network.writer.println(output);
+		}
 	}
 }

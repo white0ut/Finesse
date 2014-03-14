@@ -10,6 +10,7 @@ import edu.wmich.gic.finesse.menus.MainMenu;
 import edu.wmich.gic.finesse.menus.SetupMenu;
 import edu.wmich.gic.finesse.menus.SplashScreen;
 import edu.wmich.gic.finesse.menus.TitleScreen;
+import edu.wmich.gic.finesse.network.Network;
 
 public class FinesseGame extends StateBasedGame {
 	public static enum ScreenType {
@@ -35,7 +36,6 @@ public class FinesseGame extends StateBasedGame {
 		this.addState(new MainMenu());
 		this.addState(new SetupMenu());
 		this.addState(new Game());
-
 	}
 
 	@Override

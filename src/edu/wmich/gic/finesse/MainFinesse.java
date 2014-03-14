@@ -21,7 +21,8 @@ public class MainFinesse{
 		commandLineArgs = args;
 		if(MainFinesse.commandLineArgs.length > 0){
 			if(MainFinesse.commandLineArgs[0].compareTo("brodie") == 0){
-				height = 720;
+				width = 800;
+				height = 600;
 				playerNamesConfig = new String[]{"Tom","Jerry"};
 				numPlayersConfig = 2;
 			}else{
