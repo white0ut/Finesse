@@ -42,6 +42,18 @@ public class GUIManager {
 		
 	}
 	
+	public void checkHover(int mouseX, int mouseY) {
+		for(Button b : registeredButtons) {
+			if (b.checkClick(mouseX, mouseY)) {
+				if(b.hasHoverImage()){
+					if(!b.isHovered()) {
+						
+					}
+				}				
+			}
+		}
+	}
+	
 	public void buttonRelease(int button, int x, int y) {
 		if(button == 0) {
 			if(null != clicked) {
