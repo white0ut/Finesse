@@ -83,10 +83,7 @@ public class Network {
 //								System.out.println(input);
 								if(input.compareTo("alive") != 0){
 									game.receiveNetwork(input);
-									writer.println("alive");
-								}
-								if(input != ""){
-									output += input+"\n";
+//									writer.println("alive");
 								}
 							}
 						}
@@ -98,6 +95,8 @@ public class Network {
 						// a socket is closed).
 						if (state != "closed"){
 							System.out.println("\nNetwork Error, don't worry about it");
+							System.out.println(e);
+//							e.printStackTrace();
 							state = e.toString();
 						}
 					}

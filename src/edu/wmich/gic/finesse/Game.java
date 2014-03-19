@@ -40,8 +40,7 @@ public class Game extends BasicGameState {
 		isInitialized = false;
 		initPlayers(MainFinesse.numPlayersConfig,MainFinesse.playerNamesConfig);
 		
-		network = new Network(this);
-		gameGrid = new GameGrid(this,network);
+		gameGrid = new GameGrid(this);
 		
 		test = new Button(0, MainFinesse.height/2, 200, 202, new ActionHandler() {
 			public void onAction() {
@@ -51,9 +50,8 @@ public class Game extends BasicGameState {
 		
 		guiManager.registerButton(test);
 		
-		
-		
-		
+		network = new Network(this);
+		gameGrid.setNetwork(network);
 	}
 
 	public void initPlayers(int numPlayers, String[] playerNames) {
@@ -63,7 +61,7 @@ public class Game extends BasicGameState {
 		}
 		players = new Player[numPlayers];
 		for (int i = 0; i < numPlayers; i++) {
-			players[i] = new Player(playerNames[i]);
+			players[i] = new Player(playerNames[i],i);
 		}
 		isInitialized = true;
 	}
@@ -114,6 +112,7 @@ public class Game extends BasicGameState {
 	}
 
 	public void receiveNetwork(String data){
+		gameGrid.receiveNetwork(data);
 		
 	}
 

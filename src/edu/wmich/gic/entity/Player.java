@@ -7,10 +7,12 @@ public class Player {
 	
 	// Public variable
 	public int points;
+	public int id = 0;
 	public List<Minion> minions;
 	public String name;
 	
-	public Player(String _name){
+	public Player(String _name, int _id){
+		id = _id;
 		name = _name;
 		points = 100;
 		minions = new ArrayList<Minion>();

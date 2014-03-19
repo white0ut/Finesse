@@ -13,9 +13,7 @@ public class MainFinesse{
 	public static int numPlayersConfig;
 	public static int width = 1280;
 	public static int height = 1024;
-
-
-
+	public static boolean useNetwork = false;
 
 	public static void main(String[] args) throws SlickException {
 		commandLineArgs = args;
@@ -25,6 +23,7 @@ public class MainFinesse{
 				height = 600;
 				playerNamesConfig = new String[]{"Tom","Jerry"};
 				numPlayersConfig = 2;
+				useNetwork = true;
 			}else{
 				ConfigPopUp();
 			}

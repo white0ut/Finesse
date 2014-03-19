@@ -85,13 +85,12 @@ public class GameGrid {
 	public static int shootingDiameter = 300;
 
 	// private GameGrid() {
-	public GameGrid(Game game, Network _network) {
+	public GameGrid(Game game) {
 		try {
 			sprites = new SpriteSheet(new Image("res/images/tiles.png"),16,16);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		network = _network;
 		awtBigFont = new Font("Arial",Font.BOLD, 30);
 	    bigFont = new TrueTypeFont(awtBigFont, false);
 		parentGame = game;
@@ -122,9 +121,12 @@ public class GameGrid {
 							//  then find path
 							if (!moveMinion && mapArray[row][col].walkable && mapArray[row][col].minion == null) {
 								send(new Object[]{"move",currentMinionTile.row,currentMinionTile.col,row,col});
-								resetGrid(true);
-								pathfinding.searchPath(currentMinionTile,mapArray[row][col]);
-								moveMinion = true;
+								if(!MainFinesse.useNetwork){
+									sendMinion(currentMinionTile.row,currentMinionTile.col,row,col);
+								}
+//								resetGrid(true);
+//								pathfinding.searchPath(currentMinionTile,mapArray[row][col]);
+//								moveMinion = true;
 							}
 							else{//if you own the minion you clicked on, select that one and unselect the old one
 								if(mapArray[row][col].minion != null && mapArray[row][col].minion.owner == currentPlayer){
@@ -156,7 +158,10 @@ public class GameGrid {
 						}
 						if(bullet == null){//if there is no bullet, create a new one
 							send(new Object[]{"bullet",currentMinionTile.row,currentMinionTile.col,x,y});
-							bullet = new Bullet(currentMinionTile, x, y);
+							if(!MainFinesse.useNetwork){
+								shootBullet(currentMinionTile.row,currentMinionTile.col, x, y);
+							}
+//							bullet = new Bullet(currentMinionTile, x, y);
 						}
 					}
 					else{//select a minion if it is yours
@@ -176,10 +181,13 @@ public class GameGrid {
 						//check points vs price
 						if(currentPlayer.points >= minionPurchaseCost){
 							//create new minion and add to player list
-							mapArray[row][col].minion = new Minion(currentPlayer);
-							currentPlayer.minions.add(mapArray[row][col].minion);
-							currentPlayer.points -= minionPurchaseCost;
-							send(new Object[]{"purchase",row,col});
+//							mapArray[row][col].minion = new Minion(currentPlayer);
+//							currentPlayer.minions.add(mapArray[row][col].minion);
+//							currentPlayer.points -= minionPurchaseCost;
+							if(!MainFinesse.useNetwork){
+								purchaseMinion(row,col,currentPlayer.id);
+							}
+							send(new Object[]{"purchase",row,col,currentPlayer.id});
 						}
 						else{//start popup state and set message
 							previousState = playingState;
@@ -357,6 +365,10 @@ public class GameGrid {
 				resetGrid(true);
 			}
 			else if(gc.getInput().isKeyPressed(Input.KEY_B)){
+				if(currentMinionTile != null){
+					currentMinionTile.minion.selected = false;
+				}
+				currentMinionTile = null;
 				playingState = 2;
 				resetGrid(true);
 			}
@@ -365,18 +377,21 @@ public class GameGrid {
 				resetGrid(true);
 			}
 			else if(gc.getInput().isKeyPressed(Input.KEY_ENTER)){
-				if(currentMinionTile != null){
-					currentMinionTile.minion.selected = false;
+//				if(currentMinionTile != null){
+//					currentMinionTile.minion.selected = false;
+//				}
+//				currentMinionTile = null;
+//				resetGrid(true);
+//				if(currentPlayer == parentGame.players[0]){
+//					currentPlayer = parentGame.players[1];
+//				}
+//				else if(currentPlayer == parentGame.players[1]){
+//					currentPlayer = parentGame.players[0];
+//				}
+				if(!MainFinesse.useNetwork){
+					endTurn();
 				}
-				currentMinionTile = null;
-				resetGrid(true);
 				send(new Object[]{"turnend"});
-				if(currentPlayer == parentGame.players[0]){
-					currentPlayer = parentGame.players[1];
-				}
-				else if(currentPlayer == parentGame.players[1]){
-					currentPlayer = parentGame.players[0];
-				}
 			}
 		}
 //		else if(gc.getInput().isKeyPressed(Input.KEY_ENTER)){
@@ -405,6 +420,39 @@ public class GameGrid {
 		pathfinding.endTile.end = false;
 //		pathfinding.startTile.start = false;
 	}
+	
+	public void purchaseMinion(int _row,int _col,int _id){
+		Player _player = parentGame.players[_id];
+		mapArray[_row][_col].minion = new Minion(_player);
+		_player.minions.add(mapArray[_row][_col].minion);
+		_player.points -= minionPurchaseCost;
+	}
+
+	public void sendMinion(int start_row,int start_col,int end_row, int end_col){
+		resetGrid(true);
+		Tile startTile = mapArray[start_row][start_col];
+		pathfinding.searchPath(startTile,mapArray[end_row][end_col]);
+		moveMinion = true;
+	}
+
+	public void shootBullet(int _row,int _col,int _x, int _y){
+		Tile startTile = mapArray[_row][_col];
+		bullet = new Bullet(startTile, _x, _y);
+	}
+	
+	public void endTurn(){
+		if(currentMinionTile != null){
+			currentMinionTile.minion.selected = false;
+		}
+		currentMinionTile = null;
+		resetGrid(true);
+		if(currentPlayer == parentGame.players[0]){
+			currentPlayer = parentGame.players[1];
+		}
+		else if(currentPlayer == parentGame.players[1]){
+			currentPlayer = parentGame.players[0];
+		}
+	}
 
 	static public int getRow(int y) { //translates coords to rows
 		return (y - GameGrid.gridTopOffset)
@@ -421,9 +469,34 @@ public class GameGrid {
 		for (Object item : data) {
 			output += item.toString() + " ";
 		}
-		System.out.println(output);
+//		System.out.println(output);
 		if(network.state == "connected"){
 			network.writer.println(output);
 		}
+	}
+	
+	public void receiveNetwork(String input){
+		System.out.println(input);
+		String data[] = input.split(" ");
+		if(data[0].compareTo("move") == 0){
+			System.out.println("move");
+			sendMinion(Integer.parseInt(data[1]),Integer.parseInt(data[2]),Integer.parseInt(data[3]),Integer.parseInt(data[4]));
+		}
+		else if(data[0].compareTo("purchase") == 0){
+			System.out.println("purchase");
+			purchaseMinion(Integer.parseInt(data[1]),Integer.parseInt(data[2]),Integer.parseInt(data[3]));
+		}
+		else if(data[0].compareTo("bullet") == 0){
+			System.out.println("bullet");
+			shootBullet(Integer.parseInt(data[1]),Integer.parseInt(data[2]),Integer.parseInt(data[3]),Integer.parseInt(data[4]));
+		}
+		else if(data[0].compareTo("turnend") == 0){
+			System.out.println("turnend");
+			endTurn();
+		}
+	}
+	
+	public void setNetwork(Network _network){
+		network = _network;
 	}
 }
