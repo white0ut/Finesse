@@ -63,7 +63,7 @@ public class GameGrid {
 	private int oldRow = 0;
 	private int oldColumn = 0;
 	
-	private static String popupMessage = "";
+	public static String popupMessage = "";
 	private int popupX = MainFinesse.width / 5;
 	private int popupY = MainFinesse.height/5;
 	private int popupWidth = MainFinesse.width * 3 / 5;
@@ -393,6 +393,13 @@ public class GameGrid {
 				}
 				send(new Object[]{"turnend"});
 			}
+			else if(gc.getInput().isKeyPressed(Input.KEY_Y)){
+				for (int i = 0; i < rows; i++) {
+					for (int j = 0; j < columns; j++) {
+						send(new Object[]{"map",i,j,mapArray[i][j].walkable});
+					}
+				}
+			}
 		}
 //		else if(gc.getInput().isKeyPressed(Input.KEY_ENTER)){
 //			
@@ -430,8 +437,8 @@ public class GameGrid {
 
 	public void sendMinion(int start_row,int start_col,int end_row, int end_col){
 		resetGrid(true);
-		Tile startTile = mapArray[start_row][start_col];
-		pathfinding.searchPath(startTile,mapArray[end_row][end_col]);
+		currentMinionTile = mapArray[start_row][start_col];
+		pathfinding.searchPath(currentMinionTile,mapArray[end_row][end_col]);
 		moveMinion = true;
 	}
 
@@ -464,7 +471,7 @@ public class GameGrid {
 				/ (GameGrid.colWidth + GameGrid.gridSpacing);
 	}
 	
-	private void send(Object[] data){
+	public void send(Object[] data){
 		String output = "";
 		for (Object item : data) {
 			output += item.toString() + " ";
@@ -493,6 +500,9 @@ public class GameGrid {
 		else if(data[0].compareTo("turnend") == 0){
 			System.out.println("turnend");
 			endTurn();
+		}
+		else if(data[0].compareTo("map") == 0){
+			mapArray[Integer.parseInt(data[1])][Integer.parseInt(data[2])].walkable = Boolean.parseBoolean(data[3]);
 		}
 	}
 	

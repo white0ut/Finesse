@@ -6,10 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import javax.swing.JOptionPane;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -22,49 +25,64 @@ import org.newdawn.slick.state.StateBasedGame;
 import edu.wmich.gic.finesse.Game;
 import edu.wmich.gic.finesse.MainFinesse;
 import edu.wmich.gic.finesse.FinesseGame.ScreenType;
+import edu.wmich.gic.finesse.drawable.GameGrid;
 
 public class Network {
 	private boolean init = false;
-	private boolean client = true;
-	public ServerSocket server = null;
+	public boolean client = false;
+	public boolean server = false;
+	public ServerSocket serv = null;
 	public Socket connection = null;
 	public InputStream in;
 	public OutputStream out;
 	public BufferedReader reader;
 	public PrintStream writer;
-	private String output = "";
 	public String state = "connecting";
+	private String address = "";
 
-	public Network(final Game game){
+	public Network(final Game game,final GameGrid gameGrid){
 		if(MainFinesse.commandLineArgs.length > 0){
 			if(MainFinesse.commandLineArgs[0].compareTo("brodie") == 0){
 				System.out.println("Init Network");
 				new Thread(new Runnable() {public void run() {
-					System.out.println("Thread init");
+//					System.out.println("Thread init");
+					try {
+						address = InetAddress.getLocalHost().getHostAddress();
+						serv = new ServerSocket();
+						serv.bind(new InetSocketAddress(address, 9876));
+						gameGrid.popupMessage = address;
+						gameGrid.playingState = 4;
+						System.out.println("Created Server");
+						connection = serv.accept();
+						in = connection.getInputStream();
+						out = connection.getOutputStream();
+						reader = new BufferedReader(new InputStreamReader(in));
+						writer = new PrintStream(out, true);
+						state = "connected";
+						server = true;
+						for (int i = 0; i < gameGrid.rows; i++) {
+							for (int j = 0; j < gameGrid.columns; j++) {
+								gameGrid.send(new Object[]{"map",i,j,gameGrid.mapArray[i][j].walkable});
+							}
+						}
+					} catch (IOException e1) {
 
-//					try {
-//						server = new ServerSocket();
-//						server.bind(new InetSocketAddress("localhost", 9876));
-//						connection = server.accept();
-//						in = connection.getInputStream();
-//						out = connection.getOutputStream();
-//						reader = new BufferedReader(new InputStreamReader(in));
-//						writer = new PrintStream(out, true);
-//						state = "connected";
-//					} catch (IOException e1) {
-//
-//					}
+					}
 
 					try {
 						if (state == "connecting") {
 							// Open a connection as a client.
+							address = (String)JOptionPane.showInputDialog(null,"I.P. Address","Address",
+									JOptionPane.PLAIN_MESSAGE,null,null,InetAddress.getLocalHost().getHostAddress());
 							System.out.println("Connecting");
-							connection = new Socket("localhost",9876);
+							connection = new Socket(address,9876);
 							in = connection.getInputStream();
 							out = connection.getOutputStream();
 							reader = new BufferedReader(new InputStreamReader(in));
 							writer = new PrintStream(out, true);
 							state = "connected";
+							client = true;
+							System.out.println("Created Client");
 						}
 						if (state == "connected") {
 							System.out.println("Connected");
@@ -108,33 +126,4 @@ public class Network {
 			}
 		}
 	}
-
-//	@Override
-//	public void render(GameContainer gc, StateBasedGame game, Graphics g)
-//			throws SlickException {
-//		g.setColor(Color.green);
-//		g.fillRect(0, 0, gc.getWidth(), gc.getHeight());
-//		g.setColor(Color.blue);
-//		g.drawString("Network Menu",300,50);
-//		g.drawString("State: "+state,300,100);
-//		g.drawString("Client: "+client,300,150);
-//		g.drawString("Output: "+output,300,200);
-//	}
-//
-//	@Override
-//	public void update(GameContainer gc, StateBasedGame game, int delta)
-//			throws SlickException {
-//		if(gc.getInput().isKeyPressed(Input.KEY_ENTER)){
-//			if(state == "connected"){
-//				writer.println("Blah");
-//				System.out.println("Blah");
-//			}
-//		}
-//	}
-//
-//	@Override
-//	public int getID() {
-//		return ScreenType.NETWORKMENU.getValue();
-//	}
-
 }

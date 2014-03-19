@@ -50,7 +50,7 @@ public class Game extends BasicGameState {
 		
 		guiManager.registerButton(test);
 		
-		network = new Network(this);
+		network = new Network(this,gameGrid);
 		gameGrid.setNetwork(network);
 	}
 

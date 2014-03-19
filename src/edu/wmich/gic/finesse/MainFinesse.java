@@ -8,7 +8,7 @@ import org.newdawn.slick.SlickException;
 
 public class MainFinesse{
 	private static AppGameContainer app;
-	public static String[] commandLineArgs = new String[0];
+	public static String[] commandLineArgs;// = new String[0];
 	public static String[] playerNamesConfig;
 	public static int numPlayersConfig;
 	public static int width = 1280;
@@ -17,13 +17,14 @@ public class MainFinesse{
 
 	public static void main(String[] args) throws SlickException {
 		commandLineArgs = args;
+//		commandLineArgs = new String[]{"brodie"};
 		if(MainFinesse.commandLineArgs.length > 0){
 			if(MainFinesse.commandLineArgs[0].compareTo("brodie") == 0){
-				width = 800;
-				height = 600;
+//				width = 800;height = 600;
+				width = 1024;height = 720;
 				playerNamesConfig = new String[]{"Tom","Jerry"};
 				numPlayersConfig = 2;
-				useNetwork = true;
+//				useNetwork = true;
 			}else{
 				ConfigPopUp();
 			}
@@ -50,8 +51,8 @@ public class MainFinesse{
 		numPlayersConfig = Integer.parseInt(options[0]);
 		if(numPlayersConfig < 2){
 			numPlayersConfig = 2;
-		}else if(numPlayersConfig > 4){
-			numPlayersConfig = 4;
+		}else if(numPlayersConfig > 2){
+			numPlayersConfig = 2;
 		}
 		if(options.length-1 < numPlayersConfig){
 			options = new String[numPlayersConfig+1];
