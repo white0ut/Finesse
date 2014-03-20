@@ -1,0 +1,606 @@
+mapTileSpritesheet.png
+{
+	Corner - Bottom Left 2.png
+	2
+	2
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Corner - Bottom Left.png
+	36
+	2
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Corner - Bottom Right 2.png
+	70
+	2
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Corner - Bottom Right.png
+	104
+	2
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Corner - Outside Bottom Left.png
+	138
+	2
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Corner - Outside Bottom Right.png
+	172
+	2
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Corner - Outside Top Left.png
+	206
+	2
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Corner - Outside Top Right.png
+	2
+	36
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Corner - Top Left 2.png
+	36
+	36
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Corner - Top Left.png
+	70
+	36
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Corner - Top Right 2.png
+	104
+	36
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Corner - Top Right.png
+	138
+	36
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Dirt 1.png
+	172
+	36
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass 1.png
+	206
+	36
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Open Corner - Bottom Left.png
+	2
+	70
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Open Corner - Bottom Right.png
+	36
+	70
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Open Corner - Top Left.png
+	70
+	70
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Open Corner - Top Right.png
+	104
+	70
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - All but Bottom Left.png
+	138
+	70
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - All but Bottom Right.png
+	172
+	70
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - All but Top Left.png
+	206
+	70
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - All but Top Right.png
+	2
+	104
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - All.png
+	36
+	104
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - Bottom Left.png
+	70
+	104
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - Bottom Right.png
+	104
+	104
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - Bottom Side.png
+	138
+	104
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - Left Side.png
+	172
+	104
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - Right Side.png
+	206
+	104
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - Top Left.png
+	2
+	138
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - Top Right.png
+	36
+	138
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Outside Corner - Top Side.png
+	70
+	138
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Side - Bottom.png
+	104
+	138
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Side - Left.png
+	138
+	138
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Side - Right.png
+	172
+	138
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Side - Top.png
+	206
+	138
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Floor.png
+	2
+	172
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal Bottom - Outside Corner Top Left.png
+	36
+	172
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal Bottom - Outside Corner Top Right.png
+	70
+	172
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal Bottom - Outside Corner Top Side.png
+	104
+	172
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal Bottom.png
+	138
+	172
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal End Bottom.png
+	172
+	172
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal End Left.png
+	206
+	172
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal End Top.png
+	2
+	206
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal Top - Outside Corner Bottom Left.png
+	36
+	206
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal Top - Outside Corner Bottom Right.png
+	70
+	206
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal Top - Outside Corner Bottom Side.png
+	104
+	206
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal Top.png
+	138
+	206
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Horizontal.png
+	172
+	206
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Vertical End Right.png
+	206
+	206
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Vertical Left - Outside Right Bottom.png
+	2
+	240
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Vertical Left - Outside Right Side.png
+	36
+	240
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Vertical Left - Outside Right Top.png
+	70
+	240
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Vertical Left.png
+	104
+	240
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Vertical Right.png
+	138
+	240
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Wall Vertical.png
+	172
+	240
+	32
+	32
+	0
+	0
+	0
+	0
+}
