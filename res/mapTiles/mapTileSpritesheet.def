@@ -1,140 +1,8 @@
 mapTileSpritesheet.png
 {
-	Corner - Bottom Left 2.png
-	0
-	0
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Corner - Bottom Left.png
-	32
-	0
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Corner - Bottom Right 2.png
-	64
-	0
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Corner - Bottom Right.png
-	96
-	0
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Corner - Outside Bottom Left.png
-	128
-	0
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Corner - Outside Bottom Right.png
-	160
-	0
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Corner - Outside Top Left.png
-	192
-	0
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Corner - Outside Top Right.png
-	224
-	0
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Corner - Top Left 2.png
-	0
-	32
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Corner - Top Left.png
-	32
-	32
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Corner - Top Right 2.png
-	64
-	32
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Corner - Top Right.png
-	96
-	32
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
 	Dirt 1.png
-	128
-	32
+	0
+	0
 	32
 	32
 	0
@@ -144,6 +12,138 @@ mapTileSpritesheet.png
 }
 {
 	Grass 1.png
+	32
+	0
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Corner - Bottom Left 2.png
+	64
+	0
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Corner - Bottom Right 2.png
+	96
+	0
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Corner - Outside Bottom Left.png
+	128
+	0
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Corner - Outside Bottom Right.png
+	160
+	0
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Corner - Outside Top Left.png
+	192
+	0
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Corner - Outside Top Right.png
+	224
+	0
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Corner - Top Left 2.png
+	0
+	32
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Corner - Top Right 2.png
+	32
+	32
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Side - Bottom.png
+	64
+	32
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Side - Left.png
+	96
+	32
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Side - Right.png
+	128
+	32
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Grass Side - Top.png
 	160
 	32
 	32
@@ -154,7 +154,7 @@ mapTileSpritesheet.png
 	0
 }
 {
-	Open Corner - Bottom Left.png
+	Stone Corner - Bottom Left.png
 	192
 	32
 	32
@@ -165,7 +165,7 @@ mapTileSpritesheet.png
 	0
 }
 {
-	Open Corner - Bottom Right.png
+	Stone Corner - Bottom Right.png
 	224
 	32
 	32
@@ -176,7 +176,7 @@ mapTileSpritesheet.png
 	0
 }
 {
-	Open Corner - Top Left.png
+	Stone Corner - Top Left.png
 	0
 	64
 	32
@@ -187,196 +187,9 @@ mapTileSpritesheet.png
 	0
 }
 {
-	Open Corner - Top Right.png
+	Stone Corner - Top Right.png
 	32
 	64
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - All but Bottom Left.png
-	64
-	64
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - All but Bottom Right.png
-	96
-	64
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - All but Top Left.png
-	128
-	64
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - All but Top Right.png
-	160
-	64
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - All.png
-	192
-	64
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - Bottom Left.png
-	224
-	64
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - Bottom Right.png
-	0
-	96
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - Bottom Side.png
-	32
-	96
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - Left Side.png
-	64
-	96
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - Right Side.png
-	96
-	96
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - Top Left.png
-	128
-	96
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - Top Right.png
-	160
-	96
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Outside Corner - Top Side.png
-	192
-	96
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Side - Bottom.png
-	224
-	96
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Side - Left.png
-	0
-	128
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Side - Right.png
-	32
-	128
-	32
-	32
-	0
-	0
-	0
-	0
-}
-{
-	Side - Top.png
-	64
-	128
 	32
 	32
 	0
@@ -386,6 +199,193 @@ mapTileSpritesheet.png
 }
 {
 	Stone Floor.png
+	64
+	64
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Open Corner - Bottom Left.png
+	96
+	64
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Open Corner - Bottom Right.png
+	128
+	64
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Open Corner - Top Left.png
+	160
+	64
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Open Corner - Top Right.png
+	192
+	64
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - All but Bottom Left.png
+	224
+	64
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - All but Bottom Right.png
+	0
+	96
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - All but Top Left.png
+	32
+	96
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - All but Top Right.png
+	64
+	96
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - All.png
+	96
+	96
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - Bottom Left.png
+	128
+	96
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - Bottom Right.png
+	160
+	96
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - Bottom Side.png
+	192
+	96
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - Left Side.png
+	224
+	96
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - Right Side.png
+	0
+	128
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - Top Left.png
+	32
+	128
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - Top Right.png
+	64
+	128
+	32
+	32
+	0
+	0
+	0
+	0
+}
+{
+	Stone Outside Corner - Top Side.png
 	96
 	128
 	32
