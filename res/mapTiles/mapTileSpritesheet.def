@@ -1,8 +1,8 @@
 mapTileSpritesheet.png
 {
 	Corner - Bottom Left 2.png
-	2
-	2
+	0
+	0
 	32
 	32
 	0
@@ -12,8 +12,8 @@ mapTileSpritesheet.png
 }
 {
 	Corner - Bottom Left.png
-	36
-	2
+	32
+	0
 	32
 	32
 	0
@@ -23,8 +23,8 @@ mapTileSpritesheet.png
 }
 {
 	Corner - Bottom Right 2.png
-	70
-	2
+	64
+	0
 	32
 	32
 	0
@@ -34,8 +34,8 @@ mapTileSpritesheet.png
 }
 {
 	Corner - Bottom Right.png
-	104
-	2
+	96
+	0
 	32
 	32
 	0
@@ -45,8 +45,8 @@ mapTileSpritesheet.png
 }
 {
 	Corner - Outside Bottom Left.png
-	138
-	2
+	128
+	0
 	32
 	32
 	0
@@ -56,8 +56,8 @@ mapTileSpritesheet.png
 }
 {
 	Corner - Outside Bottom Right.png
-	172
-	2
+	160
+	0
 	32
 	32
 	0
@@ -67,8 +67,8 @@ mapTileSpritesheet.png
 }
 {
 	Corner - Outside Top Left.png
-	206
-	2
+	192
+	0
 	32
 	32
 	0
@@ -78,8 +78,8 @@ mapTileSpritesheet.png
 }
 {
 	Corner - Outside Top Right.png
-	2
-	36
+	224
+	0
 	32
 	32
 	0
@@ -89,8 +89,8 @@ mapTileSpritesheet.png
 }
 {
 	Corner - Top Left 2.png
-	36
-	36
+	0
+	32
 	32
 	32
 	0
@@ -100,8 +100,8 @@ mapTileSpritesheet.png
 }
 {
 	Corner - Top Left.png
-	70
-	36
+	32
+	32
 	32
 	32
 	0
@@ -111,8 +111,8 @@ mapTileSpritesheet.png
 }
 {
 	Corner - Top Right 2.png
-	104
-	36
+	64
+	32
 	32
 	32
 	0
@@ -122,8 +122,8 @@ mapTileSpritesheet.png
 }
 {
 	Corner - Top Right.png
-	138
-	36
+	96
+	32
 	32
 	32
 	0
@@ -133,8 +133,8 @@ mapTileSpritesheet.png
 }
 {
 	Dirt 1.png
-	172
-	36
+	128
+	32
 	32
 	32
 	0
@@ -144,8 +144,8 @@ mapTileSpritesheet.png
 }
 {
 	Grass 1.png
-	206
-	36
+	160
+	32
 	32
 	32
 	0
@@ -155,8 +155,8 @@ mapTileSpritesheet.png
 }
 {
 	Open Corner - Bottom Left.png
-	2
-	70
+	192
+	32
 	32
 	32
 	0
@@ -166,8 +166,8 @@ mapTileSpritesheet.png
 }
 {
 	Open Corner - Bottom Right.png
-	36
-	70
+	224
+	32
 	32
 	32
 	0
@@ -177,8 +177,8 @@ mapTileSpritesheet.png
 }
 {
 	Open Corner - Top Left.png
-	70
-	70
+	0
+	64
 	32
 	32
 	0
@@ -188,8 +188,8 @@ mapTileSpritesheet.png
 }
 {
 	Open Corner - Top Right.png
-	104
-	70
+	32
+	64
 	32
 	32
 	0
@@ -199,8 +199,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - All but Bottom Left.png
-	138
-	70
+	64
+	64
 	32
 	32
 	0
@@ -210,8 +210,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - All but Bottom Right.png
-	172
-	70
+	96
+	64
 	32
 	32
 	0
@@ -221,8 +221,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - All but Top Left.png
-	206
-	70
+	128
+	64
 	32
 	32
 	0
@@ -232,8 +232,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - All but Top Right.png
-	2
-	104
+	160
+	64
 	32
 	32
 	0
@@ -243,8 +243,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - All.png
-	36
-	104
+	192
+	64
 	32
 	32
 	0
@@ -254,8 +254,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - Bottom Left.png
-	70
-	104
+	224
+	64
 	32
 	32
 	0
@@ -265,8 +265,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - Bottom Right.png
-	104
-	104
+	0
+	96
 	32
 	32
 	0
@@ -276,8 +276,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - Bottom Side.png
-	138
-	104
+	32
+	96
 	32
 	32
 	0
@@ -287,8 +287,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - Left Side.png
-	172
-	104
+	64
+	96
 	32
 	32
 	0
@@ -298,8 +298,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - Right Side.png
-	206
-	104
+	96
+	96
 	32
 	32
 	0
@@ -309,8 +309,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - Top Left.png
-	2
-	138
+	128
+	96
 	32
 	32
 	0
@@ -320,8 +320,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - Top Right.png
-	36
-	138
+	160
+	96
 	32
 	32
 	0
@@ -331,8 +331,8 @@ mapTileSpritesheet.png
 }
 {
 	Outside Corner - Top Side.png
-	70
-	138
+	192
+	96
 	32
 	32
 	0
@@ -342,8 +342,8 @@ mapTileSpritesheet.png
 }
 {
 	Side - Bottom.png
-	104
-	138
+	224
+	96
 	32
 	32
 	0
@@ -353,8 +353,8 @@ mapTileSpritesheet.png
 }
 {
 	Side - Left.png
-	138
-	138
+	0
+	128
 	32
 	32
 	0
@@ -364,8 +364,8 @@ mapTileSpritesheet.png
 }
 {
 	Side - Right.png
-	172
-	138
+	32
+	128
 	32
 	32
 	0
@@ -375,8 +375,8 @@ mapTileSpritesheet.png
 }
 {
 	Side - Top.png
-	206
-	138
+	64
+	128
 	32
 	32
 	0
@@ -386,8 +386,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Floor.png
-	2
-	172
+	96
+	128
 	32
 	32
 	0
@@ -397,8 +397,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal Bottom - Outside Corner Top Left.png
-	36
-	172
+	128
+	128
 	32
 	32
 	0
@@ -408,8 +408,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal Bottom - Outside Corner Top Right.png
-	70
-	172
+	160
+	128
 	32
 	32
 	0
@@ -419,8 +419,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal Bottom - Outside Corner Top Side.png
-	104
-	172
+	192
+	128
 	32
 	32
 	0
@@ -430,8 +430,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal Bottom.png
-	138
-	172
+	224
+	128
 	32
 	32
 	0
@@ -441,8 +441,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal End Bottom.png
-	172
-	172
+	0
+	160
 	32
 	32
 	0
@@ -452,8 +452,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal End Left.png
-	206
-	172
+	32
+	160
 	32
 	32
 	0
@@ -463,8 +463,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal End Top.png
-	2
-	206
+	64
+	160
 	32
 	32
 	0
@@ -474,8 +474,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal Top - Outside Corner Bottom Left.png
-	36
-	206
+	96
+	160
 	32
 	32
 	0
@@ -485,8 +485,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal Top - Outside Corner Bottom Right.png
-	70
-	206
+	128
+	160
 	32
 	32
 	0
@@ -496,8 +496,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal Top - Outside Corner Bottom Side.png
-	104
-	206
+	160
+	160
 	32
 	32
 	0
@@ -507,8 +507,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal Top.png
-	138
-	206
+	192
+	160
 	32
 	32
 	0
@@ -518,8 +518,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Horizontal.png
-	172
-	206
+	224
+	160
 	32
 	32
 	0
@@ -529,8 +529,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Vertical End Right.png
-	206
-	206
+	0
+	192
 	32
 	32
 	0
@@ -540,8 +540,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Vertical Left - Outside Right Bottom.png
-	2
-	240
+	32
+	192
 	32
 	32
 	0
@@ -551,8 +551,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Vertical Left - Outside Right Side.png
-	36
-	240
+	64
+	192
 	32
 	32
 	0
@@ -562,8 +562,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Vertical Left - Outside Right Top.png
-	70
-	240
+	96
+	192
 	32
 	32
 	0
@@ -573,8 +573,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Vertical Left.png
-	104
-	240
+	128
+	192
 	32
 	32
 	0
@@ -584,8 +584,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Vertical Right.png
-	138
-	240
+	160
+	192
 	32
 	32
 	0
@@ -595,8 +595,8 @@ mapTileSpritesheet.png
 }
 {
 	Stone Wall Vertical.png
-	172
-	240
+	192
+	192
 	32
 	32
 	0

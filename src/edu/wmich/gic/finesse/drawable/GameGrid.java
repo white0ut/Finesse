@@ -44,8 +44,11 @@ public class GameGrid {
 	public int buyingZoneWidth = 6;
 	public int buyingZoneHeight = 6;
 	public int minionPurchaseCost = 50;
+	
 	public static SpriteSheet sprites;
-
+	public static SpriteSheet newSprites;
+	public static Image testImage;
+	
 	public Tile currentMinionTile;
 	public Tile enemyMinionTile;
 	public static Tile[][] mapArray;// = new Tile[rows][columns];
@@ -88,6 +91,9 @@ public class GameGrid {
 	public GameGrid(Game game) {
 		try {
 			sprites = new SpriteSheet(new Image("res/images/tiles.png"),16,16);
+			newSprites = new SpriteSheet(new Image("res/mapTiles/mapTileSpritesheet.png"),32,32);
+			testImage = newSprites.getSprite(6, 2);
+			testImage = testImage.getScaledCopy(80, 80);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -121,9 +127,9 @@ public class GameGrid {
 							//  then find path
 							if (!moveMinion && mapArray[row][col].walkable && mapArray[row][col].minion == null) {
 								send(new Object[]{"move",currentMinionTile.row,currentMinionTile.col,row,col});
-								if(!MainFinesse.useNetwork){
+//								if(!MainFinesse.useNetwork){
 									sendMinion(currentMinionTile.row,currentMinionTile.col,row,col);
-								}
+//								}
 //								resetGrid(true);
 //								pathfinding.searchPath(currentMinionTile,mapArray[row][col]);
 //								moveMinion = true;
@@ -158,9 +164,9 @@ public class GameGrid {
 						}
 						if(bullet == null){//if there is no bullet, create a new one
 							send(new Object[]{"bullet",currentMinionTile.row,currentMinionTile.col,x,y});
-							if(!MainFinesse.useNetwork){
+//							if(!MainFinesse.useNetwork){
 								shootBullet(currentMinionTile.row,currentMinionTile.col, x, y);
-							}
+//							}
 //							bullet = new Bullet(currentMinionTile, x, y);
 						}
 					}
@@ -184,9 +190,9 @@ public class GameGrid {
 //							mapArray[row][col].minion = new Minion(currentPlayer);
 //							currentPlayer.minions.add(mapArray[row][col].minion);
 //							currentPlayer.points -= minionPurchaseCost;
-							if(!MainFinesse.useNetwork){
+//							if(!MainFinesse.useNetwork){
 								purchaseMinion(row,col,currentPlayer.id);
-							}
+//							}
 							send(new Object[]{"purchase",row,col,currentPlayer.id});
 						}
 						else{//start popup state and set message
@@ -327,6 +333,18 @@ public class GameGrid {
 			stringWidth = bigFont.getWidth("This is an alert, click to remove");
 			g.drawString("This is an alert, click to remove", popupX + (popupWidth - stringWidth) / 2, popupY+300);
 		}
+		g.drawImage(testImage, 20, 20);
+		g.setColor(new Color(255,0,0,0.2f));
+		g.fillRect(20, 20, 20, 20);
+		g.fillRect(80, 20, 20, 20);
+		g.fillRect(20, 80, 20, 20);
+		g.fillRect(80, 80, 20, 20);
+		g.setColor(Color.black);
+		for(int i = 0;i<4;i++){
+			for(int j = 0;j<4;j++){
+				g.drawRect(20+i*20, 20+j*20, 20, 20);
+			}
+		}
 	}
 
 	public void update(GameContainer gc, int delta) {
@@ -388,9 +406,9 @@ public class GameGrid {
 //				else if(currentPlayer == parentGame.players[1]){
 //					currentPlayer = parentGame.players[0];
 //				}
-				if(!MainFinesse.useNetwork){
+//				if(!MainFinesse.useNetwork){
 					endTurn();
-				}
+//				}
 				send(new Object[]{"turnend"});
 			}
 			else if(gc.getInput().isKeyPressed(Input.KEY_Y)){

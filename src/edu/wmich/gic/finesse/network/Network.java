@@ -41,7 +41,7 @@ public class Network {
 	private String address = "";
 
 	public Network(final Game game,final GameGrid gameGrid){
-		if(MainFinesse.commandLineArgs.length > 0){
+		if(MainFinesse.useNetwork && MainFinesse.commandLineArgs.length > 0){
 			if(MainFinesse.commandLineArgs[0].compareTo("brodie") == 0){
 				System.out.println("Init Network");
 				new Thread(new Runnable() {public void run() {
