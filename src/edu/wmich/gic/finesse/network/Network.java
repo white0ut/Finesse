@@ -38,17 +38,19 @@ public class Network {
 	public BufferedReader reader;
 	public PrintStream writer;
 	public String state = "connecting";
-	private String address = "";
+	private static String address = "";
 
 	public Network(final Game game,final GameGrid gameGrid){
-		if(MainFinesse.useNetwork && MainFinesse.commandLineArgs.length > 0){
-			if(MainFinesse.commandLineArgs[0].compareTo("brodie") == 0){
+		if(MainFinesse.useNetwork){// && MainFinesse.commandLineArgs.length > 0){
+//			if(MainFinesse.commandLineArgs[0].compareTo("brodie") == 0){
 				System.out.println("Init Network");
 				new Thread(new Runnable() {public void run() {
 //					System.out.println("Thread init");
 					try {
 						address = (String)JOptionPane.showInputDialog(null,"I.P. Address","Address",
 								JOptionPane.PLAIN_MESSAGE,null,null,InetAddress.getLocalHost().getHostAddress());
+
+						System.out.println(address);
 						serv = new ServerSocket();
 						serv.bind(new InetSocketAddress(address, 9876));
 						gameGrid.popupMessage = address;
@@ -61,11 +63,11 @@ public class Network {
 						writer = new PrintStream(out, true);
 						state = "connected";
 						server = true;
-						for (int i = 0; i < gameGrid.rows; i++) {
-							for (int j = 0; j < gameGrid.columns; j++) {
-								gameGrid.send(new Object[]{"map",i,j,gameGrid.mapArray[i][j].walkable});
-							}
-						}
+//						for (int i = 0; i < gameGrid.rows; i++) {
+//							for (int j = 0; j < gameGrid.columns; j++) {
+//								gameGrid.send(new Object[]{"map",i,j,gameGrid.mapArray[i][j].walkable});
+//							}
+//						}
 					} catch (IOException e1) {
 
 					}
@@ -73,8 +75,11 @@ public class Network {
 					try {
 						if (state == "connecting") {
 							// Open a connection as a client.
+							System.out.println(address);
+							if(address == ""){
 							address = (String)JOptionPane.showInputDialog(null,"I.P. Address","Address",
 									JOptionPane.PLAIN_MESSAGE,null,null,InetAddress.getLocalHost().getHostAddress());
+							}
 							System.out.println("Connecting");
 							connection = new Socket(address,9876);
 							in = connection.getInputStream();
@@ -124,7 +129,7 @@ public class Network {
 					}
 				}
 				}).start();
-			}
+//			}
 		}
 	}
 }

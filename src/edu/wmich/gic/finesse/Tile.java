@@ -32,18 +32,19 @@ public class Tile {
 	public Minion minion = null;
 	public Image wall;
 	public Image floor;
+	public Image image;
 	public boolean buyingZone = false;
 	public Player buyingZoneOwner = null;
 
 	public Tile(int _row, int _col) throws SlickException{
 		width = GameGrid.colWidth;
 		height = GameGrid.rowHeight;
-		wall = GameGrid.sprites.getSprite(1,0).getScaledCopy(width, height);
-		floor = GameGrid.sprites.getSprite(6,1).getScaledCopy(width, height);
-		int rand = (int) Math.floor((Math.random()*10)+1);
-		if(rand == 1){
-			walkable = false;
-		}
+//		wall = GameGrid.sprites.getSprite(1,0).getScaledCopy(width, height);
+//		floor = GameGrid.sprites.getSprite(6,1).getScaledCopy(width, height);
+//		int rand = (int) Math.floor((Math.random()*10)+1);
+//		if(rand == 1){
+//			walkable = false;
+//		}
 		row = _row;
 		col = _col;
 
@@ -54,6 +55,10 @@ public class Tile {
 	public String toString(){
 		//return "Row:"+row+"  Column:"+col+"  Start:"+start+"  End:"+end+"  Searched:"+searched+"  Walkable:"+walkable;//+"  \nParent:"+parent+"\nChild:"+child+"\n";
 		return "row"+row+"  col:"+col+"  path:"+path+"  searched:"+searched+"  walkable:"+walkable+"  start:"+start+"  end:"+end;
+	}
+	
+	public void setImage(Image _image){
+		image = _image.getScaledCopy(width, height);
 	}
 
 	public void resetTile(boolean resetFurthest){
@@ -74,10 +79,10 @@ public class Tile {
 	}
 
 	public void render(Graphics g){
-		if(!walkable){
-			g.drawImage(wall, x, y);
-			return;
-		}
+//		if(!walkable){
+//			g.drawImage(wall, x, y);
+//			return;
+//		}
 		//g.drawImage(floor, x, y);
 //		if(minion != null){
 //			g.setColor(Color.white);
@@ -85,16 +90,19 @@ public class Tile {
 //			minion.render(g,x,y);
 //			//return;
 //		}
-		g.setColor(Color.blue);
-		if(start)
-			g.setColor(Color.green);
-			else if(path || furthest)
-					g.setColor(Color.cyan);
-				else if(walkable)
-						g.setColor(Color.white);
+		g.setColor(Color.transparent);
+		if(start){
+//			g.setColor(Color.green);
+		}
+		else if(path || furthest){
+			g.setColor(new Color(0, 255, 255,0.5f));//cyan
+		}
 		
 		if(end){
 			g.setColor(Color.red);
+		}
+		if(image != null){
+			g.drawImage(image, x, y);
 		}
 		g.fillRect(x, y, width, height);
 		if(minion != null){

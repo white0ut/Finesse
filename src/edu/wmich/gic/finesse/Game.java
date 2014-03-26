@@ -107,7 +107,8 @@ public class Game extends BasicGameState {
 		if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			gc.exit();
 		} else if (gc.getInput().isKeyPressed(Input.KEY_TAB)) {
-			gameGrid.createGrid();
+//			gameGrid.createGrid();
+			gameGrid.readTiledMap();
 		}
 	}
 

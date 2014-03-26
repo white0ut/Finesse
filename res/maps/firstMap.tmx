@@ -2,6 +2,16 @@
 <map version="1.0" orientation="orthogonal" width="25" height="25" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="mapTileSpritesheet" tilewidth="32" tileheight="32">
   <image source="../mapTiles/mapTileSpritesheet.png" width="256" height="256"/>
+  <tile id="0">
+   <properties>
+    <property name="Right" value="true"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="Left" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tile Layer 1" width="25" height="25">
   <data encoding="csv">
