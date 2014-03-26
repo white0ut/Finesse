@@ -47,7 +47,8 @@ public class Network {
 				new Thread(new Runnable() {public void run() {
 //					System.out.println("Thread init");
 					try {
-						address = InetAddress.getLocalHost().getHostAddress();
+						address = (String)JOptionPane.showInputDialog(null,"I.P. Address","Address",
+								JOptionPane.PLAIN_MESSAGE,null,null,InetAddress.getLocalHost().getHostAddress());
 						serv = new ServerSocket();
 						serv.bind(new InetSocketAddress(address, 9876));
 						gameGrid.popupMessage = address;
