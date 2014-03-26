@@ -21,10 +21,11 @@ public class MainFinesse{
 		if(MainFinesse.commandLineArgs.length > 0){
 			if(MainFinesse.commandLineArgs[0].compareTo("brodie") == 0){
 //				width = 800;height = 600;
-				width = 1024;height = 720;
+				width = 1000;height = 800;
+//				width = 1440;height = 800;
 				playerNamesConfig = new String[]{"Tom","Jerry"};
 				numPlayersConfig = 2;
-//				useNetwork = true;
+				useNetwork = true;
 			}else{
 				ConfigPopUp();
 			}
