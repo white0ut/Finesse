@@ -1,6 +1,10 @@
 package edu.wmich.gic.finesse.drawable;
 
 import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -28,14 +32,15 @@ public class GameGrid {
 
 	Input input;
 	private Network network = null;
+	private BufferedReader fileInput;
 	
 	public final static int rowHeight = 25;
 	public final static int colWidth = 25;
-	public final static int gridSpacing = 1;
-	public final static int rows = MainFinesse.height / (rowHeight + gridSpacing);
-	public final static int columns = MainFinesse.width * 4 / 5 / (colWidth + gridSpacing);
-	public final static int gridTopOffset = (MainFinesse.height - (rows * (rowHeight + gridSpacing)))/2;
-	public final static int gridLeftOffset = MainFinesse.width - (columns*colWidth + columns*gridSpacing) - gridTopOffset;
+	public final static int gridSpacing = 0;
+	public static int rows = 10;// = MainFinesse.height / (rowHeight + gridSpacing);
+	public static int columns = 10;// = MainFinesse.width * 4 / 5 / (colWidth + gridSpacing);
+	public static int gridTopOffset;// = (MainFinesse.height - (rows * (rowHeight + gridSpacing)))/2;
+	public static int gridLeftOffset;// = MainFinesse.width - (columns*colWidth + columns*gridSpacing) - gridTopOffset;
 	public static int maxDist;
 	public static int maxLength;
 	public int rowCounter = maxLength * -1;
@@ -92,8 +97,8 @@ public class GameGrid {
 		try {
 			sprites = new SpriteSheet(new Image("res/images/tiles.png"),16,16);
 			newSprites = new SpriteSheet(new Image("res/mapTiles/mapTileSpritesheet.png"),32,32);
-			testImage = newSprites.getSprite(6, 2);
-			testImage = testImage.getScaledCopy(80, 80);
+//			testImage = newSprites.getSprite(6, 2);
+//			testImage = testImage.getScaledCopy(80, 80);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -103,10 +108,83 @@ public class GameGrid {
 		maxDist = 40;
 		maxLength = (maxDist / 10) + 1;
 		pathfinding = new Pathfinding();
-		createGrid();
+		
+		readTiledMap();
+		resetOffset();
+//		createGrid();
+		resetPlayers();
 	}
 
-
+	public void readTiledMap(){
+		try {
+			fileInput = new BufferedReader(new FileReader("res/maps/firstMap.tmx"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String input = "";
+		String data = "";
+		String sets[] = null;
+		String items[] = null;
+		boolean start = false;
+		int _rows = 0;
+		int _columns = 0;
+		try {
+			while ((input = fileInput.readLine()) != null) {
+				if(start){
+					if(input.contains("</data>")){
+						break;
+					}
+					if(input.endsWith(",")){
+						input = input.substring(0, input.length()-1);
+						data += input + "/";
+					}
+					else{
+						data += input;
+					}
+//					System.out.println(input);
+					_rows += 1;
+				}
+				if(input.contains("<data ")){
+					System.out.println("start");
+					start = true;
+				}
+			}
+			fileInput.close();
+			sets = data.split("/");
+			items = sets[0].split(",");
+			_columns = items.length;
+			System.out.println("Columns: "+ _columns);
+			System.out.println("Rows: "+ _rows);
+//			System.out.println(data);
+			rows = _rows;
+			columns = _columns;
+			resetOffset();
+			
+			mapArray = new Tile[rows][columns];
+			int num = 0;
+			for (int i = 0; i < rows; i++) {
+				items = sets[i].split(",");
+				for (int j = 0; j < columns; j++) {
+					try {
+						mapArray[i][j] = new Tile(i, j);
+						num = Integer.parseInt(items[j]) - 1;
+//						System.out.print(num%7 + "," + num/8 + " - ");
+						mapArray[i][j].setImage(newSprites.getSprite(num%8, num/8));
+						if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1) {
+							mapArray[i][j].walkable = false;
+						}
+					} catch (SlickException e) {
+						e.printStackTrace();
+					}
+				}
+//				System.out.println();
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void mouseReleased(int button, int x, int y) {
 //		send("mouseclick "+button);
 		int row = getRow(y);
@@ -243,12 +321,31 @@ public class GameGrid {
 			}
 		}
 	}
-
-	public void createGrid() { //creates new grid from scratch
+	
+	public void resetPlayers(){
 		currentMinionTile = null;
 		currentPlayer = parentGame.players[0];
 		parentGame.players[0].minions.clear();
 		parentGame.players[1].minions.clear();
+		//add minions for players 0 and 1
+		for(int i = 1; i <= startingMinions; i++){
+			int randRow = rows - i - 2;//FinesseGame.rand.nextInt(rows-2)+1;
+			int randCol = startingMinions - i + 2;//FinesseGame.rand.nextInt(columns-2)+1;
+			mapArray[randRow][randCol].minion = new Minion(parentGame.players[0]);
+			parentGame.players[0].minions.add(mapArray[randRow][randCol].minion);
+			mapArray[randRow][randCol].walkable = true;
+		}
+		for(int i = 1; i <= startingMinions; i++){
+			int randRow = startingMinions - i + 2;//FinesseGame.rand.nextInt(rows-2)+1;
+			int randCol = columns - i - 2;//FinesseGame.rand.nextInt(columns-2)+1;
+			mapArray[randRow][randCol].minion = new Minion(parentGame.players[1]);
+			parentGame.players[1].minions.add(mapArray[randRow][randCol].minion);
+			mapArray[randRow][randCol].walkable = true;
+		}
+	}
+
+	public void createGrid() { //creates new grid from scratch
+//		resetPlayers();
 		mapArray = new Tile[rows][columns];
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
@@ -272,29 +369,7 @@ public class GameGrid {
 				}
 			}
 		}
-		//add minions for players 0 and 1
-		for(int i = 1; i <= startingMinions; i++){
-			int randRow = rows - i - 2;//FinesseGame.rand.nextInt(rows-2)+1;
-			int randCol = startingMinions - i + 2;//FinesseGame.rand.nextInt(columns-2)+1;
-			mapArray[randRow][randCol].minion = new Minion(parentGame.players[0]);
-			parentGame.players[0].minions.add(mapArray[randRow][randCol].minion);
-			mapArray[randRow][randCol].walkable = true;
-		}
-		for(int i = 1; i <= startingMinions; i++){
-			int randRow = startingMinions - i + 2;//FinesseGame.rand.nextInt(rows-2)+1;
-			int randCol = columns - i - 2;//FinesseGame.rand.nextInt(columns-2)+1;
-			mapArray[randRow][randCol].minion = new Minion(parentGame.players[1]);
-			parentGame.players[1].minions.add(mapArray[randRow][randCol].minion);
-			mapArray[randRow][randCol].walkable = true;
-		}
-		currentPlayer = parentGame.players[0];
-
-//		showFurthest(currentMinionTile);
 	}
-
-	// public static GameGrid getInstance() {
-	// return INSTANCE;
-	// }
 
 	public void render(Graphics g) {
 		g.setColor(Color.red);
@@ -333,18 +408,18 @@ public class GameGrid {
 			stringWidth = bigFont.getWidth("This is an alert, click to remove");
 			g.drawString("This is an alert, click to remove", popupX + (popupWidth - stringWidth) / 2, popupY+300);
 		}
-		g.drawImage(testImage, 20, 20);
-		g.setColor(new Color(255,0,0,0.2f));
-		g.fillRect(20, 20, 20, 20);
-		g.fillRect(80, 20, 20, 20);
-		g.fillRect(20, 80, 20, 20);
-		g.fillRect(80, 80, 20, 20);
-		g.setColor(Color.black);
-		for(int i = 0;i<4;i++){
-			for(int j = 0;j<4;j++){
-				g.drawRect(20+i*20, 20+j*20, 20, 20);
-			}
-		}
+//		g.drawImage(testImage, 20, 20);
+//		g.setColor(new Color(255,0,0,0.2f));
+//		g.fillRect(20, 20, 20, 20);
+//		g.fillRect(80, 20, 20, 20);
+//		g.fillRect(20, 80, 20, 20);
+//		g.fillRect(80, 80, 20, 20);
+//		g.setColor(Color.black);
+//		for(int i = 0;i<4;i++){
+//			for(int j = 0;j<4;j++){
+//				g.drawRect(20+i*20, 20+j*20, 20, 20);
+//			}
+//		}
 	}
 
 	public void update(GameContainer gc, int delta) {
@@ -522,6 +597,11 @@ public class GameGrid {
 		else if(data[0].compareTo("map") == 0){
 			mapArray[Integer.parseInt(data[1])][Integer.parseInt(data[2])].walkable = Boolean.parseBoolean(data[3]);
 		}
+	}
+	
+	private void resetOffset(){
+		gridTopOffset = (MainFinesse.height - (rows * (rowHeight + gridSpacing)))/2;
+		gridLeftOffset = MainFinesse.width - (columns*colWidth + columns*gridSpacing) - gridTopOffset;
 	}
 	
 	public void setNetwork(Network _network){
