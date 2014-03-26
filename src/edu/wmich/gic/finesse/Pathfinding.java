@@ -23,9 +23,13 @@ public class Pathfinding {
 	public Tile startTile;
 	public Tile endTile;
 	public Tile oldEndTile;
+	
+	public boolean searchPath(Tile start, Tile end){
+		return searchPath(start, end, false);
+	}
 
 	@SuppressWarnings("unused")
-	public boolean searchPath(Tile start, Tile end) {
+	public boolean searchPath(Tile start, Tile end,boolean playSound) {
 		startTile = start;
 		startTile.start = true;
 		startTile.walkable = true;
@@ -81,7 +85,10 @@ public class Pathfinding {
 //				if(oldEndTile != null){
 					if(oldEndTile != endTile){
 						oldEndTile = endTile;
-						System.out.println("New End Tile");
+//						System.out.println("New End Tile");
+						if(playSound){
+							AudioManager.playSfx("bloop");
+						}
 					}
 //				}
 				// System.out.println("Found End Tile");

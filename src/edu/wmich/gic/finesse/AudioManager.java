@@ -10,7 +10,8 @@ import jxna.audio.modules.*;
 public class AudioManager{
 	public static volatile double musVol=.5,sfxVol=.7;
 	
-	private static final String path="res"+File.separator+"audio"+File.separator;
+	private static final String dir="res"+File.separator+"audio";
+	private static final String path=dir+File.separator;
 	
 	private static volatile boolean musicSync=true;
 	
@@ -63,7 +64,7 @@ public class AudioManager{
 			if(go){
 				musList=new Organya[32];
 				musNameList=new String[32];
-				for(File f:new File("audio").listFiles()){
+				for(File f:new File(dir).listFiles()){
 					String s=f.getName();
 					if(s.endsWith(".org")){
 						char c1=s.charAt(0),c2=s.charAt(1);

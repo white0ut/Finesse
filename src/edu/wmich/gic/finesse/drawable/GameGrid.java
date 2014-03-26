@@ -307,7 +307,7 @@ public class GameGrid {
 				oldColumn = col;
 				if (mapArray[row][col].walkable && mapArray[row][col].minion == null && currentMinionTile != mapArray[row][col]) {
 					resetGrid(false);
-					pathfinding.searchPath(currentMinionTile, mapArray[row][col]);
+					pathfinding.searchPath(currentMinionTile, mapArray[row][col],true);
 				}
 			}
 		}

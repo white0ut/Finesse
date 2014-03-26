@@ -32,6 +32,7 @@ public class MainFinesse{
 		}else{
 			ConfigPopUp();
 		}
+		AudioManager.setParams(44100, 0.1);
 		startGame();
 	}
 
