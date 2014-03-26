@@ -25,7 +25,7 @@ public class MainFinesse{
 //				width = 1440;height = 800;
 				playerNamesConfig = new String[]{"Tom","Jerry"};
 				numPlayersConfig = 2;
-				useNetwork = true;
+//				useNetwork = true;
 			}else{
 				ConfigPopUp();
 			}

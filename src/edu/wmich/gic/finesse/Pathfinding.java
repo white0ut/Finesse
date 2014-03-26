@@ -22,6 +22,7 @@ public class Pathfinding {
 	private List<Tile> closedList;// = new ArrayList<Tile>();
 	public Tile startTile;
 	public Tile endTile;
+	public Tile oldEndTile;
 
 	@SuppressWarnings("unused")
 	public boolean searchPath(Tile start, Tile end) {
@@ -77,6 +78,12 @@ public class Pathfinding {
 					bestNode = bestNode.child;
 					// System.out.println(bestNode);
 				}
+//				if(oldEndTile != null){
+					if(oldEndTile != endTile){
+						oldEndTile = endTile;
+						System.out.println("New End Tile");
+					}
+//				}
 				// System.out.println("Found End Tile");
 
 				return true;
