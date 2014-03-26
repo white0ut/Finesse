@@ -49,6 +49,7 @@ public class Network {
 					try {
 						address = (String)JOptionPane.showInputDialog(null,"I.P. Address","Address",
 								JOptionPane.PLAIN_MESSAGE,null,null,InetAddress.getLocalHost().getHostAddress());
+
 						System.out.println(address);
 						serv = new ServerSocket();
 						serv.bind(new InetSocketAddress(address, 9876));
